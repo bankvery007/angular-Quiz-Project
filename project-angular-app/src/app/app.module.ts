@@ -25,7 +25,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     FilterPipe,
     SignupComponent,
     QuestionComponent,
-    ResultComponent
+    ResultComponent,
     SigninComponent,
     WelcomeComponent
   ],
