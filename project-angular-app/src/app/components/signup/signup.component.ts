@@ -15,23 +15,12 @@ export class SignupComponent implements OnInit {
     title: new FormControl(''),
     firstName:  new FormControl(''),
     lastName: new FormControl(''),
-    stdid: new FormControl('',[Validators.required, Validators.pattern('B[0-9]{7}')]),
+    username: new FormControl('',[Validators.required]),
     sex: new FormControl(''),
     email: new FormControl('',[Validators.required,Validators.email]),
-    address: new FormGroup({
-      street: new FormControl(''),
-      city: new FormControl(''),
-      state: new FormControl(''),
-      zip: new FormControl(''),
-    }),
-    aliases: new FormArray([
-      new FormControl('')
-    ])
+    password: new FormControl('',[Validators.required]),
   });
   
-  get aliases() {
-    return this.profileForm.get('aliases') as FormArray;
-  }
 
   get email() {return this.profileForm.get('email');}
 
