@@ -1,0 +1,127 @@
+<div class="card" style="background-color: black;">
+    <div class="row">
+        <div class="col-lg-11 text-right" style="margin-top: 60px;margin-left: 150px;">
+            <a style="margin-right: 20px; font-size: 35px;">ฟิวหล่อเท่</a>
+            <img [src]="'https://i.im.ge/2022/10/15/2D6ArK.user.png'" class="img-thumbnail" alt="Your Image" style="max-height: 80px ;max-width: 80px;
+            border-top-left-radius: 240px;
+            border-top-right-radius: 240px;
+            border-bottom-left-radius: 240px;
+            border-bottom-right-radius: 240px;
+            margin-bottom: 20px;">
+        </div>
+    </div>
+</div>
+
+<div class="card" style="background-color: black;">
+    <div class="row">
+        <div class="col-md-3 text-center" style="margin-top: 10px; margin-left: 50px;">
+            <img [src]="'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
+                class="img-thumbnail" alt="Your Image" style="max-height: 500px ;max-width: 500px;">
+        </div>
+        <div style="margin: 30px 0 0 200px; font-size: 35px;">
+            สวัสดี User พร้อมที่จะเล่นเกมหรือยัง?!
+            <div>
+                <input type="text" [(ngModel)]="searchText" placeholder="search ...."
+                    style="width: 500px; height:auto;">
+
+                <button class="fa fa-search fa-xs" aria-hidden="true" style="position: relative;
+                               top: 0.5px;
+                               left: 12px;    
+                               width: 80px;
+                               height: 50px;">
+                </button>
+            </div>
+            <div style="font-size: 27px; margin-top: 30px;">
+                <a style="position: relative;top: 15px">หรือสร้างเกมใหม่ของคุณได้ที่นี้</a>
+                <button routerLink="newquiz" routerLinkActive="active"
+                    style="height: 70px;width: 160px;margin-left: 15px;">New QUIZ</button>
+            </div>
+            <br>
+        </div>
+    </div>
+    <table *ngIf="(gametype_list | filter: searchText).length == gametype_list.length;">
+        <div class="card-body" *ngFor="let gametypes of gametype_list | filter: searchText; let i = index">
+            <div class="col-lg-12 text-left" style="font-size: 50px;margin-left: 50px;margin-top: 100px;">
+                {{gametypes}}
+            </div>
+            <div style="margin-left: 20px;width: 2700px;overflow-x: scroll;">
+                <tbody>
+                    <tr>
+                        <th *ngFor="let item of getAllgroup() | filter: gametypes  let j = index">
+                            <input type="button" style="margin-left: 85px; margin-top: 30px;">
+                            <div class="col-lg-12 text-center" style="margin-left: 50px; 
+                                    font-size: 30px;
+                                    ">
+                                {{item.name}}
+                            </div>
+                            <div class="col-lg-12 text-center" style="margin-left: 50px; 
+                               font-size: 22px; color: gray; 
+                               ">
+                                create on {{item.date}}
+                            </div>
+                            <div class="col-lg-12 text-center" style="margin-left: 50px; 
+                        font-size: 22px; color: green;
+                        ">
+                                Player : {{item.player}}
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
+    </table>
+    <table *ngIf="(getAllgroup() | filter: searchText).length > 0 && (getAllgroup() | filter: searchText).length != (getAllgroup()).length">
+        <div class="col-lg-12 text-left" style="font-size: 50px;margin-left: 50px;margin-top: 100px;">
+            Searching . . .
+        </div>
+        <div style="margin-left: 20px;width: 2700px;overflow-x: scroll;">
+            <tbody>
+                <tr>
+                    <th *ngFor="let item of getAllgroup() | filter: searchText let j = index">
+                        <input type="button" style="margin-left: 85px; margin-top: 30px;">
+                        <div class="col-lg-12 text-center" style="margin-left: 50px; 
+                                        font-size: 30px;
+                                        ">
+                            {{item.name}}
+                        </div>
+                        <div class="col-lg-12 text-center" style="margin-left: 50px; 
+                                   font-size: 22px; color: gray; 
+                                   ">
+                            create on {{item.date}}
+                        </div>
+                        <div class="col-lg-12 text-center" style="margin-left: 50px; 
+                            font-size: 22px; color: green;
+                            ">
+                            Player : {{item.player}}
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </div>
+    </table>
+    <div class="card" style="background-color: black;">
+        <form [formGroup]="productForm">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <textarea rows="6" cols="80" formControlName='text' maxlength="999"
+                        style="margin-left: 110px; font-size: 30px;"></textarea>
+                    <button type="button" class="btn btn-success btn-lg" (click)="addComment()"
+                        style="position: relative;bottom: 30px;right: 135px;">Comment</button>
+
+                </div>
+                <div *ngIf="text?.invalid && (text?.dirty || text?.touched) || this.alert_comment"
+                    class="alert alert-dark col-md-2 text-center" style="margin: auto;">
+                    <div *ngIf="text?.errors?.['required'] || this.alert_comment"
+                        style="font-size: 30px;color: black;opacity: 0.8;">
+                        ลองพิมอะไรสักหน่อยสิ
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div style="margin: 70px 0 250px 70px; height: 700px;overflow-y: scroll;">
+            <span *ngFor="let item of getAllcomment(); index as i">
+                <textarea rows="5" cols="35" disabled
+                    style="resize: none; margin: 40px 0 0 80px;background-color: rgb(50,50,50); color: white; font-size: 30px;">{{item.text}}</textarea>
+            </span>
+        </div>
+    </div>
