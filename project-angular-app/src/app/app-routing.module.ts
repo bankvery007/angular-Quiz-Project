@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { NewquizComponent } from './components/newquiz/newquiz.component';
 import { QuizComponent } from './components/quiz/quiz.component';
+import { QuestionComponent } from './components/question/question.component';
+import { ResultComponent } from './components/result/result.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -16,6 +18,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'newquiz', component: NewquizComponent},
   {path: 'quiz', component: QuizComponent},
+  {path: 'question', component: QuestionComponent},
+  {path: 'result', component: ResultComponent},
   
   {path: '', 
     redirectTo: 'home', 
