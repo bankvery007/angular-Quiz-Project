@@ -1,0 +1,58 @@
+div{
+    color: white;
+    white-space: normal;
+}
+
+input{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+    background-repeat:no-repeat;
+    width: 300px; 
+    height: 300px;
+}
+
+button { 
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: green;
+    color: white;
+  }
+
+img{
+    border-top-left-radius: 90px;
+    border-top-right-radius: 90px;
+    border-bottom-left-radius: 90px;
+    border-bottom-right-radius: 90px;
+    border-color:black ;
+    
+}
+
+textarea{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-top: 120px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(9, 74, 12); 
+    border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b1f7b6; 
+}

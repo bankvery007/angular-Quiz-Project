@@ -1,0 +1,28 @@
+div {
+    font-size: 30px;
+}
+
+input {
+    font-size: 30px;
+}
+
+label {
+    float: left;
+    clear: none;
+    display: block;
+    padding: 0px 1em 0px 8px;
+    font-size: 25px;
+    
+}
+
+input[type=radio],
+input.radio {
+    float: left;
+    clear: none;
+    margin: 2px 0 0 2px;
+    height: 30px;
+    width: 30px;
+    margin-left: -10px;
+    margin-right: 25px;
+}
+
