@@ -10,6 +10,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
 import { NewquizComponent } from './components/newquiz/newquiz.component';
 import { FilterPipe } from './filter.pipe';
 import { SignupComponent } from './components/signup/signup.component';
+import { QuestionComponent } from './components/question/question.component';
+import { ResultComponent } from './components/result/result.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { SignupComponent } from './components/signup/signup.component';
     QuizComponent,
     NewquizComponent,
     FilterPipe,
-    SignupComponent
+    SignupComponent,
+    QuestionComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
