@@ -9,7 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { NewquizComponent } from './components/newquiz/newquiz.component';
 import { FilterPipe } from './filter.pipe';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 @NgModule({
