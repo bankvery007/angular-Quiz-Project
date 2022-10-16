@@ -8,6 +8,8 @@ import { ResultComponent } from './components/result/result.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { HistoryComponent } from './components/history/history.component';
+import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 
 
 
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: 'quiz', component: QuizComponent},
   {path: 'question', component: QuestionComponent},
   {path: 'result', component: ResultComponent},
+  {path: 'history', component: HistoryComponent},
+  {path: 'profilemodal', component: ProfilemodalComponent},
   
   {path: '', 
     redirectTo: 'home', 

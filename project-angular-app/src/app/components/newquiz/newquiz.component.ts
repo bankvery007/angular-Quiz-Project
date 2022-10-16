@@ -62,6 +62,11 @@ export class NewquizComponent implements OnInit {
   onClick() {
     this.show = !this.show
   }
+
+  setValidators(){
+    this.productForm.get('choice3')?.setValidators(Validators.required)
+    this.productForm.get('choice4')?.setValidators(Validators.required)
+  }
   
   ngClassMethod1() { if (this.checkAnswer == "1") { return true } else { return false } }
   ngClassMethod2() { if (this.checkAnswer == "2") { return true } else { return false } }
@@ -87,8 +92,7 @@ export class NewquizComponent implements OnInit {
     this.show = true
     this.productForm.controls['choice3'].setValue(this.choice3_dimmy);
     this.productForm.controls['choice4'].setValue(this.choice4_dimmy);
-    this.productForm.get('choice3')?.setValidators(Validators.required)
-    this.productForm.get('choice4')?.setValidators(Validators.required)
+    this.setValidators();
   }
 
   addData() {
@@ -126,5 +130,6 @@ export class NewquizComponent implements OnInit {
     this.productForm.controls['number'].setValue("4");
     this.show = true
     this.imgSrc = ""
+    this.setValidators();
   }
 }

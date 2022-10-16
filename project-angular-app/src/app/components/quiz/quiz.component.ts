@@ -16,8 +16,8 @@ export class QuizComponent implements OnInit {
 
   imgSrc: string = 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'
   alert_comment : boolean = false
-  gametype_list: string[] = ['ปริศนาฟ้าแลบ ดั้งเดิม','คณิตคิดเร็ว','Custom Game'];
-  searchText!: string;
+  searchText: string = "";
+  type_display!: string;
 
   productForm = new FormGroup({
     name: new FormControl(''),
@@ -64,6 +64,10 @@ export class QuizComponent implements OnInit {
     this.alert_comment = false
     alert("Add Comment Success")
     }
+  }
+
+  ShowTypeDisplay(){
+    return (this.searchText).length > 0 ? "Searching . . ." : "Quiz"
   }
 
 

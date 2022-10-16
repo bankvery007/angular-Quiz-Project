@@ -1,9 +1,9 @@
 div {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 input {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 label {
@@ -11,7 +11,7 @@ label {
     clear: none;
     display: block;
     padding: 0px 1em 0px 8px;
-    font-size: 25px;
+    font-size: 17px;
     
 }
 
@@ -20,8 +20,8 @@ input.radio {
     float: left;
     clear: none;
     margin: 2px 0 0 2px;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     margin-left: -10px;
     margin-right: 25px;
 }
