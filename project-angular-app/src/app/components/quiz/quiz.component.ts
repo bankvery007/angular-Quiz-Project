@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { CommentService } from 'src/app/service/comment.service';
+import { CountService } from 'src/app/service/count.service';
 import { DataService } from 'src/app/service/data.service';
 import { GroupService } from 'src/app/service/group.service';
 
@@ -29,7 +30,8 @@ export class QuizComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private commentService: CommentService,
-    private groupService : GroupService
+    private groupService : GroupService,
+    private countService : CountService
   ) { }
 
   ngOnInit(): void {
@@ -47,8 +49,28 @@ export class QuizComponent implements OnInit {
     return this.groupService.getAllgroup()
   }
 
+  getAllcount(){
+    return this.countService.getAllcount()
+  }
+
   getIDgroup(g_id:number){
     return this.groupService.getIDgroup(g_id)
+  }
+
+  addCount(id : number){
+    this.groupService.group[id].count += 1
+    this.countService.count[0].count += 1
+  }
+
+  // SumCount(){
+  //   for (let i = 0; i < this.groupService.group.length; i++) {
+  //     console.log(this.groupService.group[i].count)
+  //     this.countService.count[0].count += this.groupService.group[i].count
+  //   }
+  // }
+
+  getSumCount(){
+    return this.countService.getAllcount()
   }
 
   addComment() {
@@ -69,8 +91,5 @@ export class QuizComponent implements OnInit {
   ShowTypeDisplay(){
     return (this.searchText).length > 0 ? "Searching . . ." : "Quiz"
   }
-
-
-
 
 }

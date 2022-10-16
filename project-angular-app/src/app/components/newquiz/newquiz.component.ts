@@ -1,4 +1,5 @@
 import { NgIfContext } from '@angular/common';
+import { NodeWithI18n } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -63,7 +64,7 @@ export class NewquizComponent implements OnInit {
   });
 
   get quiz() { return this.productForm.get('quiz') as FormArray; }
-  get question() { return this.productForm.get('question') as FormArray}
+  get question() { return this.productForm.get('question') as FormArray }
   get number() { return this.productForm.get('number') }
   get choice1() { return this.productForm.get('choice1') }
   get choice2() { return this.productForm.get('choice2') }
@@ -93,8 +94,8 @@ export class NewquizComponent implements OnInit {
       }));
   }
 
-  delQuiz(index:number) {
-      this.quiz.removeAt(index)
+  delQuiz(index: number) {
+    this.quiz.removeAt(index)
   }
 
   onChange(event: any) {
@@ -121,7 +122,7 @@ export class NewquizComponent implements OnInit {
   ngClassMethod3() { if (this.checkAnswer == "3") { return true } else { return false } }
   ngClassMethod4() { if (this.checkAnswer == "4") { return true } else { return false } }
 
-  ngClassNumber2(i_quiz : number) {
+  ngClassNumber2(i_quiz: number) {
     this.show = false
     // this.choice3_dimmy = this.productForm.value.quiz[i_quiz].value.choice3 || ''
     // this.choice4_dimmy = this.productForm.value.choice4 || ''
@@ -137,11 +138,15 @@ export class NewquizComponent implements OnInit {
     // }
   }
 
-  ngClassNumber4(i_quiz : number) {
+  ngClassNumber4(i_quiz: number) {
     this.show = true
     // this.productForm.controls['choice3'].setValue(this.choice3_dimmy);
     // this.productForm.controls['choice4'].setValue(this.choice4_dimmy);
     this.setValidators();
+  }
+
+  getDateNow() {
+    return [new Date().getDate(), new Date().getMonth() + 1, new Date().getFullYear()].join('/')
   }
 
   addData() {
@@ -172,7 +177,7 @@ export class NewquizComponent implements OnInit {
     this.dataService.data.push(
       {
         question: this.productForm.value.question || '',
-        number: parseInt(this.productForm.value.number || ''),
+        number: Date.now(),
         choice1: this.productForm.value.choice1 || '',
         choice2: this.productForm.value.choice2 || '',
         choice3: this.productForm.value.choice3 || '',

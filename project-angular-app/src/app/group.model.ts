@@ -2,7 +2,7 @@ interface group{
     type: string,
     name: string,
     date: string,
-    player: number,
+    count: number,
 
 }
 

@@ -24,7 +24,6 @@ const routes: Routes = [
   {path: 'result', component: ResultComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'profilemodal', component: ProfilemodalComponent},
-  
   {path: '', 
     redirectTo: 'home', 
     pathMatch: 'full'          
