@@ -46,7 +46,7 @@ export class NewquizComponent implements OnInit {
 
   productForm: FormGroup = this.fb.group({
     quizName: [''],
-    quizNumber: ['', Validators.required],
+    datetime: ['', Validators.required],
     //The part related to the error
     quiz: this.fb.array([
       this.fb.group({
