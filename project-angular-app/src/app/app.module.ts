@@ -13,6 +13,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { ResultComponent } from './components/result/result.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { HistoryComponent } from './components/history/history.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     QuestionComponent,
     ResultComponent,
     SigninComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
