@@ -13,7 +13,8 @@ import { QuestionComponent } from './components/question/question.component';
 import { ResultComponent } from './components/result/result.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-
+import { ChangeBgDirective } from 'src/change-bg.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,15 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     QuestionComponent,
     ResultComponent,
     SigninComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ChangeBgDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule
 
   ],
   providers: [],
