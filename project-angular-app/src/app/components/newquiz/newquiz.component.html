@@ -1,210 +1,30 @@
 <div class="card" style="background-color: black;">
-
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <img [src]="this.imgSrc || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
-                    alt="Your Image" style="height: 300px;">
-            </div>
-        </div>
-        <div class="d-flex justify-content-center py-3">
-            <div class="col-lg-6 text-center" style="color: white; margin-top: 50px;">
-                <div style="width: 380; height: 100px; background-color:rgb(32, 114, 32)">
-                    <div class="col-lg-11 text-center" style="margin:auto">{{productForm.value.question}}</div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class="col-lg-6" style="margin-top: 20px;">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card" style="width: 380; height: 100px;"
-                            [ngClass]="{'alert-success': ngClassMethod1()}">
-                            <div class="col-lg-12 text-center" style="margin:auto">{{productForm.value.choice1}}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card" style="width: 380; height: 100px;"
-                            [ngClass]="{'alert-success': ngClassMethod2()}">
-                            <div class="col-lg-12 text-center" style="margin:auto">{{productForm.value.choice2}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class="col-lg-6" style="margin-top: 20px;" *ngIf="show">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card" style="width: 380; height: 100px;"
-                            [ngClass]="{'alert-success': ngClassMethod3()}">
-                            <div class="col-lg-12 text-center" style="margin:auto">{{productForm.value.choice3}}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card" style="width: 380; height: 100px;"
-                            [ngClass]="{'alert-success': ngClassMethod4()}">
-                            <div class="col-lg-12 text-center" style="margin:auto">{{productForm.value.choice4}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="card-body" style="margin-left: 300px; margin-right: 300px;">
         <div class="row">
             <div class="col-md">
                 <div class="card">
                     <div class="card-header">
-                        Create Question
+                        Create Quiz
                     </div>
                     <div class="card-body">
                         <form [formGroup]="productForm">
-                            <div class="row" style="padding: 5px;">
-                                <div class="col-lg-2"> Question :</div>
-                                <div class="col-lg-4 text-left">
-                                    <div class="form-group">
-                                        <input type="string" class="form-control" formControlName='question'
-                                            maxlength="80">
-                                        <div *ngIf="question?.invalid && (question?.dirty || question?.touched || this.array[0])"
-                                            class="alert alert-danger">
-                                            <div *ngIf="choice3?.errors?.['required'] || this.array[0]">
-                                                Question is required.
-                                            </div>
+                            <div class="col-lg-2">Quiz Name :</div>
+                            <div class="col-lg-4 text-left">
+                                <div class="form-group">
+                                    <input type="string" class="form-control" formControlName='quizName'
+                                        maxlength="250">
+                                    <div *ngIf="question?.invalid && (question?.dirty || question?.touched || this.array[0])"
+                                        class="alert alert-danger">
+                                        <div *ngIf="choice3?.errors?.['required'] || this.array[0]">
+                                            Quiz is required.
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2">
-                                    Number of questions :</div>
-                                <fieldset>
-                                    <div class="some-class">
-                                        <label>2 Choice</label>
-                                        <input [(ngModel)]="checkNumber" (click)="ngClassNumber2()" type="radio"
-                                            class="radio" formControlName='number' value="2">
-                                        <label>4 Choice</label>
-                                        <input [(ngModel)]="checkNumber" (click)="ngClassNumber4()" type="radio"
-                                            class="radio" formControlName='number' value="4">
-                                    </div>
-                                </fieldset>
+                                <button type="button" class="btn btn-info btn-lg" (click)="addQuiz()"
+                                    style="margin-right: 20px;">Add Question <i class="fa fa-arrow-down" aria-hidden="true"
+                                        style="margin-left:2px"></i></button>
                             </div>
 
-                            <div class="row" style="padding: 5px;">
-                                <div class="col-lg-2"> Choice 1 :</div>
-                                <div class="col-lg-4 text-left">
-                                    <div class="form-group">
-                                        <input type="string" class="form-control" formControlName='choice1'
-                                            maxlength="50">
-                                        <div *ngIf="choice1?.invalid && (choice1?.dirty || choice1?.touched || this.array[1])"
-                                            class="alert alert-danger">
-                                            <div *ngIf="choice1?.errors?.['required'] || this.array[1]">
-                                                Choice1 is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2"> Choice 2 :</div>
-                                <div class="col-lg-4 text-left">
-                                    <div class="form-group">
-                                        <input type="string" class="form-control" formControlName='choice2'
-                                            maxlength="50">
-                                        <div *ngIf="choice2?.invalid && (choice2?.dirty || choice2?.touched || this.array[2])"
-                                            class="alert alert-danger">
-                                            <div *ngIf="choice2?.errors?.['required'] || this.array[2]">
-                                                choice2 is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a *ngIf="show">
-                                <div class="row" style="padding: 5px;">
-                                    <div class="col-lg-2"> Choice 3 :</div>
-                                    <div class="col-lg-4 text-left">
-                                        <div class="form-group">
-                                            <input type="string" class="form-control" formControlName='choice3'
-                                                maxlength="50">
-                                            <div *ngIf="choice3?.invalid && (choice3?.dirty || choice3?.touched || this.array[3])"
-                                                class="alert alert-danger">
-                                                <div *ngIf="choice3?.errors?.['required'] || this.array[3]">
-                                                    choice3 is required.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2"> Choice 4 :</div>
-                                    <div class="col-lg-4 text-left">
-                                        <div class="form-group">
-                                            <input type="string" class="form-control" formControlName='choice4'
-                                                maxlength="50">
-                                            <div *ngIf="choice4?.invalid && (choice4?.dirty || choice4?.touched || this.array[4])"
-                                                class="alert alert-danger">
-                                                <div *ngIf="choice4?.errors?.['required'] || this.array[4]">
-                                                    choice4 is required.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <div class="row" style="padding: 5px;">
-                                <div class="col-lg-2"> Answer :</div>
-                                <div class="col-lg-3">
-                                    <div class="form-group" style="font-size: 20px;">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label>Choice1</label>
-                                                    <input [(ngModel)]="checkAnswer" type="radio" class="radio"
-                                                        formControlName='answer' value="1">
-                                                </div>
-                                                <div class="col">
-                                                    <label>Choice2</label>
-                                                    <input [(ngModel)]="checkAnswer" type="radio" class="radio"
-                                                        formControlName='answer' value="2">
-                                                </div>
-                                            </div>
-                                            <div class="row" *ngIf="show">
-                                                <div class="col">
-                                                    <label>Choice3</label>
-                                                    <input [(ngModel)]="checkAnswer" type="radio" class="radio"
-                                                        formControlName='answer' value="3">
-                                                </div>
-                                                <div class="col">
-                                                    <label>Choice4</label>
-                                                    <input [(ngModel)]="checkAnswer" type="radio" class="radio"
-                                                        formControlName='answer' value="4">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <!-- <div *ngIf="answer?.invalid && (answer?.dirty || answer?.touched || this.array[5])" -->
-                                        <div *ngIf="true" class="alert alert-danger" style="margin-left: 0;">
-                                            <div *ngIf="answer?.errors?.['required'] || this.array[5]">
-                                                answer is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row" style="padding: 5px;">
-                                <div class="col-lg-2"> Picture :</div>
-                                <div class="col-lg-4 text-left">
-                                    <div class="form-group">
-                                        <input (change)="onChange($event)" type="file" formControlName='picture'>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12  text-right">
-                                    <button type="button" class="btn btn-secondary btn-lg" (click)="clsData()"
-                                        style="margin-right: 20px;">Clear</button>
-                                    <button type="button" class="btn btn-success btn-lg"
-                                        (click)="addData()">Save</button>
-                                </div>
-                            </div>
                         </form>
                         <div class="card" style="margin: 100px 0 0 0;">
                             <div class="card-header">Tool Display</div>
@@ -216,18 +36,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row" style="padding: 5px;">
-                                <div class="col-lg-2"><i class="fa fa-address-book" aria-hidden="true"></i> Image:</div>
-                                <div class="col-lg-10 text-left">
-                                    <div class="form-group">
-                                        <label for="comment">{{this.imgSrc}}</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row" style="padding: 5px;">
-                                <div class="col-lg-2"><i class="fa fa-address-book" aria-hidden="true"></i> Test:</div>
+                                <div class="col-lg-2"><i class="fa fa-address-book" aria-hidden="true"></i>
+                                    Test:</div>
                                 {{array}}
                                 <div class="col-lg-10 text-left">
                                     <div class="form-group">
@@ -254,7 +65,8 @@
                                                     <td scope="row">{{item.choice4}}</td>
                                                     <td scope="row">{{item.answer}}</td>
                                                     <td scope="row"><img src={{item.picture}}
-                                                            style="max-height: 500px; max-width: 500px;"></td>
+                                                            style="max-height: 500px; max-width: 500px;">
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -266,5 +78,254 @@
                 </div>
             </div>
         </div>
+        <form [formGroup]="productForm">
+            <div formArrayName="quiz">
+                <div class="form-group" *ngFor="let line of quiz.controls; let i_quiz=index">
+                    <div [formGroupName]="i_quiz">
+                        <div class="card" style="background-color: black; margin-top: 100px;">
+                            <div class="d-flex justify-content-center" style="color: white; font-size: 60px;">
+                                Question : {{i_quiz+1}}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <img [src]="this.productForm.value.quiz[i_quiz].pic || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
+                                        alt="Your Image" style="height: 300px;">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center py-3">
+                                <div class="col-lg-6 text-center" style="margin-top: 50px;">
+                                    <div style="width: 380; height: 100px; background-color:rgb(32, 114, 32)">
+                                        <div class="col-lg-11 text-center" style="margin:auto">
+                                            {{productForm.value.quiz[i_quiz].question}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="col-lg-6" style="margin-top: 20px;">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="card" style="width: 380; height: 100px;"
+                                                [ngClass]="{'alert-success': ngClassMethod1()}">
+                                                <div class="col-lg-12 text-center" style="margin:auto">
+                                                    {{productForm.value.quiz[i_quiz].choice1}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card" style="width: 380; height: 100px;"
+                                                [ngClass]="{'alert-success': ngClassMethod2()}">
+                                                <div class="col-lg-12 text-center" style="margin:auto">
+                                                    {{productForm.value.quiz[i_quiz].choice2}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="col-lg-6" style="margin-top: 20px;" *ngIf="show">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="card" style="width: 380; height: 100px;"
+                                                [ngClass]="{'alert-success': ngClassMethod3()}">
+                                                <div class="col-lg-12 text-center" style="margin:auto">
+                                                    {{productForm.value.quiz[i_quiz].choice3}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card" style="width: 380; height: 100px;"
+                                                [ngClass]="{'alert-success': ngClassMethod4()}">
+                                                <div class="col-lg-12 text-center" style="margin:auto">
+                                                    {{productForm.value.quiz[i_quiz].choice4}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="margin-left: 300px; margin-right: 300px;">
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Create Question {{i_quiz+1}}
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding: 5px;">
+                                                <div class="col-lg-2"> Question :</div>
+                                                <div class="col-lg-4 text-left">
+                                                    <div class="form-group">
+                                                        <input type="string" class="form-control"
+                                                            formControlName='question' maxlength="250">
+                                                        <div *ngIf="question?.invalid && (question?.dirty || question?.touched || this.array[0])"
+                                                            class="alert alert-danger">
+                                                            <div *ngIf="choice3?.errors?.['required'] || this.array[0]">
+                                                                Question is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Comming Soon . . .
+                                            <div class="col-lg-2">
+                                                Number of questions :
+                                            </div>
+                                            <fieldset>
+                                                <div class="some-class">
+                                                    <label>2 Choice</label>
+                                                    <input (click)="ngClassNumber2(i_quiz)" type="radio" class="radio"
+                                                        formControlName='number' value="2">
+                                                    <label>4 Choice</label>
+                                                    <input (click)="ngClassNumber4(i_quiz)" type="radio" class="radio"
+                                                        formControlName='number' value="4">
+                                                </div>
+                                            </fieldset> -->
+                                            </div>
+
+                                            <div class="row" style="padding: 5px;">
+                                                <div class="col-lg-2"> Choice 1 :</div>
+                                                <div class="col-lg-4 text-left">
+                                                    <div class="form-group">
+                                                        <input type="string" class="form-control"
+                                                            formControlName='choice1' maxlength="140">
+                                                        <div *ngIf="choice1?.invalid && (choice1?.dirty || choice1?.touched || this.array[1])"
+                                                            class="alert alert-danger">
+                                                            <div *ngIf="choice1?.errors?.['required'] || this.array[1]">
+                                                                Choice1 is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2"> Choice 2 :</div>
+                                                <div class="col-lg-4 text-left">
+                                                    <div class="form-group">
+                                                        <input type="string" class="form-control"
+                                                            formControlName='choice2' maxlength="140">
+                                                        <div *ngIf="choice2?.invalid && (choice2?.dirty || choice2?.touched || this.array[2])"
+                                                            class="alert alert-danger">
+                                                            <div *ngIf="choice2?.errors?.['required'] || this.array[2]">
+                                                                choice2 is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <a *ngIf="show">
+                                                <div class="row" style="padding: 5px;">
+                                                    <div class="col-lg-2"> Choice 3 :</div>
+                                                    <div class="col-lg-4 text-left">
+                                                        <div class="form-group">
+                                                            <input type="string" class="form-control"
+                                                                formControlName='choice3' maxlength="140">
+                                                            <div *ngIf="choice3?.invalid && (choice3?.dirty || choice3?.touched || this.array[3])"
+                                                                class="alert alert-danger">
+                                                                <div
+                                                                    *ngIf="choice3?.errors?.['required'] || this.array[3]">
+                                                                    choice3 is required.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-2"> Choice 4 :</div>
+                                                    <div class="col-lg-4 text-left">
+                                                        <div class="form-group">
+                                                            <input type="string" class="form-control"
+                                                                formControlName='choice4' maxlength="140">
+                                                            <div *ngIf="choice4?.invalid && (choice4?.dirty || choice4?.touched || this.array[4])"
+                                                                class="alert alert-danger">
+                                                                <div
+                                                                    *ngIf="choice4?.errors?.['required'] || this.array[4]">
+                                                                    choice4 is required.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <div class="row" style="padding: 5px;">
+                                                <div class="col-lg-2"> Answer :</div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group" style="font-size: 20px;">
+                                                        <fieldset>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label>Choice1</label>
+                                                                    <input [(ngModel)]="checkAnswer" type="radio"
+                                                                        class="radio" formControlName='answer'
+                                                                        value="1">
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label>Choice2</label>
+                                                                    <input [(ngModel)]="checkAnswer" type="radio"
+                                                                        class="radio" formControlName='answer'
+                                                                        value="2">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" *ngIf="show">
+                                                                <div class="col">
+                                                                    <label>Choice3</label>
+                                                                    <input [(ngModel)]="checkAnswer" type="radio"
+                                                                        class="radio" formControlName='answer'
+                                                                        value="3">
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label>Choice4</label>
+                                                                    <input [(ngModel)]="checkAnswer" type="radio"
+                                                                        class="radio" formControlName='answer'
+                                                                        value="4">
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <div *ngIf="answer?.invalid && (answer?.dirty || answer?.touched || this.array[5])"
+                                                            style="margin-left: 0;">
+                                                            <div *ngIf="answer?.errors?.['required'] || this.array[5]">
+                                                                answer is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Comming Soon . . .
+                                        <div class="row" style="padding: 5px;">
+                                            <div class="col-lg-2"> Picture :</div>
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group">
+                                                    <input type="file"
+                                                    (emitFormControl)="onChange($event)" formControlName='pic'>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                            <div class="row">
+                                                <div class="col-md-6  text-left">
+                                                    <button type="button" class="btn btn-info btn-lg"
+                                                        (click)="addQuiz()" style="margin-right: 20px;">Add Question {{i_quiz+2}}<i
+                                                            class="fa fa-arrow-down" aria-hidden="true"
+                                                            style="margin-left:2px"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-lg"
+                                                        (click)="delQuiz(i_quiz)" style="margin-right: 20px;">Delete Question {{i_quiz+1}}
+                                                        <i class="fa fa-trash-o" aria-hidden="true"
+                                                            style="margin-left:2px"></i></button>
+
+                                                </div>
+                                                <div class="col-md-6  text-right">
+                                                    <button type="button" class="btn btn-secondary btn-lg"
+                                                        (click)="clsData()" style="margin-right: 20px;">Clear</button>
+                                                    <button type="button" class="btn btn-success btn-lg"
+                                                        (click)="addData()">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
