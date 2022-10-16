@@ -53,12 +53,23 @@
                         <br/><br/>
 
                         <div class="form-group">
+                            <label>BirthYaer</label>
+                            <input type="text" class="form-control" formControlName='birthyear'>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" formControlName='phonenumber'>
+                            <div *ngIf="phonenumber?.invalid && (phonenumber?.dirty || phonenumber?.touched)" class="alert alert-danger">
+                                <div *ngIf="phonenumber?.errors?.['required']">phonenumber is required.</div>
+                                <div *ngIf="phonenumber?.errors?.['pattern']">please input correct phonenumber format</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label>Username</label>
                             <input type="text" class="form-control" formControlName='username'>
-                            <!-- <div *ngIf="stdid?.invalid && (stdid?.dirty || stdid?.touched)" class="alert alert-danger">
-                                <div *ngIf="stdid?.errors?.['required']">STD is required.</div>
-                                <div *ngIf="stdid?.errors?.['pattern']">STD is incorrect!</div>
-                            </div> -->
+                            
                         </div>
 
                         <div class="form-group">
@@ -73,10 +84,19 @@
                         <div class="form-group">
                             <label>Password</label>
                             <input type="text" class="form-control" formControlName='password'>
+                            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="alert alert-danger">
+                                <div *ngIf="password?.errors?.['required']">Password is required.</div>
+                                
+                            </div>
                         </div>
                         <div >
                             <label>Confirm Password</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" formControlName='confirmpass'>
+                            <div *ngIf="confirmpass?.invalid && (confirmpass?.dirty || confirmpass?.touched)" class="alert alert-danger">
+                                <div *ngIf="confirmpass?.errors?.['required']">re-Password is required</div>
+                                <div *ngIf="confirmpass===password">Please input your password again</div>
+                                
+                            </div>
                         </div>
 
 
