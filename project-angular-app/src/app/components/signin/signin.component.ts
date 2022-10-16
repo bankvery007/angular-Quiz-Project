@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/service/login.service';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-signin',
@@ -9,15 +15,18 @@ import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 export class SigninComponent implements OnInit {
 
   loginForm = new FormGroup({
-    username: new FormControl('',[Validators.required]),
-    passowrd: new FormControl('',[Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    passowrd: new FormControl('', [Validators.required]),
   });
 
-  constructor() { }
+  constructor(private loginService :LoginService) { }
 
   ngOnInit(): void {
   }
 
-  
+  // onClickLogin() {
+  //   this.loginService.onClickLogin();
+      
+  // }
 
 }
