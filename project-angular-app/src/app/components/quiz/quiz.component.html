@@ -32,9 +32,9 @@
                 </button>
             </div>
             <div style="font-size: 27px; margin-top: 30px;">
-                <a style="position: relative;top: 15px">หรือสร้างเกมใหม่ของคุณได้ที่นี้</a>
-                <button routerLink="newquiz" routerLinkActive="active"
-                    style="height: 70px;width: 160px;margin-left: 15px;">New QUIZ</button>
+                <a style="position: relative;top: 15px" >หรือสร้างเกมใหม่ของคุณได้ที่นี้</a>
+                <button 
+                    style="height: 70px;width: 160px;margin-left: 15px;" [routerLink]="'/newquiz'">New QUIZ</button>
             </div>
             <br>
         </div>
@@ -44,7 +44,7 @@
             <div class="col-lg-12 text-left" style="font-size: 50px;margin-left: 50px;margin-top: 100px;">
                 {{gametypes}}
             </div>
-            <div style="margin-left: 20px;width: 2700px;overflow-x: scroll;">
+            <div class="col-lg-7" style="margin-left: 20px;width: auto;overflow-x: scroll;">
                 <tbody>
                     <tr>
                         <th *ngFor="let item of getAllgroup() | filter: gametypes  let j = index">
@@ -74,7 +74,7 @@
         <div class="col-lg-12 text-left" style="font-size: 50px;margin-left: 50px;margin-top: 100px;">
             Searching . . .
         </div>
-        <div style="margin-left: 20px;width: 2700px;overflow-x: scroll;">
+        <div style="margin-left: 20px;width: auto;overflow-x: scroll;">
             <tbody>
                 <tr>
                     <th *ngFor="let item of getAllgroup() | filter: searchText let j = index">
