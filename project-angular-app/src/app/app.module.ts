@@ -14,6 +14,7 @@ import { ResultComponent } from './components/result/result.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HistoryComponent } from './components/history/history.component';
+import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HistoryComponent } from './components/history/history.component';
     ResultComponent,
     SigninComponent,
     WelcomeComponent,
-    HistoryComponent
+    HistoryComponent,
+    ProfilemodalComponent
   ],
   imports: [
     BrowserModule,
