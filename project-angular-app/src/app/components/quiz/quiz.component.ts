@@ -62,14 +62,7 @@ export class QuizComponent implements OnInit {
     this.countService.count[0].count += 1
   }
 
-  // SumCount(){
-  //   for (let i = 0; i < this.groupService.group.length; i++) {
-  //     console.log(this.groupService.group[i].count)
-  //     this.countService.count[0].count += this.groupService.group[i].count
-  //   }
-  // }
-
-  getSumCount(){
+  getCount(){
     return this.countService.getAllcount()
   }
 

@@ -1,7 +1,8 @@
 <div class="card" style="background-color: black;">
     <div class="row">
         <div class="col-lg-6" style="margin-top: 60px">
-            <div class="col-lg-12 text-left" style="font-size: 35px; margin: 20px 0 0 30px;" *ngFor="let item of getSumCount() let c = index">
+            <div class="col-lg-12 text-left" style="font-size: 35px; margin: 20px 0 0 30px;"
+                *ngFor="let item of getCount() let c = index">
                 Play Count Server : {{item.count}}
             </div>
         </div>
@@ -51,7 +52,8 @@
         </div>
         <div class="row" style="margin-left: 20px;width: auto;overflow-x: scroll;">
             <div *ngFor="let item of getAllgroup() | filter: searchText let j = index">
-                <input type="button" style="margin-left: 85px; margin-top: 30px;" (click)="addCount(j)" [routerLink]="'/question'">
+                <input type="button" style="margin-left: 85px; margin-top: 30px;" (click)="addCount(j)"
+                    [routerLink]="'/question'">
                 <div class="col-lg-12 text-center" style="margin-left: 50px; 
                                         font-size: 30px;
                                         ">
