@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { CommentService } from 'src/app/service/comment.service';
 import { CountService } from 'src/app/service/count.service';
 import { DataService } from 'src/app/service/data.service';
-import { GroupService } from 'src/app/service/group.service';
 
 
 
@@ -30,7 +29,6 @@ export class QuizComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private commentService: CommentService,
-    private groupService : GroupService,
     private countService : CountService
   ) { }
 
@@ -45,27 +43,19 @@ export class QuizComponent implements OnInit {
     return this.commentService.getAllcomment().reverse()
   }
 
-  getAllgroup(){
-    return this.groupService.getAllgroup()
-  }
-
   getAllcount(){
     return this.countService.getAllcount()
   }
 
-  getIDgroup(g_id:number){
-    return this.groupService.getIDgroup(g_id)
-  }
-
   addCount(id : number){
-    this.groupService.group[id].count += 1
+    this.dataService.data[id].count += 1
     this.countService.count[0].count += 1
   }
 
   getCount(){
     return this.countService.getAllcount()
   }
-
+  
   addComment() {
     if(this.text?.errors?.['required']){
       this.alert_comment = true

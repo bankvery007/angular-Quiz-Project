@@ -14,25 +14,18 @@
                                     <div class="form-group">
                                         <input type="string" class="form-control" formControlName='quizName'
                                             maxlength="250">
-                                        <div *ngIf="question?.invalid && (question?.dirty || question?.touched || this.array[0])"
+                                        <div *ngIf="quizName?.invalid && (quizName?.dirty || quizName?.touched)"
                                             class="alert alert-danger">
-                                            <div *ngIf="choice3?.errors?.['required'] || this.array[0]">
+                                            <div *ngIf="quizName?.errors?.['required']">
                                                 Quiz is required.
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2">Date():</div>
-                                <div class="col-lg-4 text-left">
-                                    <div class="form-group">
-                                        <input type="date" class="form-control" formControlName='datetime'
-                                            maxlength="250">
-                                    </div>
-                                </div>
                             </div>
                             <button type="button" class="btn btn-info btn-lg" (click)="addQuiz()"
-                                style="margin-right: 20px;">Add Question <i class="fa fa-arrow-down" aria-hidden="true"
-                                    style="margin-left:2px"></i></button>
+                                style="margin-right: 20px;">Add Question {{(productForm.value.quiz).length+1}}<i
+                                    class="fa fa-arrow-down" aria-hidden="true" style="margin-left:2px"></i></button>
                         </form>
                         <div class="card" style="margin: 100px 0 0 0;">
                             <div class="card-header">Tool Display</div>
@@ -44,12 +37,16 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row" style="padding: 5px;">
                                 <div class="col-lg-2"><i class="fa fa-address-book" aria-hidden="true"></i>
-                                    Test:</div>
-                                {{array}}
-                                <div class="col-lg-10 text-left">
-                                    <div class="form-group">
+                                    Test:</div> {{productForm.status}}
+                                <!-- <div class="col-lg-10 text-left">
+                                    <div class="form-group" *ngFor="let items of getAlldata(); index as i_data">
+                                        <div>Test . . .</div>
+                                        <div>{{i_data}}</div>
+                                        <div>{{items.quizName}}</div>
+                                        <div>{{items.datetime}}</div>
                                         <table class="table table-striped table-inverse">
                                             <thead class="thead-inverse">
                                                 <tr>
@@ -64,7 +61,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of getAlldata(); index as i">
+                                                <tr *ngFor="let item of items.quiz; index as j_data">
                                                     <td scope="row">{{item.question}}</td>
                                                     <td scope="row">{{item.number}}</td>
                                                     <td scope="row">{{item.choice1}}</td>
@@ -72,21 +69,21 @@
                                                     <td scope="row">{{item.choice3}}</td>
                                                     <td scope="row">{{item.choice4}}</td>
                                                     <td scope="row">{{item.answer}}</td>
-                                                    <td scope="row"><img src={{item.picture}}
+                                                    <td scope="row"><img src={{item.pic}}
                                                             style="max-height: 500px; max-width: 500px;">
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <form [formGroup]="productForm">
             <div formArrayName="quiz">
                 <div class="form-group" *ngFor="let line of quiz.controls; let i_quiz=index">
@@ -96,7 +93,7 @@
                                 Question : {{i_quiz+1}}
                             </div>
                         </div>
-                        <div class="card-body" style="background-color: black;">
+                        <!-- <div class="card-body" style="background-color: black;">
                             <div class="row">
                                 <div class="col-lg-12 text-center">
                                     <img [src]="this.productForm.value.quiz[i_quiz].pic || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
@@ -152,7 +149,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md">
@@ -167,42 +164,29 @@
                                                     <div class="form-group">
                                                         <input type="string" class="form-control"
                                                             formControlName='question' maxlength="250">
-                                                        <div *ngIf="question?.invalid && (question?.dirty || question?.touched || this.array[0])"
-                                                            class="alert alert-danger">
-                                                            <div *ngIf="choice3?.errors?.['required'] || this.array[0]">
-                                                                Question is required.
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <!-- Comming Soon . . .
-                                            <div class="col-lg-2">
+
+                                                <!-- <div class="col-lg-2">
                                                 Number of questions :
                                             </div>
                                             <fieldset>
                                                 <div class="some-class">
                                                     <label>2 Choice</label>
-                                                    <input (click)="ngClassNumber2(i_quiz)" type="radio" class="radio"
+                                                    <input type="radio" class="radio"
                                                         formControlName='number' value="2">
                                                     <label>4 Choice</label>
-                                                    <input (click)="ngClassNumber4(i_quiz)" type="radio" class="radio"
+                                                    <input type="radio" class="radio"
                                                         formControlName='number' value="4">
                                                 </div>
                                             </fieldset> -->
                                             </div>
-
                                             <div class="row" style="padding: 5px;">
                                                 <div class="col-lg-2"> Choice 1 :</div>
                                                 <div class="col-lg-4 text-left">
                                                     <div class="form-group">
                                                         <input type="string" class="form-control"
                                                             formControlName='choice1' maxlength="140">
-                                                        <div *ngIf="choice1?.invalid && (choice1?.dirty || choice1?.touched || this.array[1])"
-                                                            class="alert alert-danger">
-                                                            <div *ngIf="choice1?.errors?.['required'] || this.array[1]">
-                                                                Choice1 is required.
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2"> Choice 2 :</div>
@@ -210,49 +194,27 @@
                                                     <div class="form-group">
                                                         <input type="string" class="form-control"
                                                             formControlName='choice2' maxlength="140">
-                                                        <div *ngIf="choice2?.invalid && (choice2?.dirty || choice2?.touched || this.array[2])"
-                                                            class="alert alert-danger">
-                                                            <div *ngIf="choice2?.errors?.['required'] || this.array[2]">
-                                                                choice2 is required.
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <a *ngIf="show">
-                                                <div class="row" style="padding: 5px;">
-                                                    <div class="col-lg-2"> Choice 3 :</div>
-                                                    <div class="col-lg-4 text-left">
-                                                        <div class="form-group">
-                                                            <input type="string" class="form-control"
-                                                                formControlName='choice3' maxlength="140">
-                                                            <div *ngIf="choice3?.invalid && (choice3?.dirty || choice3?.touched || this.array[3])"
-                                                                class="alert alert-danger">
-                                                                <div
-                                                                    *ngIf="choice3?.errors?.['required'] || this.array[3]">
-                                                                    choice3 is required.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-2"> Choice 4 :</div>
-                                                    <div class="col-lg-4 text-left">
-                                                        <div class="form-group">
-                                                            <input type="string" class="form-control"
-                                                                formControlName='choice4' maxlength="140">
-                                                            <div *ngIf="choice4?.invalid && (choice4?.dirty || choice4?.touched || this.array[4])"
-                                                                class="alert alert-danger">
-                                                                <div
-                                                                    *ngIf="choice4?.errors?.['required'] || this.array[4]">
-                                                                    choice4 is required.
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                            <div class="row" style="padding: 5px;">
+                                                <div class="col-lg-2"> Choice 3 :</div>
+                                                <div class="col-lg-4 text-left">
+                                                    <div class="form-group">
+                                                        <input type="string" class="form-control"
+                                                            formControlName='choice3' maxlength="140">
                                                     </div>
                                                 </div>
-                                            </a>
+
+                                                <div class="col-lg-2"> Choice 4 :</div>
+                                                <div class="col-lg-4 text-left">
+                                                    <div class="form-group">
+                                                        <input type="string" class="form-control"
+                                                            formControlName='choice4' maxlength="140">
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="row" style="padding: 5px;">
                                                 <div class="col-lg-2"> Answer :</div>
@@ -262,39 +224,29 @@
                                                             <div class="col">
                                                                 <div class="row">
                                                                     <label>Choice1</label>
-                                                                    <input [(ngModel)]="checkAnswer" type="radio"
+                                                                    <input [(ngModel)]="checkAnswer" type="radio" id="1"
                                                                         class="radio" formControlName='answer'
                                                                         value="1">
                                                                 </div>
-
                                                                 <div class="row">
                                                                     <label>Choice3</label>
-                                                                    <input [(ngModel)]="checkAnswer" type="radio"
-                                                                        class="radio" formControlName='answer'
-                                                                        value="3">
+                                                                    <input type="radio" id="3" class="radio"
+                                                                        formControlName='answer' value="3">
                                                                 </div>
                                                             </div>
-                                                            <div class="col" *ngIf="show">
+                                                            <div class="col">
                                                                 <div class="row">
                                                                     <label>Choice2</label>
-                                                                    <input [(ngModel)]="checkAnswer" type="radio"
-                                                                        class="radio" formControlName='answer'
-                                                                        value="2">
+                                                                    <input type="radio" id="2" class="radio"
+                                                                        formControlName='answer' value="2">
                                                                 </div>
                                                                 <div class="row">
                                                                     <label>Choice4</label>
-                                                                    <input [(ngModel)]="checkAnswer" type="radio"
-                                                                        class="radio" formControlName='answer'
-                                                                        value="4">
+                                                                    <input type="radio" id="4" class="radio"
+                                                                        formControlName='answer' value="4">
                                                                 </div>
                                                             </div>
                                                         </fieldset>
-                                                        <div *ngIf="answer?.invalid && (answer?.dirty || answer?.touched || this.array[5])"
-                                                            style="margin-left: 0;">
-                                                            <div *ngIf="answer?.errors?.['required'] || this.array[5]">
-                                                                answer is required.
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,25 +263,21 @@
                                         </div> -->
 
                                             <div class="row">
-                                                <div class="col-md-6  text-left">
-                                                    <button type="button" class="btn btn-info btn-lg"
-                                                        (click)="addQuiz()" style="margin-right: 20px;">Add Question
-                                                        {{i_quiz+2}}<i class="fa fa-arrow-down" aria-hidden="true"
-                                                            style="margin-left:2px"></i></button>
+                                                <div class="col-md-6  text-left"
+                                                    *ngIf="(productForm.value.quiz).length > 1">
                                                     <button type="button" class="btn btn-danger btn-lg"
                                                         (click)="delQuiz(i_quiz)" style="margin-right: 20px;">Delete
                                                         Question {{i_quiz+1}}
                                                         <i class="fa fa-trash-o" aria-hidden="true"
                                                             style="margin-left:2px"></i></button>
-
                                                 </div>
-                                                <div class="col-md-6  text-right">
+                                                <!-- <div class="col-md-6  text-right">
                                                     <button type="button" class="btn btn-secondary btn-lg"
-                                                        (click)="clsData()" style="margin-right: 20px;">Clear</button>
-                                                    <button type="button" class="btn btn-success btn-lg"
-                                                        (click)="addData()">Save</button>
-                                                </div>
+                                                        (click)="clsData(i_quiz)" style="margin-right: 20px;">Clear <i
+                                                            class="fa fa-eraser " aria-hidden="true"></i></button>
+                                                </div> -->
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -338,6 +286,29 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="this.status" class="alert alert-danger">
+                <div class="text-center" *ngIf="this.status">
+                    Please fill all questions or quiz name.
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-6 text-center">
+                    <button type="button" class="btn btn-info btn-lg" (click)="addQuiz()"
+                        style="width: 100%; height: 100px;">
+                        Add Question {{(productForm.value.quiz).length+1}}
+                        <i class="fa fa-arrow-down btn-lg" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+                <div class="col-lg-6 text-center">
+                    <button type="button" class="btn btn-success btn-lg" (click)="addData()"
+                        style="width: 100%; height: 100px;">
+                        Save
+                        <i class="fa fa-floppy-o btn-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
         </form>
-   
     </div>
