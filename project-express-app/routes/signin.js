@@ -73,7 +73,7 @@ router.route('/signin')
             const status = loginStatus.status;
 
             if(status){
-                const token = jwt.sign(result,key,{expiresIn: 60*5});
+                const token = jwt.sign(result,key,{expiresIn: 60*15});
                 res.status(200).json({result,token,status});
             }else{
                 res.status(200).json({status});

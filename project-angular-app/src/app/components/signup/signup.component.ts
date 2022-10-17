@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +33,7 @@ export class SignupComponent implements OnInit {
   get password() {return this.profileForm.get('password');}
   get confirmpass() {return this.profileForm.get('confirmpass');}
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
   }
