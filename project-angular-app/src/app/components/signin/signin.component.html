@@ -3,19 +3,22 @@
     <img src="https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png" height="100%"
         width="100%" />
         <div class="d-flex justify-content-around py-3">
-    <div class="card col-md-6" style="text-align:center">
+    <div class="card col-md-6" style="text-align:center" [formGroup]="loginForm">
         <br /><br />
+        <p style="text-align:center">
+            "username":"Monkey_za007",
+            "password":"monkey1234"
+          </p>
         <div>
             <label>Username : </label>
-            <input type="text" placeholder="Enter Username" name="username" required>
+            <input type="text" placeholder="Enter Username" formControlName="username" required>
         </div>
-
         <div>
             <label>Password : </label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <input type="password" placeholder="Enter Password" formControlName="password" required>
         </div>
 
-        <div><button type="submit">Login</button></div>
+        <div><button type="submit" (click)="onClickLogin()">Login</button></div>
         <br />
 
     </div>
