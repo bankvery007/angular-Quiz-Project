@@ -36,8 +36,8 @@ export class SigninComponent implements OnInit {
           if ((<any>Object).values(data)[0] != false) {
             console.log((<any>Object).values(data)[0])
             console.log((<any>Object).values(data)[1])
+            
             window.localStorage.setItem("token", (<any>Object).values(data)[1]);
-            // localStorage.setItem("token",this.nameKey.nativeElement.value);
 
             alert("welcome!")
             this.router.navigate(['./quiz']);
