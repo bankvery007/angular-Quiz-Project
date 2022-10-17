@@ -17,6 +17,7 @@ import { ChangeBgDirective } from './change-bg.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
+import { SatisfiedComponent } from './components/satisfied/satisfied.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ProfilemodalComponent } from './components/profilemodal/profilemodal.co
     WelcomeComponent,
     ChangeBgDirective,
     HistoryComponent,
-    ProfilemodalComponent
+    ProfilemodalComponent,
+    SatisfiedComponent
   ],
   imports: [
     BrowserModule,

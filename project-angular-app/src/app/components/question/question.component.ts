@@ -22,6 +22,7 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.getAllQuestions();
     this.startCounter();
+    this.correctAnswer=0;
   }
   getAllQuestions(){
     this.QuestionsService.getQuestionJson()
