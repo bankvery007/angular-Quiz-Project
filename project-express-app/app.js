@@ -16,7 +16,7 @@ expressApp.use((req,res,next)=>{
     return next()
 });
 
-expressApp.use(expressFunction.json());
+expressApp.use(expressFunction.json({ limit: '100mb' }));
 
 expressApp.use((req,res,next)=>{
     mongoose.connect(url,config)
@@ -34,7 +34,8 @@ expressApp.use((req,res,next)=>{
 
 expressApp.use('/user', require('./routes/user'))
 expressApp.use('/login', require('./routes/signin'))
-expressApp.use('/api', require('./api/quiz'))
+expressApp.use('/quiz', require('./api/quiz'))
+expressApp.use('/comment', require('./api/comment'))
 
 expressApp.listen(3000, function(){
     console.log('Listening on Port 3000');

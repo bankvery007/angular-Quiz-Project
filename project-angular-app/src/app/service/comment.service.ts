@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
 import { commentModel } from '../comment.model';
-
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
 
-  comment : commentModel = [
-    {name: "patcharachart", text: "Good!"},
-    {name: "kuyyai", text: "lnwza007"},
-    {name: "xxxxx", text: "porn!"},
-    {name: "test", text: "test!"},
-    {name: "A", text: "Good!"},
-    {name: "B", text: "Good!"},
-    {name: "Cat", text: "Good!"},
-    {name: "ควาย", text: "เกมโง่ๆ"},
-    {name: "อิอิ", text: "โคตรยาววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว"},
+  constructor(private http: HttpClient) { }
 
-  ]
+  comment: any
 
-  constructor() { }
-
-  getAllcomment(){
-    return this.comment;
+  addComment(CommentData: any) {
+    return this.http.post<any>('http://localhost:3000/comment/addComment', CommentData)
+      .pipe(map(datas => {
+        return datas;
+      }));
   }
+
+  getAllcomment() {
+    return this.http.get<any>('http://localhost:3000/comment/getComment')
+      .pipe(map(newcomment => {
+        if (newcomment) {
+          this.comment = newcomment;
+        }
+        return this.comment;
+      }));
+  }
+
 }

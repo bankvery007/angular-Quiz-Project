@@ -46,15 +46,17 @@
             <br>
         </div>
     </div>
-    <table *ngIf="(getAlldata() | filter: searchText).length > 0 ;else noResults">
+    <table *ngIf="(quiz | filter: searchText).length > 0 ;else noResults">
         <div class="col-lg-12 text-left" style="font-size: 50px;margin-left: 50px;">
             {{ShowTypeDisplay()}}
         </div>
         <div class="row" style="margin-left: 60px;width: 100%;; overflow-x: scroll;">
-            <div class="col-lg-2 text-center" *ngFor="let item of getAlldata() | filter: searchText let j = index">
+            <div class="col-lg-2 text-center" *ngFor="let item of quiz | filter: searchText let j = index">
                 <div class="row">
-                    <div class="col text-center" style="font-size: 30px;" >
-                        <input type="button" style="margin-top: 30px; height: 250px;" (click)="addCount(j)" [routerLink]="'/question'">
+                    <div class="col text-center" style="font-size: 30px;">
+                        <input type="image" style="margin-top: 30px; height: 250px;" (click)="addCount(j)"
+                            [routerLink]="'/question'" [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
+                            
                     </div>
                 </div>
                 <div class="row">
@@ -64,7 +66,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-center" style="font-size: 22px; color: gray;">
-                        create on {{item.datetime}}
+                        create on {{(item.datetime)}}
                     </div>
                 </div>
                 <div class="row">
@@ -82,7 +84,7 @@
         <form [formGroup]="productForm">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <textarea rows="6" cols="80" formControlName='text' maxlength="999"
+                    <textarea rows="6" cols="80" formControlName='comment' maxlength="999"
                         style="margin-left: 110px; font-size: 30px;"></textarea>
                     <button type="button" class="btn btn-success btn-lg" (click)="addComment()"
                         style="position: relative;bottom: 30px;right: 135px;">Comment</button>
@@ -98,9 +100,9 @@
             </div>
         </form>
         <div style="margin: 70px 0 250px 70px; height: 700px;overflow-y: scroll;">
-            <span *ngFor="let item of getAllcomment(); index as i">
+            <span *ngFor="let item of comment; index as i">
                 <textarea rows="5" cols="35" disabled
-                    style="resize: none; margin: 40px 0 0 80px;background-color: rgb(50,50,50); color: white; font-size: 25px;">{{item.text}}</textarea>
+                    style="resize: none; margin: 40px 0 0 80px;background-color: rgb(50,50,50); color: white; font-size: 25px;">{{item.comment}}</textarea>
             </span>
         </div>
     </div>

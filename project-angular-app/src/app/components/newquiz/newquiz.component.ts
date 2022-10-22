@@ -3,8 +3,8 @@ import { NodeWithI18n } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
-
 
 @Component({
   selector: 'app-newquiz',
@@ -18,7 +18,8 @@ export class NewquizComponent implements OnInit {
 
   imgSrc!: string;
   checkAnswer!: string;
-  status! : boolean; 
+  status!: boolean;
+  previewLoaded: boolean = false;
 
   // productForm = new FormGroup({
   //   quizName: new FormControl('', [Validators.required]),
@@ -39,6 +40,7 @@ export class NewquizComponent implements OnInit {
 
   productForm: FormGroup = this.fb.group({
     quizName: ['', Validators.required],
+    img: [''],
     quiz: this.fb.array([
       this.fb.group({
         question: ['', Validators.required],
@@ -47,6 +49,7 @@ export class NewquizComponent implements OnInit {
         choice3: ['', [Validators.required]],
         choice4: ['', [Validators.required]],
         answer: ['', Validators.required],
+        imgArray: [''],
       })
     ])
   });
@@ -54,10 +57,10 @@ export class NewquizComponent implements OnInit {
   get quizName() { return this.productForm.get('quizName') }
   get quiz() { return this.productForm.get('quiz') as FormArray; }
 
-
   constructor(
     private dataService: DataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +76,7 @@ export class NewquizComponent implements OnInit {
         choice3: new FormControl('', [Validators.required]),
         choice4: new FormControl('', [Validators.required]),
         answer: new FormControl('', [Validators.required]),
+        imgArray: new FormControl(''),
       }));
   }
 
@@ -81,50 +85,85 @@ export class NewquizComponent implements OnInit {
     this.quiz.removeAt(index)
   }
 
-  onChange(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const render = new FileReader();
-      render.onload = (e: any) => {
-        return e.target.result;
+  onChangeImg(e: any) {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      var pattern =/image-*/;
+      const reader = new FileReader();
+      if(!file.type.match(pattern)) {
+        alert('invalid format')
+        this.productForm.reset()
+      }else{
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.previewLoaded = true;
+          this.productForm.patchValue({
+            img: reader.result?.toString()
+          });
       };
-      return render.readAsDataURL(event.target.files[0])
+
+      }
     }
   }
 
-  // setValidators() {
-  //   this.productForm.get('choice3')?.setValidators(Validators.required)
-  //   this.productForm.get('choice4')?.setValidators(Validators.required)
-  // }
+  onChangeImgArray(e: any) {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      var pattern =/image-*/;
+      const reader = new FileReader();
+      if(!file.type.match(pattern)) {
+        alert('invalid format')
+        this.productForm.reset()
+      }else{
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.previewLoaded = true;
+          this.productForm.value.quiz.patchValue({
+            imgArray: reader.result?.toString()
+          });
+      };
 
-  ngClassMethod1() { if (this.checkAnswer == "1") { return true } else { return false } }
-  ngClassMethod2() { if (this.checkAnswer == "2") { return true } else { return false } }
-  ngClassMethod3() { if (this.checkAnswer == "3") { return true } else { return false } }
-  ngClassMethod4() { if (this.checkAnswer == "4") { return true } else { return false } }
+      }
+    }
+  }
 
+  resetForm() {
+    this.productForm.reset();
+    this.previewLoaded = false;
+  }
 
   getDateNow() {
     return [new Date().getDate(), new Date().getMonth() + 1, new Date().getFullYear()].join('/')
   }
 
   addData() {
-    if(this.productForm.status == "INVALID"){
+    if (this.productForm.status == "INVALID") {
       this.status = true
-    }else{
-      this.dataService.data.push(
+    } else {
+      this.dataService.addQuiz(
         {
           quizName: this.productForm.value.quizName || '',
           datetime: this.getDateNow(),
           count: 0,
+          img: this.productForm.value.img || '',
           quiz: this.productForm.value.quiz
         }
-      )
-      console.log(this.dataService.getAlldata())
-      alert("Add Data Success")
+      ).subscribe(
+        data => {
+          console.log(this.dataService.getAllQuiz())
+          alert('Quiz added successfully');
+          this.productForm.reset();
+          this.router.navigate(['/quiz']);
+        },
+        err => {
+          console.log(err);
+        }
+      );
     }
   }
 
-  getAlldata() {
-    return this.dataService.getAlldata()
+  getAllQuiz() {
+    return this.dataService.getAllQuiz()
   }
 
 }
