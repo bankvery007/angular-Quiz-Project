@@ -37,6 +37,10 @@ expressApp.use('/login', require('./routes/signin'))
 expressApp.use('/quiz', require('./api/quiz'))
 expressApp.use('/comment', require('./api/comment'))
 
+expressApp.get('api/test', function(req, res){
+    res.status(200).send('Hello World'); 
+});
+
 expressApp.listen(3000, function(){
     console.log('Listening on Port 3000');
 });
