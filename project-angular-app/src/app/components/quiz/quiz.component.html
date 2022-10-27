@@ -1,15 +1,16 @@
 <div class="card" style="background-color: black;">
     <div class="row">
         <div class="col-lg-6" style="margin-top: 60px">
-            <div class="col-lg-12 text-left" style="font-size: 35px; margin: 20px 0 0 30px;"
+            <p class="col-lg-12 text-left" style="font-size: 35px; margin: 20px 0 0 30px;"
                 *ngFor="let item of getCount() let c = index">
-                Play Count Server : {{item.count}}
-            </div>
+                Play Count Server : {{this.count}}
+            </p>
         </div>
         <div class="col-lg-6 text-right" style="margin-top: 60px;">
             <a href="#" class="btn" data-toggle="modal" data-target="#myModal">
                 <a style="margin-right: 20px; font-size: 35px; color: white;">ฟิวหล่อเท่</a>
-                <img [src]="'https://i.im.ge/2022/10/15/2D6ArK.user.png'" class="img-thumbnail" alt="Your Image" style="max-height: 80px ;max-width: 80px;
+                <img id="img1" [src]="'https://i.im.ge/2022/10/15/2D6ArK.user.png'" class="img-thumbnail"
+                    alt="Your Image" style="max-height: 80px ;max-width: 80px;
             border-top-left-radius: 240px;
             border-top-right-radius: 240px;
             border-bottom-left-radius: 240px;
@@ -23,13 +24,14 @@
 <div class="card" style="background-color: black;  margin-left: 100px;">
     <div class="row">
         <div class="col-md-3 text-center" style="margin-top: 10px; margin-left: 50px;">
-            <img [src]="this.imgSrc || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
+            <img id="img1"
+                [src]="this.imgSrc || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
                 alt="Your Image" style="max-height: 500px ;max-width: 500px;">
         </div>
         <div style="margin: 30px 0 0 200px; font-size: 35px;">
-            สวัสดี User พร้อมที่จะเล่นเกมหรือยัง?!
+            <p>สวัสดี User พร้อมที่จะเล่นเกมหรือยัง?!</p>
             <div>
-                <input type="text" [(ngModel)]="searchText" placeholder="search ...."
+                <input id="img2" type="text" [(ngModel)]="searchText" placeholder="search ...."
                     style="width: 500px; height:auto;">
 
                 <button class="fa fa-search fa-xs" aria-hidden="true" style="position: relative;
@@ -47,63 +49,61 @@
         </div>
     </div>
     <table *ngIf="(quiz | filter: searchText).length > 0 ;else noResults">
-        <div class="col-lg-12 text-left" style="font-size: 50px;">
+        <p class="col-lg-12 text-left" style="font-size: 50px;">
             {{ShowTypeDisplay()}}
-        </div>
+        </p>
         <div class="d-flex justify-content-center">
             <div class="row" style="width:100%;height: 850px; overflow-y: scroll;">
                 <div class="col-lg-2 text-center" *ngFor="let item of quiz | filter: searchText let j = index">
-                    <div class="row">
-                        <div class="col text-center" style="font-size: 30px;">
-                            <input type="image" style="margin-top: 30px; height: 250px;" (click)="addCount(j)"
-                                [routerLink]="'/question'" [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
+                    <div class="row" style="padding-top: 30px;">
+                        <div class="col text-center" style="width:250px ;height: 250px; ">
+                            <p class="avoid-clicks">{{item.quiz.length}} point</p>
+                            <img id="img2" type="image" title={{item.quizName}}
+                                style="object-fit: cover;margin-top: 30px;width: 90%; height: 80%;"
+                                (click)="addCount(j)" [routerLink]="'/question'"
+                                [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col text-center" style="font-size: 25px;">
+                        <p class="col text-center" title={{item.quizName}} style="font-size: 2vmin;">
                             {{item.quizName}}
-                        </div>
+                        </p>
                     </div>
                     <div class="row">
-                        <div class="col text-center" style="font-size: 22px; color: gray;">
+                        <p class="col text-center" style="font-size: 2vmin; color: gray;">
                             create on {{(item.datetime)}}
-                        </div>
+                        </p>
                     </div>
                     <div class="row">
-                        <div class="col text-center" style="font-size: 22px; color: green;">
+                        <p class="col text-center" style="font-size: 2vmin; color: green;">
                             play count : {{item.count}}
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </table>
     <ng-template #noResults>
-        <p style="padding: 50px;font-size: 25px;">No results found for "{{searchText}}".</p>
+        <p *ngIf="quiz" style="padding: 50px;font-size: 25px;">No results found for "{{searchText}}".</p>
+        <p *ngIf="!quiz" style="padding: 50px;font-size: 100px;">ไปรัน backend ไอสัส</p>
+        <!-- <p *ngIf="!quiz" style="padding: 50px;font-size: 25px;">No quiz right now, let's create your own quiz!!</p> -->
     </ng-template>
-    <div class="card" style="background-color: black;">
+    <div class="col text-center" style="background-color: black; ">
         <form [formGroup]="productForm">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                <p class="col-lg-12 text-center">
                     <textarea rows="6" cols="80" formControlName='comment' maxlength="999"
                         style="margin-left: 110px; font-size: 30px;"></textarea>
                     <button type="button" class="btn btn-success btn-lg" (click)="addComment()"
+                        [disabled]="!productForm.valid"
                         style="position: relative;bottom: 30px;right: 135px;">Comment</button>
-
-                </div>
-                <div *ngIf="text?.invalid && (text?.dirty || text?.touched) || this.alert_comment"
-                    class="alert alert-dark col-md-3 text-center" style="margin: auto;">
-                    <div *ngIf="text?.errors?.['required'] || this.alert_comment"
-                        style="font-size: 30px;color: black; opacity: 0.7;">
-                        ลองพิมอะไรสักหน่อยสิ
-                    </div>
-                </div>
+                </p>
             </div>
         </form>
-        <div style="margin: 70px 0 250px 70px; height: 700px;overflow-y: scroll;">
-            <span *ngFor="let item of comment; index as i">
+        <div style="margin: 70px 0 250px 0; height: 700px;overflow-y: scroll;">
+            <span *ngFor="let item of comment; index as i" style="padding-left: 40px ">
                 <textarea rows="5" cols="35" disabled
-                    style="resize: none; margin: 40px 0 0 80px;background-color: rgb(50,50,50); color: white; font-size: 25px;">{{item.comment}}</textarea>
+                    style="margin-top: 50px;resize: none;background-color: rgb(50,50,50); color: white; font-size: 2vmin;">{{item.comment}}</textarea>
             </span>
         </div>
     </div>

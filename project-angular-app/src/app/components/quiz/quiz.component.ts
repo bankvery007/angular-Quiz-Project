@@ -19,7 +19,8 @@ export class QuizComponent implements OnInit {
   searchText: string = "";
   quiz: any;
   comment: any;
-
+  sum : number = 0;
+  count! : string
 
   productForm = new FormGroup({
     comment: new FormControl('', [Validators.required]),
@@ -43,6 +44,16 @@ export class QuizComponent implements OnInit {
       this.dataService.getAllQuiz().subscribe(
         data => {
           this.quiz = data.reverse();
+          for(const i in data){
+            this.sum += data[i].count;
+            if(this.sum >= 1000000){
+              this.count = String( (this.sum / 1000000).toFixed(1) ) + " M"
+            }else if(this.sum >= 1000){
+              this.count = String( (this.sum / 1000).toFixed(1) ) + " k"
+            }else{
+              this.count = String(this.sum);
+            }
+          }
         },
         err => {
           console.log(err);
@@ -63,9 +74,9 @@ export class QuizComponent implements OnInit {
   }
 
   addComment() {
-    if(this.comment?.errors?.['required'] || this.productForm.value.comment == ""){
+    if (this.comment?.errors?.['required'] || this.productForm.value.comment == "") {
       this.alert_comment = true
-    }else{
+    } else {
       this.commentService.addComment(this.productForm.value).subscribe(
         data => {
           alert('Comment added successfully');
@@ -77,7 +88,7 @@ export class QuizComponent implements OnInit {
           console.log(err);
         }
       );
-      
+
     }
   }
 
@@ -99,4 +110,8 @@ export class QuizComponent implements OnInit {
     return (this.searchText).length > 0 ? "Searching . . ." : "Quiz"
   }
 
+  textAreaAdjust(element:any) {
+    element.style.height = "1px";
+    element.style.height = (25+element.scrollHeight)+"px";
+  }
 }

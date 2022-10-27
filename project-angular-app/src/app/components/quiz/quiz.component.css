@@ -3,17 +3,6 @@ div{
     white-space: normal;
 }
 
-input{
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    background-color: white;
-    background-repeat:no-repeat;
-    width: 100%; 
-    height: 100%;
-}
-
 button { 
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -23,13 +12,24 @@ button {
     color: white;
   }
 
-img{
+#img1{
     border-top-left-radius: 90px;
     border-top-right-radius: 90px;
     border-bottom-left-radius: 90px;
     border-bottom-right-radius: 90px;
     border-color:black ;
-    
+}
+
+#img2{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+    background-repeat:no-repeat;
+    width: 100%; 
+    height: 100%;
+    cursor: pointer;
 }
 
 textarea{
@@ -49,10 +49,31 @@ textarea{
 ::-webkit-scrollbar-thumb {
     background: rgb(9, 74, 12); 
     border-radius: 10px;
-
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #b1f7b6; 
 }
+
+p{
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden ;
+    text-overflow: ellipsis;
+}
+
+.avoid-clicks {
+  display: block;
+  background: rgba(51,51,51,0.85);
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  color: whitesmoke;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-size: 2vmin;
+}
+
