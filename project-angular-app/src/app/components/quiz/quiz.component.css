@@ -1,38 +1,49 @@
-div{
+div {
     color: white;
     white-space: normal;
+    font-size: 2vmin;
 }
 
-button { 
+button {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: green;
     color: white;
-  }
+}
 
-#img1{
+#img1 {
     border-top-left-radius: 90px;
     border-top-right-radius: 90px;
     border-bottom-left-radius: 90px;
     border-bottom-right-radius: 90px;
-    border-color:black ;
+    border-color: black;
 }
 
-#img2{
+#img2 {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: white;
-    background-repeat:no-repeat;
-    width: 100%; 
+    background-repeat: no-repeat;
+    width: 100%;
     height: 100%;
     cursor: pointer;
 }
 
-textarea{
+#profile {
+    max-height: 80px;
+    max-width: 80px;
+    border-top-left-radius: 240px;
+    border-top-right-radius: 240px;
+    border-bottom-left-radius: 240px;
+    border-bottom-right-radius: 240px;
+    margin-bottom: 20px;
+}
+
+textarea {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -47,33 +58,52 @@ textarea{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(9, 74, 12); 
+    background: rgb(9, 74, 12);
     border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #b1f7b6; 
+    background: #b1f7b6;
 }
 
-p{
+p {
     margin: 0;
     white-space: nowrap;
-    overflow: hidden ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+h2 {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .avoid-clicks {
-  display: block;
-  background: rgba(51,51,51,0.85);
-  position: absolute;
-  padding: 10px;
-  pointer-events: none;
-  color: whitesmoke;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  font-size: 2vmin;
+    display: block;
+    background: rgba(51, 51, 51, 0.85);
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+    color: whitesmoke;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 2vmin;
 }
 
+#mycomment {
+    display: block;
+    background: rgba(51, 51, 51, 0.85);
+    position: absolute;
+    padding: 10px;
+    color: whitesmoke;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 2vmin;
+}

@@ -134,10 +134,11 @@
                                                         <fieldset class="row">
                                                             <div class="col">
                                                                 <div class="row">
+                                                                    {{productForm.value.choice1}}
                                                                     <label>Choice1</label>
                                                                     <input [(ngModel)]="checkAnswer" type="radio" id="1"
                                                                         class="radio" formControlName='answer'
-                                                                        value="1">
+                                                                        value={{productForm.value.choice1}}>
                                                                 </div>
                                                                 <div class="row">
                                                                     <label>Choice3</label>

@@ -1,21 +1,15 @@
 <div class="card" style="background-color: black;">
     <div class="row">
         <div class="col-lg-6" style="margin-top: 60px">
-            <p class="col-lg-12 text-left" style="font-size: 35px; margin: 20px 0 0 30px;"
-                *ngFor="let item of getCount() let c = index">
+            <p class="col-lg-12 text-left" style="font-size: 35px; margin: 20px 0 0 30px;">
                 Play Count Server : {{this.count}}
             </p>
         </div>
         <div class="col-lg-6 text-right" style="margin-top: 60px;">
             <a href="#" class="btn" data-toggle="modal" data-target="#myModal">
                 <a style="margin-right: 20px; font-size: 35px; color: white;">ฟิวหล่อเท่</a>
-                <img id="img1" [src]="'https://i.im.ge/2022/10/15/2D6ArK.user.png'" class="img-thumbnail"
-                    alt="Your Image" style="max-height: 80px ;max-width: 80px;
-            border-top-left-radius: 240px;
-            border-top-right-radius: 240px;
-            border-bottom-left-radius: 240px;
-            border-bottom-right-radius: 240px;
-            margin-bottom: 20px;">
+                <img id="profile" [src]="'https://i.im.ge/2022/10/15/2D6ArK.user.png'" class="img-thumbnail"
+                    alt="Your Image">
             </a>
         </div>
     </div>
@@ -32,17 +26,17 @@
             <p>สวัสดี User พร้อมที่จะเล่นเกมหรือยัง?!</p>
             <div>
                 <input id="img2" type="text" [(ngModel)]="searchText" placeholder="search ...."
-                    style="width: 500px; height:auto;">
+                    style="width: 500px; height:auto; font-size: 3.5vmin;">
 
                 <button class="fa fa-search fa-xs" aria-hidden="true" style="position: relative;
-                               top: 0.5px;
+                               bottom: 6px;
                                left: 12px;    
                                width: 80px;
                                height: 50px;">
                 </button>
             </div>
             <div style="font-size: 27px; margin-top: 30px;">
-                <a style="position: relative;top: 15px">หรือสร้างเกมใหม่ของคุณได้ที่นี้</a>
+                <a style="position: relative;top: 15px;">หรือสร้างเกมใหม่ของคุณได้ที่นี้</a>
                 <button style="height: 70px;width: 160px;margin-left: 15px;" [routerLink]="'/newquiz'">New QUIZ</button>
             </div>
             <br>
@@ -60,8 +54,7 @@
                             <p class="avoid-clicks">{{item.quiz.length}} point</p>
                             <img id="img2" type="image" title={{item.quizName}}
                                 style="object-fit: cover;margin-top: 30px;width: 90%; height: 80%;"
-                                (click)="addCount(j)" [routerLink]="'/question'"
-                                [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
+                                (click)="editQuiz(j)" [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
                         </div>
                     </div>
                     <div class="row">
@@ -88,23 +81,31 @@
         <p *ngIf="!quiz" style="padding: 50px;font-size: 100px;">ไปรัน backend ไอสัส</p>
         <!-- <p *ngIf="!quiz" style="padding: 50px;font-size: 25px;">No quiz right now, let's create your own quiz!!</p> -->
     </ng-template>
-    <div class="col text-center" style="background-color: black; ">
+    <div class="col text-left" style="background-color: black; ">
         <form [formGroup]="productForm">
             <div class="row">
                 <p class="col-lg-12 text-center">
                     <textarea rows="6" cols="80" formControlName='comment' maxlength="999"
-                        style="margin-left: 110px; font-size: 30px;"></textarea>
+                        style="margin-left: 110px; font-size: 3vmin;"></textarea>
                     <button type="button" class="btn btn-success btn-lg" (click)="addComment()"
                         [disabled]="!productForm.valid"
                         style="position: relative;bottom: 30px;right: 135px;">Comment</button>
                 </p>
             </div>
         </form>
-        <div style="margin: 70px 0 250px 0; height: 700px;overflow-y: scroll;">
-            <span *ngFor="let item of comment; index as i" style="padding-left: 40px ">
-                <textarea rows="5" cols="35" disabled
-                    style="margin-top: 50px;resize: none;background-color: rgb(50,50,50); color: white; font-size: 2vmin;">{{item.comment}}</textarea>
-            </span>
+        <div class="row" style="margin: 70px 0 250px 0; height: 700px;overflow-y: scroll;">
+            <div class="col-lg-3 text-left" *ngFor="let item of comment | filter: mycomment let k = index"
+                style="padding-left: 40px ">
+                <div class="row" type="button">
+                    <h2 id="mycomment" style="margin-top: 35px; width: 15vmax; border-bottom-left-radius: 0;"
+                        title="User"><i class="fa fa-user-o" aria-hidden="true" *ngIf="item.comment== 'test'"
+                            style="color: rgb(55, 202, 50);"></i> User</h2>
+                </div>
+                <div class="row">
+                    <textarea rows="5" cols="35" disabled
+                        style="margin-top: 70px;resize: none;background-color: rgb(50,50,50); color: white; font-size: 2vmin;border-top-left-radius: 0;">{{item.comment}}</textarea>
+                </div>
+            </div>
         </div>
     </div>
 

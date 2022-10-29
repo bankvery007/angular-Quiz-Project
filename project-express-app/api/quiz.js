@@ -42,7 +42,7 @@ const addQuiz = (QuizData) => {
     });
 }
 
-router.route('/addQuiz')
+router.route('/Quiz')
     .post((req, res) => {
         const payload = {
             quizName: req.body.quizName,
@@ -64,7 +64,7 @@ router.route('/addQuiz')
 
 
 // Get Quiz
-router.route('/getQuiz')
+router.route('/Quiz')
     // V authorization V อยู่ตรงนี้ 
     // ตัวอย่าง .get(authorization, (req, res) => {
     .get((req, res) => {
@@ -76,6 +76,59 @@ router.route('/getQuiz')
             }
         })
     })
+
+// Patch Quiz
+
+const editQuiz = (QuizData) => {
+    return new Promise((resolve, reject) => {
+        var edit_quiz = new Quiz({
+            _id: QuizData._id,
+            quizName: QuizData.quizName,
+            datetime: QuizData.datetime,
+            count: QuizData.count,
+            img: QuizData.img,
+            quiz: QuizData.quiz
+        });
+        edit_quiz.update((err, data) => {
+            if (err) {
+                reject(new Error('Cannot edit quiz to DB!'));
+            } else {
+                resolve({ message: 'Edit quiz successfully' });
+            }
+        });
+    });
+}
+
+router.route('/Quiz/:id')
+    .patch((req, res) => {
+        Quiz.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((blog) => {
+            if (!blog) {
+                return res.status(404).send();
+            }
+            res.send(blog);
+        }).catch((error) => {
+            res.status(500).send(error);
+        })
+        // var payload = req.body; // {last_name : "smith", age: 44}
+        // var id = req.params.id;
+        // const payload = {
+        //     _id: req.body._id,
+        //     quizName: req.body.quizName,
+        //     datetime: req.body.datetime,
+        //     count: req.body.count,
+        //     img: req.body.img,
+        //     quiz: req.body.quiz,
+        // }
+        // console.log(payload);
+        // editQuiz(payload)
+        //     .then(result => {
+        //         console.log(result);
+        //         res.status(200).json(result);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+    });
 
 
 module.exports = router

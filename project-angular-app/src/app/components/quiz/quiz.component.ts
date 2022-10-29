@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms';
 import { CommentService } from 'src/app/service/comment.service';
 import { CountService } from 'src/app/service/count.service';
 import { DataService } from 'src/app/service/data.service';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,12 +15,14 @@ import { DataService } from 'src/app/service/data.service';
 export class QuizComponent implements OnInit {
 
   imgSrc: string = 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'
-  alert_comment: boolean = false
+  
   searchText: string = "";
   quiz: any;
   comment: any;
-  sum : number = 0;
-  count! : string
+  mycomment: string = ""
+  alert_comment: boolean = false
+  sum: number = 0;
+  count!: string
 
   productForm = new FormGroup({
     comment: new FormControl('', [Validators.required]),
@@ -31,7 +33,8 @@ export class QuizComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private commentService: CommentService,
-    private countService: CountService
+    private countService: CountService,
+    private router: Router,
   ) {
     this.onLoading();
   }
@@ -44,13 +47,14 @@ export class QuizComponent implements OnInit {
       this.dataService.getAllQuiz().subscribe(
         data => {
           this.quiz = data.reverse();
-          for(const i in data){
+          this.sum = 0;
+          for (const i in data) {
             this.sum += data[i].count;
-            if(this.sum >= 1000000){
-              this.count = String( (this.sum / 1000000).toFixed(1) ) + " M"
-            }else if(this.sum >= 1000){
-              this.count = String( (this.sum / 1000).toFixed(1) ) + " k"
-            }else{
+            if (this.sum >= 1000000) {
+              this.count = String((this.sum / 1000000).toFixed(1)) + " M"
+            } else if (this.sum >= 1000) {
+              this.count = String((this.sum / 1000).toFixed(1)) + " k"
+            } else {
               this.count = String(this.sum);
             }
           }
@@ -92,26 +96,24 @@ export class QuizComponent implements OnInit {
     }
   }
 
-
-  getAllcount() {
-    return this.countService.getAllcount()
-  }
-
-  addCount(id: number) {
-    // this.dataService.data[id].count += 1
-    this.countService.count[0].count += 1
-  }
-
-  getCount() {
-    return this.countService.getAllcount()
-  }
-
   ShowTypeDisplay() {
     return (this.searchText).length > 0 ? "Searching . . ." : "Quiz"
   }
 
-  textAreaAdjust(element:any) {
-    element.style.height = "1px";
-    element.style.height = (25+element.scrollHeight)+"px";
+  editQuiz(index: any) {
+    this.dataService.editQuiz(
+      this.quiz[index]._id,
+      {
+        count: this.quiz[index].count + 1
+      }
+    ).subscribe(
+      data => {
+        this.router.navigate(['/question']);
+        console.log(data.count)
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }
