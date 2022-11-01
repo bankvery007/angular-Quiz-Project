@@ -19,6 +19,5 @@ export class LoginService {
       console.log(data)
       localStorage.setItem("token",this.nameKey.nativeElement.value);
     })
-      
   }
 }
