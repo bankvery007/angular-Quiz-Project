@@ -78,8 +78,7 @@
     </table>
     <ng-template #noResults>
         <p *ngIf="quiz" style="padding: 50px;font-size: 25px;">No results found for "{{searchText}}".</p>
-        <p *ngIf="!quiz" style="padding: 50px;font-size: 100px;">ไปรัน backend ไอสัส</p>
-        <!-- <p *ngIf="!quiz" style="padding: 50px;font-size: 25px;">No quiz right now, let's create your own quiz!!</p> -->
+        <p *ngIf="!quiz" style="padding: 50px;font-size: 25px;">No quiz right now, let's create your own quiz!!</p>
     </ng-template>
     <div class="col text-left" style="background-color: black; ">
         <form [formGroup]="productForm">
