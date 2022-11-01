@@ -46,8 +46,8 @@ export class NewquizComponent implements OnInit {
         question: ['', Validators.required],
         choice1: ['', Validators.required],
         choice2: ['', Validators.required],
-        choice3: ['', [Validators.required]],
-        choice4: ['', [Validators.required]],
+        choice3: ['', Validators.required],
+        choice4: ['', Validators.required],
         answer: ['', Validators.required],
         imgArray: [''],
       })
