@@ -51,7 +51,6 @@ export class NewquizComponent implements OnInit {
         choice3: ['', Validators.required],
         choice4: ['', Validators.required],
         answer: ['', Validators.required],
-        imgArray: [''],
       })
     ])
   });
@@ -78,7 +77,6 @@ export class NewquizComponent implements OnInit {
         choice3: new FormControl('', [Validators.required]),
         choice4: new FormControl('', [Validators.required]),
         answer: new FormControl('', [Validators.required]),
-        imgArray: new FormControl(''),
       }));
   }
 

@@ -40,9 +40,7 @@ export class QuizComponent implements OnInit {
     private profile: ProfilemodalService,
     private questions : QuestionsService
   ) {
-
     this.onLoading();
-    console.log("quiz user ID",this.profile.getUser())
   }
 
   ngOnInit(): void {
@@ -73,6 +71,7 @@ export class QuizComponent implements OnInit {
       this.commentService.getAllcomment().subscribe(
         data => {
           this.comment = data.reverse();
+          console.log(this.comment)
         },
         err => {
           console.log(err);
