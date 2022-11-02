@@ -11,6 +11,7 @@ export class ProfilemodalService {
   constructor(private http: HttpClient) { }
 
   user!:any
+  token!: string
 
   setUser(user:any){
     this.user = user
@@ -18,6 +19,14 @@ export class ProfilemodalService {
 
   getUser(){
     return this.user
+  }
+
+  setToken(token:string){
+    this.token = token
+  }
+
+  getToken(){
+    return this.token
   }
  
 

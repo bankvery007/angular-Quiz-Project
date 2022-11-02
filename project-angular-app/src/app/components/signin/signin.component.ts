@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { QuizComponent } from '../quiz/quiz.component';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Injectable({
@@ -26,7 +27,12 @@ export class SigninComponent implements OnInit {
 
   @ViewChild('token') nameKey!: ElementRef;
 
-  constructor(private http: HttpClient, private router: Router,private profile:ProfilemodalService) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private profile:ProfilemodalService,
+    private appComponent: AppComponent,
+    ) { }
 
   ngOnInit(): void {
   }
@@ -55,6 +61,10 @@ export class SigninComponent implements OnInit {
                 picture: this.user.picture, 
                 birthyear: this.user.birthyear, 
               })
+
+            this.profile.setToken((<any>Object).values(data)[1])
+            
+            this.appComponent.haveToken()
             
             window.localStorage.setItem("token", (<any>Object).values(data)[1]);
             alert("welcome!")
