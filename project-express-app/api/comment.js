@@ -6,6 +6,7 @@ const authorization = require('../config/authorize')
 var Schema = require("mongoose").Schema;
 
 const CommentSchema = Schema({
+    owner: String,
     comment: String,
 }, {
     collection: 'comment'
@@ -23,6 +24,7 @@ try {
 const addComment = (CommentData) => {
     return new Promise((resolve, reject) => {
         var new_comment = new Comment({
+            owner: CommentData.owner,
             comment: CommentData.comment,
         });
         new_comment.save((err, data) => {
@@ -38,6 +40,7 @@ const addComment = (CommentData) => {
 router.route('/addComment')
     .post((req, res) => {
         const payload = {
+            owner: req.body.owner,
             comment: req.body.comment,
         }
         console.log(payload);

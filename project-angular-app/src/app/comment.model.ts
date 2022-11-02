@@ -1,6 +1,6 @@
 interface comment{
-    name: string,
-    text: string
+    owner: string,
+    comment: string
 }
 
 export type commentModel = comment[];

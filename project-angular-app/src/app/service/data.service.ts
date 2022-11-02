@@ -11,6 +11,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   quiz: any
+  user: any
 
   addQuiz(QuizData: any) {
     return this.http.post<any>('http://localhost:3000/quiz/Quiz', QuizData)
@@ -36,8 +37,14 @@ export class DataService {
       }));
   }
 
-  // getAllData(){
-  //   return this.data
-  // }
+  getAllUser(){
+    return this.http.get<any>('http://localhost:3000/user/getUser')
+      .pipe(map(getuser => {
+        if (getuser) {
+          this.user = getuser;
+        }
+        return this.user;
+      }));
+  }
 
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { CommentService } from 'src/app/service/comment.service';
-import { CountService } from 'src/app/service/count.service';
 import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
+import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 
 
 @Component({
@@ -15,16 +15,18 @@ import { Router } from '@angular/router';
 export class QuizComponent implements OnInit {
 
   imgSrc: string = 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'
-  
+
   searchText: string = "";
   quiz: any;
   comment: any;
   mycomment: string = ""
   alert_comment: boolean = false
   sum: number = 0;
-  count!: string
+  count!: string;
+  user!:any
 
   productForm = new FormGroup({
+    owner: new FormControl(''),
     comment: new FormControl('', [Validators.required]),
   });
 
@@ -33,13 +35,16 @@ export class QuizComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private commentService: CommentService,
-    private countService: CountService,
     private router: Router,
+    private profile: ProfilemodalService
   ) {
+
     this.onLoading();
+    console.log("quiz user ID",this.profile.getUser())
   }
 
   ngOnInit(): void {
+    this.user = this.profile.getUser()
   }
 
   onLoading() {
@@ -81,7 +86,12 @@ export class QuizComponent implements OnInit {
     if (this.comment?.errors?.['required'] || this.productForm.value.comment == "") {
       this.alert_comment = true
     } else {
-      this.commentService.addComment(this.productForm.value).subscribe(
+      this.commentService.addComment(
+        {
+        owner: this.user.username,
+        comment: this.productForm.value.comment,
+        }
+      ).subscribe(
         data => {
           alert('Comment added successfully');
           this.productForm.reset();
@@ -97,6 +107,7 @@ export class QuizComponent implements OnInit {
   }
 
   ShowTypeDisplay() {
+    // console.log("quiz user ID",this.quiz[0].quizName)
     return (this.searchText).length > 0 ? "Searching . . ." : "Quiz"
   }
 
