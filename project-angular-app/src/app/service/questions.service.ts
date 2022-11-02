@@ -11,10 +11,6 @@ export class QuestionsService {
 
   constructor(private http : HttpClient) { }
 
-  getQuestionJson(){
-    return this.http.get<any>("assets/image/questions.json");
-  }
-
   setQuestion(q : any){
     this.Question = q
   }
