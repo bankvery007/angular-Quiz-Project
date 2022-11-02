@@ -66,14 +66,6 @@
                                 Question : {{i_quiz+1}}
                             </div>
                         </div>
-                        <div class="card-body" style="background-color: black;">
-                            <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <img [src]="this.productForm.value.quiz[i_quiz].imgArray || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
-                                        alt="Your Image" style="height: 300px;">
-                                </div>
-                            </div>
-                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md">
@@ -162,16 +154,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="row" style="padding: 5px;">
-                                                <div class="col-lg-2"> Picture :</div>
-                                                <div class="col-lg-4 text-left">
-                                                    <div class="form-group">
-                                                        <input type="file" class="form-control-file"
-                                                            (change)="onChangeImgArray($event)">
-                                                    </div>
-                                                </div>
-                                            </div> -->
-
                                             <div class="row">
                                                 <div class="col-md-6  text-left"
                                                     *ngIf="(productForm.value.quiz).length > 1">
@@ -181,11 +163,6 @@
                                                         <i class="fa fa-trash-o" aria-hidden="true"
                                                             style="margin-left:2px"></i></button>
                                                 </div>
-                                                <!-- <div class="col-md-6  text-right">
-                                                    <button type="button" class="btn btn-secondary btn-lg"
-                                                        (click)="clsData(i_quiz)" style="margin-right: 20px;">Clear <i
-                                                            class="fa fa-eraser " aria-hidden="true"></i></button>
-                                                </div> -->
                                             </div>
 
                                         </div>
