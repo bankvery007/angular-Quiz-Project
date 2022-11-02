@@ -32,7 +32,6 @@ export class QuestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.startCounter();
     this.correctAnswer = 0;
     this.Allquiz = this.QuestionsService.getQuestion()
     this.quiz = this.Allquiz.quiz[this.nextQuestion]
@@ -48,7 +47,7 @@ export class QuestionComponent implements OnInit {
       timerProgressBar: true,
       confirmButtonText: 'Start now!'
     }).then((result) => {
-      /* Read more about handling dismissals below */
+      this.startCounter();
       if (result.dismiss === Swal.DismissReason.timer) {
         console.log('I was closed by the timer')
       }
