@@ -13,6 +13,8 @@ export class ProfilemodalComponent implements OnInit {
 
   user!:any
 
+  currentProfile:any = this.getUser()
+
   ngOnInit(): void {
   }
 
