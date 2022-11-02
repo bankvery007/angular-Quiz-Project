@@ -35,6 +35,27 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  previewLoaded: boolean = false;
+
+  onChangeImg(e:any){
+    if(e.target.files.length>0){
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.previewLoaded = true;
+        this.profileForm.patchValue({
+          picture: reader.result?.toString() || ""
+        })
+      }
+    }
+  }
+
+  resetForm(){
+    this.profileForm.reset();
+    this.previewLoaded = false;
+  }
+
   onClickSubmit() {
     //unknown -> any
     const signupjson:JSON = <JSON><any>{
