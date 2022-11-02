@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profilemodal',
@@ -7,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilemodalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
-  //import service create const to get unsigntoken here
+  onClickLogout(){
+    window.localStorage.setItem("token", "");
+    this.router.navigate(['./signin']);
+  }
 }
