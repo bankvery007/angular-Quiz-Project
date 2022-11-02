@@ -5,6 +5,7 @@ import { CommentService } from 'src/app/service/comment.service';
 import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
+import { QuestionsService } from 'src/app/service/questions.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class QuizComponent implements OnInit {
     private dataService: DataService,
     private commentService: CommentService,
     private router: Router,
-    private profile: ProfilemodalService
+    private profile: ProfilemodalService,
+    private questions : QuestionsService
   ) {
 
     this.onLoading();
@@ -119,6 +121,7 @@ export class QuizComponent implements OnInit {
       }
     ).subscribe(
       data => {
+        this.questions.setQuestion(this.quiz[index])
         this.router.navigate(['/question']);
         console.log(data.count)
       },

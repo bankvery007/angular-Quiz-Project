@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { QuestionsService } from 'src/app/service/questions.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-question',
@@ -12,51 +15,67 @@ export class QuestionComponent implements OnInit {
   public name: string = "";
   public questionList: any = [];
   public currentQuestion: number = 0;
+
   counter = 60;
   correctAnswer: number = 0;
   interval$: any;
-  isQuizCompleted : boolean = false;
+  isQuizCompleted: boolean = false;
+  Allquiz!: any
+  quiz!: any
+  nextQuestion: number = 0;
+  timerInterval!:any
 
-  constructor(private QuestionsService : QuestionsService) { }
+  constructor(
+    private QuestionsService: QuestionsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.getAllQuestions();
     this.startCounter();
-    this.correctAnswer=0;
+    this.correctAnswer = 0;
+    this.Allquiz = this.QuestionsService.getQuestion()
+    this.quiz = this.Allquiz.quiz[this.nextQuestion]
+    this.start()
   }
-  getAllQuestions(){
-    this.QuestionsService.getQuestionJson()
-      .subscribe(res=>{
-        this.questionList = res.questions;
-        console.log(res);
+
+  start() {
+    
+    Swal.fire({
+      title: 'Are you ready?!',
+      html: 'Game will start in 5 seconds.',
+      timer: 5000,
+      timerProgressBar: true,
+      confirmButtonText: 'Start now!'
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
+
+  answer(value: number) {
+    if (value == this.quiz.answer) {
+      this.correctAnswer += 1
+    }
+    if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
+      Swal.fire({
+        title: 'Congratulations!!',
+        html: 'You score is '+ this.correctAnswer +' points',
+        width: 600,
+        padding: '3em',
+        color: '#716add',
+        background: '#fff',
+      }).then((result) => {
+        this.router.navigate(['/quiz']);
       })
-  }
-  nextQuestion() {
-    this.currentQuestion++;
-  }
-  answer(currentQno: number, option: any) {
-
-    if(currentQno === this.questionList.length) {
-      setTimeout(() => {
-        this.isQuizCompleted = true;
-        this.stopCounter();
-      }, 1000)
-    }
-    if (option.correct) {
-      this.correctAnswer++;
-      setTimeout(() => {
-        this.currentQuestion++;
-        this.resetCounter();
-      }, 1000)
-
     } else {
-      setTimeout(() => {
-        this.currentQuestion++;
-        this.resetCounter();
-      }, 1000);
+      this.nextQuestion += 1
+      this.quiz = this.Allquiz.quiz[this.nextQuestion]
+      this.resetCounter()
     }
-  }
 
+  }
   startCounter() {
     this.interval$ = interval(1000)//วินาที
       .subscribe(val => {
