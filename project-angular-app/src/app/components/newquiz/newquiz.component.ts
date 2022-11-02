@@ -5,6 +5,8 @@ import { FormArray, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
+import { ProfilemodalService } from 'src/app/service/profilemodal.service';
+ProfilemodalService
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,26 +24,11 @@ export class NewquizComponent implements OnInit {
   status!: boolean;
   previewLoaded: boolean = false;
   show_alert_del: boolean = true;
-
-  // productForm = new FormGroup({
-  //   quizName: new FormControl('', [Validators.required]),
-  //   datetime: new FormControl('', [Validators.required]),
-  //   quiz: new FormArray([
-  //     new FormGroup({
-  //       question: new FormControl('', [Validators.required]),
-  //       number: new FormControl('', [Validators.required]),
-  //       choice1: new FormControl('', [Validators.required]),
-  //       choice2: new FormControl('', [Validators.required]),
-  //       choice3: new FormControl(''),
-  //       choice4: new FormControl(''),
-  //       answer: new FormControl('', [Validators.required]),
-  //       pic: new FormControl('', [Validators.required])
-  //     })
-  //   ])
-  // });
+  user!:any
 
   productForm: FormGroup = this.fb.group({
     quizName: ['', Validators.required],
+    owner: [''],
     img: [''],
     quiz: this.fb.array([
       this.fb.group({
@@ -62,9 +49,12 @@ export class NewquizComponent implements OnInit {
     private dataService: DataService,
     private fb: FormBuilder,
     private router: Router,
+    private profile: ProfilemodalService,
   ) { }
 
   ngOnInit(): void {
+    this.user = this.profile.getUser()
+    console.log(this.user)
   }
 
   addQuiz() {
@@ -177,6 +167,7 @@ export class NewquizComponent implements OnInit {
       this.dataService.addQuiz(
         {
           quizName: this.productForm.value.quizName || '',
+          owner: this.user.username,
           datetime: this.getDateNow(),
           count: 0,
           img: this.productForm.value.img || '',
