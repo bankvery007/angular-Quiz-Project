@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
 import { QuestionsService } from 'src/app/service/questions.service';
 
+import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -16,53 +17,84 @@ export class QuestionComponent implements OnInit {
   correctAnswer: number = 0;
   interval$: any;
   isQuizCompleted : boolean = false;
+  quiz: any;
 
-  constructor(private QuestionsService : QuestionsService) { }
+  constructor(private QuestionsService : QuestionsService,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.getAllQuestions();
+    
     this.startCounter();
+    this.getAllQuiz();
+    this.onLoading();
     this.correctAnswer=0;
   }
-  getAllQuestions(){
-    this.QuestionsService.getQuestionJson()
-      .subscribe(res=>{
-        this.questionList = res.questions;
-        console.log(res);
-      })
-  }
-  nextQuestion() {
-    this.currentQuestion++;
-  }
-  answer(currentQno: number, option: any) {
 
-    if(currentQno === this.questionList.length) {
-      setTimeout(() => {
-        this.isQuizCompleted = true;
-        this.stopCounter();
-      }, 1000)
-    }
-    if (option.correct) {
-      this.correctAnswer++;
-      setTimeout(() => {
-        this.currentQuestion++;
-        this.resetCounter();
-      }, 1000)
+  // getAllQuestions(){
+  //   this.dataService.getAllQuiz()
+  //     .subscribe(res=>{
+  //       this.questionList = res.quiz;
+  //       console.log(res);
+  //     })
+  // }
 
-    } else {
-      setTimeout(() => {
-        this.currentQuestion++;
-        this.resetCounter();
-      }, 1000);
+  onLoading() {
+    try {
+      this.dataService.getAllQuiz().subscribe(
+        data => {
+          this.quiz = data ;
+          this.questionList = this.quiz
+          console.log(this.quiz);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+    } catch (err) {
+      console.log(err);
     }
   }
+
+
+  getAllQuiz() {
+    return this.dataService.getAllQuiz()
+  }
+
+
+  // nextQuestion() {
+  //   this.currentQuestion++;
+  // }
+
+  // answer(currentQno: number, option: any) {
+
+  //   if(currentQno === this.questionList.length) {
+  //     setTimeout(() => {
+  //       this.isQuizCompleted = true;
+  //       this.stopCounter();
+  //     }, 1000)
+  //   }
+  //   if (option.correct) {
+  //     this.correctAnswer++;
+  //     setTimeout(() => {
+  //       this.currentQuestion++;
+  //       this.resetCounter();
+  //     }, 1000)
+
+  //   } else {
+  //     setTimeout(() => {
+  //       this.currentQuestion++;
+  //       this.resetCounter();
+  //     }, 1000);
+  //   }
+  // }
 
   startCounter() {
     this.interval$ = interval(1000)//วินาที
       .subscribe(val => {
         this.counter--;
         if (this.counter === 0) {
-          this.currentQuestion++;
+          // this.currentQuestion++;
           this.counter = 60;
         }
       });
@@ -79,4 +111,5 @@ export class QuestionComponent implements OnInit {
     this.counter = 60;
     this.startCounter();
   }
+
 }
