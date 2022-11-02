@@ -40,8 +40,7 @@ export class SignupComponent implements OnInit {
     const signupjson:JSON = <JSON><any>{
         picture: this.profileForm.value.picture || '',
         title: this.profileForm.value.title || '',
-        firstName: this.profileForm.value.firstName || '',
-        lastName: this.profileForm.value.lastName || '',
+        name: this.profileForm.value.firstName+' '+this.profileForm.value.lastName|| '',
         sex: this.profileForm.value.sex || '',
         birthyear: parseInt(this.profileForm.value.birthyear || ''),
         phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
