@@ -34,7 +34,7 @@ const makeHash = async (plainText) => {
 const insertUser = (dataUser) => {
     return new Promise((resolve, reject) => {
         var new_user = new User({
-            
+
             picture: dataUser.picture,
             title: dataUser.title,
             name: dataUser.name,
@@ -85,4 +85,19 @@ router.route('/signup')
             })
 
     });
+
+
+router.route('/getUser')
+    // V authorization V อยู่ตรงนี้ 
+    // ตัวอย่าง .get(authorization, (req, res) => {
+    .get((req, res) => {
+        User.find((err, val) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.status(200).json(val);
+            }
+        })
+    })
+
 module.exports = router
