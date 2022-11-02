@@ -79,26 +79,6 @@ router.route('/Quiz')
 
 // Patch Quiz
 
-const editQuiz = (QuizData) => {
-    return new Promise((resolve, reject) => {
-        var edit_quiz = new Quiz({
-            _id: QuizData._id,
-            quizName: QuizData.quizName,
-            datetime: QuizData.datetime,
-            count: QuizData.count,
-            img: QuizData.img,
-            quiz: QuizData.quiz
-        });
-        edit_quiz.update((err, data) => {
-            if (err) {
-                reject(new Error('Cannot edit quiz to DB!'));
-            } else {
-                resolve({ message: 'Edit quiz successfully' });
-            }
-        });
-    });
-}
-
 router.route('/Quiz/:id')
     .patch((req, res) => {
         Quiz.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((blog) => {
@@ -109,25 +89,6 @@ router.route('/Quiz/:id')
         }).catch((error) => {
             res.status(500).send(error);
         })
-        // var payload = req.body; // {last_name : "smith", age: 44}
-        // var id = req.params.id;
-        // const payload = {
-        //     _id: req.body._id,
-        //     quizName: req.body.quizName,
-        //     datetime: req.body.datetime,
-        //     count: req.body.count,
-        //     img: req.body.img,
-        //     quiz: req.body.quiz,
-        // }
-        // console.log(payload);
-        // editQuiz(payload)
-        //     .then(result => {
-        //         console.log(result);
-        //         res.status(200).json(result);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
     });
 
 

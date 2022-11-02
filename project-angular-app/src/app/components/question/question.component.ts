@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { QuestionsService } from 'src/app/service/questions.service';
+import Swal from 'sweetalert2';
+
 
 import { DataService } from 'src/app/service/data.service';
 @Component({
@@ -13,81 +16,67 @@ export class QuestionComponent implements OnInit {
   public name: string = "";
   public questionList: any = [];
   public currentQuestion: number = 0;
+
   counter = 60;
   correctAnswer: number = 0;
   interval$: any;
-  isQuizCompleted : boolean = false;
-  quiz: any;
+  isQuizCompleted: boolean = false;
+  Allquiz!: any
+  quiz!: any
+  nextQuestion: number = 0;
+  timerInterval!:any
 
-  constructor(private QuestionsService : QuestionsService,
-              private dataService: DataService) { }
+  constructor(
+    private QuestionsService: QuestionsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    
     this.startCounter();
-    this.getAllQuiz();
-    this.onLoading();
-    this.correctAnswer=0;
+    this.correctAnswer = 0;
+    this.Allquiz = this.QuestionsService.getQuestion()
+    this.quiz = this.Allquiz.quiz[this.nextQuestion]
+    this.start()
   }
 
-  // getAllQuestions(){
-  //   this.dataService.getAllQuiz()
-  //     .subscribe(res=>{
-  //       this.questionList = res.quiz;
-  //       console.log(res);
-  //     })
-  // }
+  start() {
+    
+    Swal.fire({
+      title: 'Are you ready?!',
+      html: 'Game will start in 5 seconds.',
+      timer: 5000,
+      timerProgressBar: true,
+      confirmButtonText: 'Start now!'
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
 
-  onLoading() {
-    try {
-      this.dataService.getAllQuiz().subscribe(
-        data => {
-          this.quiz = data ;
-          this.questionList = this.quiz
-          console.log(this.quiz);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-
-    } catch (err) {
-      console.log(err);
+  answer(value: number) {
+    if (value == this.quiz.answer) {
+      this.correctAnswer += 1
     }
+    if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
+      Swal.fire({
+        title: 'Congratulations!!',
+        html: 'You score is '+ this.correctAnswer +' points',
+        width: 600,
+        padding: '3em',
+        color: '#716add',
+        background: '#fff',
+      }).then((result) => {
+        this.router.navigate(['/quiz']);
+      })
+    } else {
+      this.nextQuestion += 1
+      this.quiz = this.Allquiz.quiz[this.nextQuestion]
+      this.resetCounter()
+    }
+
   }
-
-
-  getAllQuiz() {
-    return this.dataService.getAllQuiz()
-  }
-
-
-  // nextQuestion() {
-  //   this.currentQuestion++;
-  // }
-
-  // answer(currentQno: number, option: any) {
-
-  //   if(currentQno === this.questionList.length) {
-  //     setTimeout(() => {
-  //       this.isQuizCompleted = true;
-  //       this.stopCounter();
-  //     }, 1000)
-  //   }
-  //   if (option.correct) {
-  //     this.correctAnswer++;
-  //     setTimeout(() => {
-  //       this.currentQuestion++;
-  //       this.resetCounter();
-  //     }, 1000)
-
-  //   } else {
-  //     setTimeout(() => {
-  //       this.currentQuestion++;
-  //       this.resetCounter();
-  //     }, 1000);
-  //   }
-  // }
 
   startCounter() {
     this.interval$ = interval(1000)//วินาที

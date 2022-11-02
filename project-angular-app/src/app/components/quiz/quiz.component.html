@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-6 text-right" style="margin-top: 60px;">
             <a href="#" class="btn" data-toggle="modal" data-target="#myModal">
-                <a style="margin-right: 20px; font-size: 35px; color: white;">{{user.username}}</a>
+                <a style="margin-right: 20px; font-size: 35px; color: white;">xxx</a>
                 <img id="profile" [src]="'https://i.im.ge/2022/10/15/2D6ArK.user.png'" class="img-thumbnail"
                     alt="Your Image">
             </a>
@@ -19,11 +19,11 @@
     <div class="row">
         <div class="col-md-3 text-center" style="margin-top: 10px; margin-left: 50px;">
             <img id="img1"
-                [src]="user.picture || 'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
+                [src]="'https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png'"
                 alt="Your Image" style="max-height: 500px ;max-width: 500px;">
         </div>
         <div style="margin: 30px 0 0 200px; font-size: 35px;">
-            <p>สวัสดี {{user.username}} พร้อมที่จะเล่นเกมหรือยัง?!</p>
+            <p>สวัสดี xxx พร้อมที่จะเล่นเกมหรือยัง?!</p>
             <div>
                 <input id="img2" type="text" [(ngModel)]="searchText" placeholder="search ...."
                     style="width: 500px; height:auto; font-size: 3.5vmin;">
@@ -97,8 +97,11 @@
                 style="padding-left: 40px ">
                 <div class="row" type="button">
                     <h2 id="mycomment" style="margin-top: 35px; width: 15vmax; border-bottom-left-radius: 0;"
-                        title="User"><i class="fa fa-user-o" aria-hidden="true" *ngIf="item.owner == this.user.username"
-                            style="color: rgb(55, 202, 50);"></i> {{item.owner}}</h2>
+                        title="User"><i class="fa fa-user-o" aria-hidden="true" 
+                            style="color: rgb(55, 202, 50);"></i> xxx</h2>
+                            <!-- <h2 id="mycomment" style="margin-top: 35px; width: 15vmax; border-bottom-left-radius: 0;"
+                            title="User"><i class="fa fa-user-o" aria-hidden="true" *ngIf="item.owner == this.user.username"
+                                style="color: rgb(55, 202, 50);"></i> xxx</h2> -->
                 </div>
                 <div class="row">
                     <textarea rows="5" cols="35" disabled
