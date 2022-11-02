@@ -59,6 +59,7 @@ export class QuestionComponent implements OnInit {
       this.correctAnswer += 1
     }
     if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
+      this.isQuizCompleted = true;
       Swal.fire({
         title: 'Congratulations!!',
         html: 'You score is '+ this.correctAnswer +' points',
@@ -72,9 +73,8 @@ export class QuestionComponent implements OnInit {
           left top
           no-repeat
         `
-      }).then((result) => {
-        this.router.navigate(['/quiz']);
       })
+
     } else {
       this.nextQuestion += 1
       this.quiz = this.Allquiz.quiz[this.nextQuestion]
@@ -88,7 +88,7 @@ export class QuestionComponent implements OnInit {
       .subscribe(val => {
         this.counter--;
         if (this.counter === 0) {
-          // this.currentQuestion++;
+          this.nextQuestion +=1
           this.counter = 60;
         }
       });
