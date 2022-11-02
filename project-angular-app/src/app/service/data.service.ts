@@ -37,6 +37,15 @@ export class DataService {
       }));
   }
 
+  delQuiz(id: string) {
+    console.log("dataSer",id)
+    return this.http.delete<any>('http://localhost:3000/quiz/Quiz/delete/' + id)
+      .pipe(map(datas => {
+        console.log("dataSer",datas)
+        return datas;
+      }));
+  }
+
   getAllUser(){
     return this.http.get<any>('http://localhost:3000/user/getUser')
       .pipe(map(getuser => {

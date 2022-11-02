@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 import { SatisfiedComponent } from './components/satisfied/satisfied.component';
+import { MyquizComponent } from './components/myquiz/myquiz.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SatisfiedComponent } from './components/satisfied/satisfied.component';
     ChangeBgDirective,
     HistoryComponent,
     ProfilemodalComponent,
-    SatisfiedComponent
+    SatisfiedComponent,
+    MyquizComponent
   ],
   imports: [
     BrowserModule,
