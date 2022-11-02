@@ -19,7 +19,6 @@ import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 import { SatisfiedComponent } from './components/satisfied/satisfied.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +42,7 @@ import { SatisfiedComponent } from './components/satisfied/satisfied.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
-
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

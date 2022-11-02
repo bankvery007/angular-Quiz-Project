@@ -5,6 +5,7 @@ import { FormArray, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-newquiz',
@@ -20,6 +21,7 @@ export class NewquizComponent implements OnInit {
   checkAnswer!: string;
   status!: boolean;
   previewLoaded: boolean = false;
+  show_alert_del: boolean = true;
 
   // productForm = new FormGroup({
   //   quizName: new FormControl('', [Validators.required]),
@@ -80,27 +82,61 @@ export class NewquizComponent implements OnInit {
       }));
   }
 
+
+
   delQuiz(index: number) {
-    this.status = false
-    this.quiz.removeAt(index)
+    if (this.show_alert_del) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        input: 'checkbox',
+        inputPlaceholder: "Don't ask me again",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your question has been deleted.',
+            'success'
+          )
+          this.status = false
+          this.quiz.removeAt(index)
+        }
+        if (result.value == 1) {
+          this.show_alert_del = false
+        }
+      })
+    }else{
+      this.status = false
+      this.quiz.removeAt(index)
+    }
+  }
+
+  simpleAlert() {
+    Swal.fire('Hello Angular');
   }
 
   onChangeImg(e: any) {
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
-      var pattern =/image-*/;
+      var pattern = /image-*/;
       const reader = new FileReader();
-      if(!file.type.match(pattern)) {
+      if (!file.type.match(pattern)) {
         alert('invalid format')
         this.productForm.reset()
-      }else{
+      } else {
         reader.readAsDataURL(file);
         reader.onload = () => {
           this.previewLoaded = true;
           this.productForm.patchValue({
             img: reader.result?.toString()
           });
-      };
+        };
 
       }
     }
@@ -109,19 +145,19 @@ export class NewquizComponent implements OnInit {
   onChangeImgArray(e: any) {
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
-      var pattern =/image-*/;
+      var pattern = /image-*/;
       const reader = new FileReader();
-      if(!file.type.match(pattern)) {
+      if (!file.type.match(pattern)) {
         alert('invalid format')
         this.productForm.reset()
-      }else{
+      } else {
         reader.readAsDataURL(file);
         reader.onload = () => {
           this.previewLoaded = true;
           this.productForm.value.quiz.patchValue({
             imgArray: reader.result?.toString()
           });
-      };
+        };
 
       }
     }

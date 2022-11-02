@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
+    "@sweetalert2/themes": "^5.0.13",
     "angular": "^1.8.3",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "4.6",
@@ -25,6 +26,7 @@
     "jquery": "^3.6.1",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.6.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
