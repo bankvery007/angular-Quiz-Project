@@ -52,7 +52,8 @@ export class SigninComponent implements OnInit {
 
             this.profile.setUser(
               {
-                id: this.user.id, 
+                id: this.user.id,
+                name: this.user.name,
                 username: this.user.username, 
                 email: this.user.email, 
                 title: this.user.title, 
