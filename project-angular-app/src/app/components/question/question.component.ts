@@ -5,6 +5,7 @@ import { QuestionsService } from 'src/app/service/questions.service';
 import Swal from 'sweetalert2';
 
 
+import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -76,12 +77,13 @@ export class QuestionComponent implements OnInit {
     }
 
   }
+
   startCounter() {
     this.interval$ = interval(1000)//วินาที
       .subscribe(val => {
         this.counter--;
         if (this.counter === 0) {
-          this.currentQuestion++;
+          // this.currentQuestion++;
           this.counter = 60;
         }
       });
@@ -98,4 +100,5 @@ export class QuestionComponent implements OnInit {
     this.counter = 60;
     this.startCounter();
   }
+
 }
