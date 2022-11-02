@@ -10,10 +10,12 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <img [src]="'assets/image/dog.jpg'" class="img-thumbnail" alt="Your Image">
-                <p>Username :{{currentProfile.username}}</p>
-                <p>Email: {{currentProfile.email}}</p>  
-                <p>{{currentProfile.name}}</p>
+                <img [src]="currentProfile.picture" class="img-thumbnail" alt="Your Image">
+                <p>Username: {{currentProfile.username}}</p>
+                <p>{{currentProfile.title+". "+currentProfile.name}}</p>
+                <p>Sex: {{currentProfile.sex}}</p>
+                <p>Email: {{currentProfile.email}}</p> 
+                <p>Tel: {{currentProfile.phonenumber}}</p> 
                 <p>{{2022-currentProfile.birthyear}} years old</p>
             </div>
 
