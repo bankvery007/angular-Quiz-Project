@@ -36,11 +36,11 @@ export class QuestionComponent implements OnInit {
     this.correctAnswer = 0;
     this.Allquiz = this.QuestionsService.getQuestion()
     this.quiz = this.Allquiz.quiz[this.nextQuestion]
+    console.log("quiz",this.quiz)
     this.start()
   }
 
   start() {
-    
     Swal.fire({
       title: 'Are you ready?!',
       html: 'Game will start in 5 seconds.',
@@ -66,7 +66,13 @@ export class QuestionComponent implements OnInit {
         width: 600,
         padding: '3em',
         color: '#716add',
-        background: '#fff',
+        background: '#fff url(/images/trees.png)',
+        backdrop: `
+          rgba(0,0,123,0.4)
+          https://giphy.com/embed/GkD4U3VfiIbzcBhQNu
+          left top
+          no-repeat
+        `
       }).then((result) => {
         this.router.navigate(['/quiz']);
       })
