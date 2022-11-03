@@ -14,6 +14,7 @@ import { MyquizComponent } from './components/myquiz/myquiz.component';
 
 
 
+
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'signin', component: SigninComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'profilemodal', component: ProfilemodalComponent},
   {path: 'myquiz', component: MyquizComponent},
+
   {path: '', 
     redirectTo: 'home', 
     pathMatch: 'full'          

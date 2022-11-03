@@ -25,6 +25,7 @@ export class QuestionComponent implements OnInit {
   quiz!: any
   nextQuestion: number = 0;
   timerInterval!:any
+  isCorrect : Boolean = false
 
   constructor(
     private QuestionsService: QuestionsService,
@@ -57,6 +58,7 @@ export class QuestionComponent implements OnInit {
   answer(value: number) {
     if (value == this.quiz.answer) {
       this.correctAnswer += 1
+      this.isCorrect = true;
     }
     if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
       this.isQuizCompleted = true;

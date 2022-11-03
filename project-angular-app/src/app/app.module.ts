@@ -20,6 +20,7 @@ import { ProfilemodalComponent } from './components/profilemodal/profilemodal.co
 import { SatisfiedComponent } from './components/satisfied/satisfied.component';
 import { MyquizComponent } from './components/myquiz/myquiz.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { MyquizComponent } from './components/myquiz/myquiz.component';
     ProfilemodalComponent,
     SatisfiedComponent,
     MyquizComponent
+
   ],
   imports: [
     BrowserModule,
