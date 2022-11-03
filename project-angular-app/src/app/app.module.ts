@@ -18,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 import { SatisfiedComponent } from './components/satisfied/satisfied.component';
-import { NgswitchComponent } from './components/ngswitch/ngswitch.component';
+import { MyquizComponent } from './components/myquiz/myquiz.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgswitchComponent } from './components/ngswitch/ngswitch.component';
     HistoryComponent,
     ProfilemodalComponent,
     SatisfiedComponent,
-    NgswitchComponent
+    MyquizComponent
+
   ],
   imports: [
     BrowserModule,
