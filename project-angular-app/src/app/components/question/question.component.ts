@@ -17,6 +17,7 @@ export class QuestionComponent implements OnInit {
   public questionList: any = [];
   public currentQuestion: number = 0;
 
+  toggle !: Boolean;
   counter = 60;
   correctAnswer: number = 0;
   interval$: any;
@@ -36,9 +37,15 @@ export class QuestionComponent implements OnInit {
     this.correctAnswer = 0;
     this.Allquiz = this.QuestionsService.getQuestion()
     this.quiz = this.Allquiz.quiz[this.nextQuestion]
-    console.log("quiz",this.quiz)
+    this.questionList = this.Allquiz.quiz
+    console.log(this.questionList)
+   
     this.start()
   }
+
+
+
+
 
   start() {
     Swal.fire({
@@ -57,11 +64,16 @@ export class QuestionComponent implements OnInit {
 
   answer(value: number) {
     if (value == this.quiz.answer) {
-      this.correctAnswer += 1
+      this.correctAnswer += 1;
       this.isCorrect = true;
+      setTimeout(() => {
+        this.nextQuestion++;
+        this.resetCounter();
+      }, 1000);
     }
     if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
       this.isQuizCompleted = true;
+      this.stopCounter();
       Swal.fire({
         title: 'Congratulations!!',
         html: 'You score is '+ this.correctAnswer +' points',
@@ -78,9 +90,15 @@ export class QuestionComponent implements OnInit {
       })
 
     } else {
-      this.nextQuestion += 1
-      this.quiz = this.Allquiz.quiz[this.nextQuestion]
-      this.resetCounter()
+      setTimeout(() => {
+        this.isCorrect = false;
+        this.nextQuestion++;
+        this.resetCounter();
+        this.quiz = this.Allquiz.quiz[this.nextQuestion]
+      }, 1000);
+      // this.nextQuestion += 1
+      // this.quiz = this.Allquiz.quiz[this.nextQuestion]
+      // this.resetCounter()
     }
 
   }
