@@ -38,19 +38,39 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="options">
         <div class="col-lg-12 text-center">
+            <!-- <li (click)="answer(1)">{{this.quiz.choice1}}
+                <div appChangeBg [isCorrect]="isCorrect" class="card">
+                    {{this.quiz.choice1}}
+                </div>
+            </li>
+            <li (click)="answer(2)">{{this.quiz.choice2}}
+                <div appChangeBg [isCorrect]="isCorrect" class="card">
+                    {{this.quiz.choice1}}
+                </div>
+            </li>
+            <li (click)="answer(3)">{{this.quiz.choice3}}
+                <div appChangeBg [isCorrect]="isCorrect" class="card">
+                    {{this.quiz.choice1}}
+                </div>
+            </li>
+            <li (click)="answer(4)">{{this.quiz.choice4}}
+                <div appChangeBg [isCorrect]="isCorrect" class="card">
+                    {{this.quiz.choice1}}
+                </div>
+            </li> -->
             <div>
-                <button id="button1" (click)="answer(1)">{{this.quiz.choice1}}</button>
+                <button id="button1" (click)="answer(1)" appChangeBg [isCorrect]="isCorrect" >{{this.quiz.choice1}}</button>
             </div>
             <div>
-                <button id="button1" (click)="answer(2)">{{this.quiz.choice2}}</button>
+                <button id="button1" (click)="answer(2)" appChangeBg [isCorrect]="isCorrect" >{{this.quiz.choice2}}</button>
             </div>
             <div>
-                <button id="button1" (click)="answer(3)">{{this.quiz.choice3}}</button>
+                <button id="button1" (click)="answer(3)" appChangeBg [isCorrect]="isCorrect" >{{this.quiz.choice3}}</button>
             </div>
             <div>
-                <button id="button1" (click)="answer(4)">{{this.quiz.choice4}}</button>
+                <button id="button1" (click)="answer(4)" appChangeBg [isCorrect]="isCorrect" >{{this.quiz.choice4}}</button>
             </div>
         </div>
     </div>

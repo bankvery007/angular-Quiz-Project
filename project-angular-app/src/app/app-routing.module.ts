@@ -10,7 +10,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
-
+import { NgswitchComponent } from './components/ngswitch/ngswitch.component';
 
 
 const routes: Routes = [
@@ -24,6 +24,7 @@ const routes: Routes = [
   {path: 'result', component: ResultComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'profilemodal', component: ProfilemodalComponent},
+  {path: 'ngswitch', component: NgswitchComponent},
   {path: '', 
     redirectTo: 'home', 
     pathMatch: 'full'          
