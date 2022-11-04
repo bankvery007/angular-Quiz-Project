@@ -19,6 +19,7 @@ import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 import { SatisfiedComponent } from './components/satisfied/satisfied.component';
 import { MyquizComponent } from './components/myquiz/myquiz.component';
+import { HistoryPlayingComponent } from './components/history-playing/history-playing.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MyquizComponent } from './components/myquiz/myquiz.component';
     HistoryComponent,
     ProfilemodalComponent,
     SatisfiedComponent,
-    MyquizComponent
+    MyquizComponent,
+    HistoryPlayingComponent
 
   ],
   imports: [

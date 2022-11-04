@@ -37,6 +37,7 @@ expressApp.use('/login', require('./routes/signin'))
 expressApp.use('/quiz', require('./api/quiz'))
 expressApp.use('/comment', require('./api/comment'))
 expressApp.use('/history', require('./api/history'))
+expressApp.use('/history_playing', require('./api/history_playing'))
 
 expressApp.get('api/test', function(req, res){
     res.status(200).send('Hello World'); 

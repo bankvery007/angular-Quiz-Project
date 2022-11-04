@@ -43,7 +43,6 @@ export class QuestionComponent implements OnInit {
     this.correctAnswer = 0;
     this.Allquiz = this.QuestionsService.getQuestion()
     this.quiz = this.Allquiz.quiz[this.nextQuestion]
-    this.questionList = this.Allquiz.quiz
     console.log(this.Allquiz)
     this.start()
   }
@@ -93,9 +92,9 @@ export class QuestionComponent implements OnInit {
         //xxxx
       })
     } else {
-      this.nextQuestion += 1
       this.disabled = true
       setTimeout(() => {
+        this.nextQuestion += 1
         this.quiz = this.Allquiz.quiz[this.nextQuestion]
         this.color[value - 1] = 'white'
         this.disabled = false

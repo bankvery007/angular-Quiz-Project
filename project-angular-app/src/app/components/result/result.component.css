@@ -1,0 +1,19 @@
+h3{
+    text-align: center;
+}
+
+.rating{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+i{
+    color: rgb(181, 181, 216); 
+    cursor: pointer;
+}
+
+.active{
+    color: orange;
+}
