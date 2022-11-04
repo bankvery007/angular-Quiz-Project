@@ -11,7 +11,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 import { MyquizComponent } from './components/myquiz/myquiz.component';
-
+import { HistoryPlayingComponent } from './components/history-playing/history-playing.component';
 
 
 
@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'profilemodal', component: ProfilemodalComponent},
   {path: 'myquiz', component: MyquizComponent},
+  {path: 'history_playing', component: HistoryPlayingComponent},
 
   {path: '', 
     redirectTo: 'home', 

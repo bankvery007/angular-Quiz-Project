@@ -51,7 +51,7 @@
                 <div class="col-lg-2 text-center" *ngFor="let item of quiz | filter: searchText let j = index">
                     <div class="row" style="padding-top: 30px;">
                         <div class="col text-center" style="width:250px ;height: 250px; ">
-                            <p class="avoid-clicks">{{item.quiz.length}} point</p>
+                            <p class="avoid-clicks">{{item.quiz.length}} Qestion</p>
                             <img id="img2" type="image" title={{item.quizName}}
                                 style="object-fit: cover;margin-top: 30px;width: 90%; height: 80%;"
                                 (click)="editQuiz(j)" [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">

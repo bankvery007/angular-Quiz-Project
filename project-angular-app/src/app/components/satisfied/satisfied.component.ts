@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ProfilemodalService } from 'src/app/service/profilemodal.service';
+import { QuestionsService } from 'src/app/service/questions.service';
+import { HistoryPlayingService } from 'src/app/service/history-playing.service';
 @Component({
   selector: 'app-satisfied',
   templateUrl: './satisfied.component.html',
@@ -16,14 +19,18 @@ export class SatisfiedComponent implements OnInit {
     console.log(this.rating);``
   }
 
-  // ratingform = new FormGroup({
-  //   owner: new FormControl(''),
-  //   rating: new FormControl(''),
-  // });
+  ratingform = new FormGroup({
+    owner: new FormControl(''),
+    point: new FormControl(''),
+    quizName:new FormControl(''),
+    rating: new FormControl(''),
+  });
 
-  // get start() { return this.ratingform.get('rating') }
 
-  constructor(private router: Router,) { }
+  constructor(private router: Router,
+    private ProfilemodalService:ProfilemodalService,
+    private QuestionsService:QuestionsService,
+    private hp:HistoryPlayingService) { }
 
   onclicktopath(){
     this.router.navigate(['/quiz']);
@@ -33,5 +40,19 @@ export class SatisfiedComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  addPlaying(){
+    this.hp.addplaying(this.ratingform.value).subscribe(
+      data => {
+        alert('Playing added successfully');
+        this.ratingform.reset();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  
 
 }
