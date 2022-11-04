@@ -17,16 +17,22 @@ export class QuestionComponent implements OnInit {
   public questionList: any = [];
   public currentQuestion: number = 0;
 
-  toggle !: Boolean;
-  counter = 60;
-  correctAnswer: number = 0;
+
   interval$: any;
-  isQuizCompleted: boolean = false;
   Allquiz!: any
   quiz!: any
+  timerInterval!: any
+  counter: number = 60;
+  correctAnswer: number = 0;
   nextQuestion: number = 0;
-  timerInterval!:any
-  isCorrect : Boolean = false
+  point: number = 0;
+  bonus: number = 0
+  toggle !: boolean;
+  isQuizCompleted: boolean = false;
+  isCorrect: boolean = false
+  disabled: boolean = false
+
+  color: string[] = ['white', 'white', 'white', 'white']
 
   constructor(
     private QuestionsService: QuestionsService,
@@ -38,14 +44,9 @@ export class QuestionComponent implements OnInit {
     this.Allquiz = this.QuestionsService.getQuestion()
     this.quiz = this.Allquiz.quiz[this.nextQuestion]
     this.questionList = this.Allquiz.quiz
-    console.log(this.questionList)
-   
+    console.log(this.Allquiz)
     this.start()
   }
-
-
-
-
 
   start() {
     Swal.fire({
@@ -64,43 +65,43 @@ export class QuestionComponent implements OnInit {
 
   answer(value: number) {
     if (value == this.quiz.answer) {
-      this.correctAnswer += 1;
-      this.isCorrect = true;
-      setTimeout(() => {
-        this.nextQuestion++;
-        this.resetCounter();
-      }, 1000);
+      this.color[value - 1] = 'green'
+      // this.point = 1
+      this.point = Math.round((1000 + this.bonus) / 60 * this.counter)
+      this.correctAnswer += this.point;
+      this.bonus += this.bonus + 50
+    } else {
+      this.color[value - 1] = 'red'
+      this.point = 0
+      this.bonus = 0
     }
     if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
       this.isQuizCompleted = true;
       this.stopCounter();
       Swal.fire({
-        title: 'Congratulations!!',
-        html: 'You score is '+ this.correctAnswer +' points',
+        title: this.correctAnswer == 0 ? "Try again!!" : "Congratulations!!",
+        html: 'You score is ' + this.correctAnswer + ' points',
         width: 600,
         padding: '3em',
         color: '#716add',
-        background: '#fff url(/images/trees.png)',
+        background: '#fff',
         backdrop: `
           rgba(0,0,123,0.4)
-          https://giphy.com/embed/GkD4U3VfiIbzcBhQNu
-          left top
-          no-repeat
+          url('assets/image/giphy.gif')
         `
+      }).then(() => {
+        //xxxx
       })
-
     } else {
+      this.nextQuestion += 1
+      this.disabled = true
       setTimeout(() => {
-        this.isCorrect = false;
-        this.nextQuestion++;
-        this.resetCounter();
         this.quiz = this.Allquiz.quiz[this.nextQuestion]
+        this.color[value - 1] = 'white'
+        this.disabled = false
+        this.resetCounter()
       }, 1000);
-      // this.nextQuestion += 1
-      // this.quiz = this.Allquiz.quiz[this.nextQuestion]
-      // this.resetCounter()
     }
-
   }
 
   startCounter() {
@@ -108,7 +109,8 @@ export class QuestionComponent implements OnInit {
       .subscribe(val => {
         this.counter--;
         if (this.counter === 0) {
-          this.nextQuestion +=1
+          this.nextQuestion += 1
+          this.bonus = 0
           this.counter = 60;
         }
       });

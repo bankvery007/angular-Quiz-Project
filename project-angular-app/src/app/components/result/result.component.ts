@@ -12,6 +12,7 @@ export class ResultComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("reslut",this.correctAnswer)
   }
 
 }
