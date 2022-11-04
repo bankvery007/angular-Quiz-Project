@@ -23,3 +23,14 @@ ol {
     height: 50px;
     margin-top: 20px;
 }
+
+#img2 {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+    background-repeat: no-repeat;
+    width: 60%;
+    height: 60%;
+}

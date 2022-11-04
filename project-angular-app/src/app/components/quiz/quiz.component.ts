@@ -24,7 +24,7 @@ export class QuizComponent implements OnInit {
   alert_comment: boolean = false
   sum: number = 0;
   count!: string;
-  user!:any
+  user : any = {username : 'few'}
 
   productForm = new FormGroup({
     owner: new FormControl(''),
@@ -44,7 +44,7 @@ export class QuizComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.profile.getUser()
+    // this.user = this.profile.getUser()
   }
 
   onLoading() {

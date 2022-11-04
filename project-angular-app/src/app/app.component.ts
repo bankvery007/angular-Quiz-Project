@@ -23,6 +23,8 @@ export class AppComponent {
     this.token = this.profile.getToken()
     if(this.token){
       this.pass = true
+    }else{
+      this.pass = false
     }
     console.log(this.pass)
   }
