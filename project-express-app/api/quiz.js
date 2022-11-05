@@ -71,7 +71,7 @@ router.route('/Quiz')
 router.route('/Quiz')
     // V authorization V อยู่ตรงนี้ 
     // ตัวอย่าง .get(authorization, (req, res) => {
-    .get((req, res) => {
+    .get(authorization, (req, res) => {
         Quiz.find((err, val) => {
             if (err) {
                 console.log(err)

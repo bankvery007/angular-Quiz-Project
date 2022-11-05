@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const router = expressFunction.Router();
 
-const key = 'FUXXING_KEY'
+const key = 'MY_KEY'
 
 var Schema = require("mongoose").Schema;
 
