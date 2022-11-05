@@ -13,8 +13,6 @@ import { ProfilemodalComponent } from './components/profilemodal/profilemodal.co
 import { MyquizComponent } from './components/myquiz/myquiz.component';
 import { HistoryPlayingComponent } from './components/history-playing/history-playing.component';
 
-
-
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'signin', component: SigninComponent},

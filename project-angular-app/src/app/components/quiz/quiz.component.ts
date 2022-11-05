@@ -67,7 +67,7 @@ export class QuizComponent implements OnInit {
           }
         },
         err => {
-          console.log(err);
+            console.log(err);
         }
       );
       this.commentService.getAllcomment().subscribe(
