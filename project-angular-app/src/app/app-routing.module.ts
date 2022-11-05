@@ -12,20 +12,22 @@ import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
 import { MyquizComponent } from './components/myquiz/myquiz.component';
 import { HistoryPlayingComponent } from './components/history-playing/history-playing.component';
+import { AuthService } from './auth/auth.service'
+import { AuthGuard } from './auth/auth.guard'
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'home', component: WelcomeComponent},
-  {path: 'newquiz', component: NewquizComponent},
-  {path: 'quiz', component: QuizComponent},
-  {path: 'question', component: QuestionComponent},
-  {path: 'result', component: ResultComponent},
-  {path: 'history', component: HistoryComponent},
-  {path: 'profilemodal', component: ProfilemodalComponent},
-  {path: 'myquiz', component: MyquizComponent},
-  {path: 'history_playing', component: HistoryPlayingComponent},
+  {path: 'newquiz', component: NewquizComponent, canActivate:[AuthGuard]},
+  {path: 'quiz', component: QuizComponent, canActivate:[AuthGuard]},
+  {path: 'question', component: QuestionComponent, canActivate:[AuthGuard]},
+  {path: 'result', component: ResultComponent, canActivate:[AuthGuard]},
+  {path: 'history', component: HistoryComponent, canActivate:[AuthGuard]},
+  {path: 'profilemodal', component: ProfilemodalComponent, canActivate:[AuthGuard]},
+  {path: 'myquiz', component: MyquizComponent, canActivate:[AuthGuard]},
+  {path: 'history_playing', component: HistoryPlayingComponent, canActivate:[AuthGuard]},
 
   {path: '', 
     redirectTo: 'home', 
@@ -36,6 +38,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers: [AuthService, AuthGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
