@@ -6,6 +6,7 @@ import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 import { QuestionsService } from 'src/app/service/questions.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class QuizComponent implements OnInit {
     private commentService: CommentService,
     private router: Router,
     private profile: ProfilemodalService,
-    private questions : QuestionsService
+    private questions : QuestionsService,
+    private appComponent: AppComponent,
   ) {
     this.onLoading();
   }

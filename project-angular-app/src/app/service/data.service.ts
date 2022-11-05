@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { dataModel } from '../data.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +20,9 @@ export class DataService {
   }
 
   getAllQuiz() {
-    return this.http.get<any>('http://localhost:3000/quiz/Quiz')
+    const headers = new HttpHeaders().set('authorization', `${localStorage.getItem("token")}`);
+    console.log("getAllQuiz",headers)
+    return this.http.get<any>('http://localhost:3000/quiz/Quiz', {headers : headers})
       .pipe(map(newquiz => {
         if (newquiz) {
           this.quiz = newquiz;

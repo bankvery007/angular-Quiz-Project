@@ -39,7 +39,6 @@ export class SigninComponent implements OnInit {
 
   user!: any
 
-
   onClickLogin() {
     this.http.post('http://localhost:3000/login/signin',
       { "username": this.loginForm.value.username || '', "password": this.loginForm.value.password || '' })
@@ -48,8 +47,8 @@ export class SigninComponent implements OnInit {
           if ((<any>Object).values(data)[0] != false) {
             console.log((<any>Object).values(data)[0])
             console.log((<any>Object).values(data)[1])
-            this.user = (<any>Object).values(data)[0]
 
+            this.user = (<any>Object).values(data)[0]
             this.profile.setUser(
               {
                 id: this.user.id,
@@ -63,13 +62,10 @@ export class SigninComponent implements OnInit {
                 birthyear: this.user.birthyear, 
               })
 
-            this.profile.setToken((<any>Object).values(data)[1])
-            
-            this.appComponent.haveToken()
-            
             window.localStorage.setItem("token", (<any>Object).values(data)[1]);
-            alert("welcome!")
+            this.appComponent.haveToken()
             this.router.navigate(['./quiz']);
+            alert("welcome!")
 
           } else {
             alert("your username or password is incorrect")

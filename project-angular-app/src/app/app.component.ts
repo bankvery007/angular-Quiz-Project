@@ -13,20 +13,15 @@ export class AppComponent {
   pass:boolean = false
 
   constructor(
-    private profile: ProfilemodalService
   ) {}
 
   ngOnInit(): void {
   }
 
+  //signin 68
   haveToken(){
-    this.token = this.profile.getToken()
-    if(this.token){
-      this.pass = true
-    }else{
-      this.pass = false
-    }
-    console.log(this.pass)
+    this.token = localStorage.getItem('token') || ''
+    console.log("token",localStorage.getItem('token') || '')
   }
   
 }

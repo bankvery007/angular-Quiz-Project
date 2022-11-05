@@ -21,14 +21,6 @@ export class ProfilemodalService {
     return this.user
   }
 
-  setToken(token:string){
-    this.token = token
-  }
-
-  getToken(){
-    return this.token
-  }
- 
   // getUnsignProfile() {
   //   const token:JSON = JSON.parse(localStorage.getItem("token") || "");
   //   return this.http.post<any>('http://localhost:3000/login/unsigntoken', token)
