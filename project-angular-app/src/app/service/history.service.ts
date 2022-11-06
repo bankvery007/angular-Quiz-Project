@@ -24,4 +24,18 @@ export class HistoryService {
       }));
 
   }
+
+  getCountPlayHistory() {
+    this.http.get<any>('http://localhost:3000/history/getCountPlayHistory')
+      .pipe(map(countplay => {
+        if (countplay) {
+          console.log(countplay.count)
+          return countplay
+          
+        } else {
+          alert('cannot get count played history')
+        }
+      }));
+
+  }
 }

@@ -9,7 +9,8 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
+            <div class="modal-body" *ngIf="!show">
+
                 <img [src]="currentProfile.picture" class="img-thumbnail" alt="Your Image">
                 <p>Username: {{currentProfile.username}}</p>
                 <p>{{currentProfile.title+". "+currentProfile.name}}</p>
@@ -17,7 +18,58 @@
                 <p>Email: {{currentProfile.email}}</p> 
                 <p>Tel: {{currentProfile.phonenumber}}</p> 
                 <p>{{2022-currentProfile.birthyear}} years old</p>
+                
             </div>
+
+            <div class="modal-body" *ngIf="show">
+
+                <img [src]="currentProfile.picture" class="img-thumbnail" alt="Your Image">
+                <form [formGroup]="profileForm">
+                <div class="form-group">
+                    <label>FirstName</label>
+                    <input type="text" class="form-control" formControlName='firstName'>
+                </div>
+                <div class="form-group">
+                    <label>LastName</label>
+                    <input type="text" class="form-control" formControlName='lastName'>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-label" type="radio" name="sex" value="Male" formControlName='sex'>Male
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-label" type="radio" name="sex" value="Female" formControlName='sex'>Female
+                    </label>
+                </div>
+                <br/><br/>
+
+                <div class="form-group">
+                    <label>BirthYaer</label>
+                    <input type="text" class="form-control" formControlName='birthyear'>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" formControlName='phonenumber'>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" formControlName='email'>
+                    
+                </div>
+            </form>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-primary btn-md float-right"
+                 (click)="onClickEdit()"> {{show? 'cancle':'edit profile'}}</button>
+
+            </div>
+            
 
             <!-- Modal footer -->
             <div class="modal-footer">

@@ -69,4 +69,17 @@ router.route('/getHistory')
         })
     })
 
+//getCountHistory
+router.route('/getCountPlayHistory')
+    .get((req, res) => {
+        History.find((err, val) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.status(200).json({count:val.length});
+            }
+        })
+    })
+
+
 module.exports = router
