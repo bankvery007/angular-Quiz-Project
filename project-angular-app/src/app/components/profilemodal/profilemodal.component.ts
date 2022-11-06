@@ -5,6 +5,7 @@ import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 import { HistoryService } from 'src/app/service/history.service';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profilemodal',
@@ -63,14 +64,24 @@ export class ProfilemodalComponent implements OnInit {
     this.show = !this.show;
   }
 
-  onClickSubmit() {
-    //unknown -> any
+  onClickDelete() {
+    return this.http.delete<any>('http://localhost:3000/user/delete/' + this.user._id)
+      .pipe(map(deleteuser => {
+        return deleteuser;
+      }));
+  }
+
+  onClickUpdate() {
     const patchjson:JSON = <JSON><any>{
+      picture: this.user.value.picture || '',
+        title: this.user.value.title || '',
         name: this.profileForm.value.firstName+' '+this.profileForm.value.lastName|| '',
         sex: this.profileForm.value.sex || '',
+        username: this.user.value.username || '',
         birthyear: parseInt(this.profileForm.value.birthyear || ''),
         phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
         email: this.profileForm.value.email || '',
+        password: this.user.value.password || ''
     }
     
     this.http.patch('http://localhost:3000/user/updateuser',patchjson

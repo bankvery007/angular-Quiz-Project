@@ -64,12 +64,23 @@
                 </div>
             </form>
             </div>
-            <div class="modal-body">
-                <button type="button" class="btn btn-primary btn-md float-right"
-                 (click)="onClickEdit()"> {{show? 'cancle':'edit profile'}}</button>
-
-            </div>
             
+            <div class="modal-body">
+                <div>
+                    <button type="button" class="btn btn-primary btn-md float-right"
+                 (click)="onClickEdit()"> {{show? 'cancle':'edit profile'}}</button>
+                </div>
+                
+                 <div *ngIf="show">
+                    <button type="button" class="btn btn-primary btn-md float-right"
+                     (click)="onClickUpdate()"> save </button>
+    
+                </div>
+            </div>
+            <div class="modal-body">
+            <button type="button" class="btn btn-danger btn-md float-right"
+                     (click)="onClickDelete()"> delete your profile </button>
+            </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">

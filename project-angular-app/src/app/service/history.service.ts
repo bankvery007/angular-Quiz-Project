@@ -29,7 +29,6 @@ export class HistoryService {
     this.http.get<any>('http://localhost:3000/history/getCountPlayHistory')
       .pipe(map(countplay => {
         if (countplay) {
-          console.log(countplay.count)
           return countplay
           
         } else {
