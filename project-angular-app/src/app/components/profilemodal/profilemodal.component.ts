@@ -6,6 +6,7 @@ import { HistoryService } from 'src/app/service/history.service';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-profilemodal',
@@ -19,7 +20,8 @@ export class ProfilemodalComponent implements OnInit {
     private profilemodal: ProfilemodalService,
     private appComponent: AppComponent,
     private history:HistoryService,
-    private http:HttpClient
+    private http:HttpClient,
+    private login:LoginService
     ) { }
 
   user!:any
@@ -65,26 +67,40 @@ export class ProfilemodalComponent implements OnInit {
   }
 
   onClickDelete() {
-    return this.http.delete<any>('http://localhost:3000/user/delete/' + this.user._id)
-      .pipe(map(deleteuser => {
-        return deleteuser;
-      }));
+    console.log(this.currentProfile.id)
+    return this.http.delete<any>('http://localhost:3000/user/delete/' + this.currentProfile.id ,{headers : this.login.getToken()})
+      .subscribe({
+        next: (data) => {
+          if ((<any>Object).values(data)[0] != false) {
+            alert("delete success!")
+            this.router.navigate(['./home']);
+          } else {
+            alert("failed")
+          }
+        },
+        error: (error) => {
+          alert("cannot delete")
+        }
+      })
+      
   }
 
   onClickUpdate() {
     const patchjson:JSON = <JSON><any>{
-      picture: this.user.value.picture || '',
-        title: this.user.value.title || '',
+      picture: this.currentProfile.picture || '',
+        title: this.currentProfile.title || '' ,
         name: this.profileForm.value.firstName+' '+this.profileForm.value.lastName|| '',
         sex: this.profileForm.value.sex || '',
-        username: this.user.value.username || '',
+        username: this.currentProfile.username || '',
         birthyear: parseInt(this.profileForm.value.birthyear || ''),
         phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
         email: this.profileForm.value.email || '',
-        password: this.user.value.password || ''
+        password: this.currentProfile.password
     }
+
+    console.log(this.currentProfile);
     
-    this.http.patch('http://localhost:3000/user/updateuser',patchjson
+    this.http.patch('http://localhost:3000/user/patch/'+ this.currentProfile.id,patchjson,{headers : this.login.getToken()}
       )
       .subscribe({
         next: (data) => {

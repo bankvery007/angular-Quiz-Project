@@ -57,39 +57,45 @@ export class SignupComponent implements OnInit {
   }
 
   onClickSubmit() {
-    //unknown -> any
+    if(!this.profileForm.invalid){
+      //unknown -> any
     const signupjson:JSON = <JSON><any>{
-        picture: this.profileForm.value.picture || '',
-        title: this.profileForm.value.title || '',
-        name: this.profileForm.value.firstName+' '+this.profileForm.value.lastName|| '',
-        sex: this.profileForm.value.sex || '',
-        birthyear: parseInt(this.profileForm.value.birthyear || ''),
-        phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
-        username: this.profileForm.value.username || '',
-        email: this.profileForm.value.email || '',
-        password: this.profileForm.value.password || ''
+      picture: this.profileForm.value.picture || '',
+      title: this.profileForm.value.title || '',
+      name: this.profileForm.value.firstName+' '+this.profileForm.value.lastName|| '',
+      sex: this.profileForm.value.sex || '',
+      birthyear: parseInt(this.profileForm.value.birthyear || ''),
+      phonenumber: this.profileForm.value.phonenumber || '',
+      username: this.profileForm.value.username || '',
+      email: this.profileForm.value.email || '',
+      password: this.profileForm.value.password || ''
+  }
+  
+  this.http.post('http://localhost:3000/user/signup',signupjson
+    )
+    .subscribe({
+      next: (data) => {
+        if ((<any>Object).values(data)[0] != false) {
+          console.log((<any>Object).values(data)[0])
+          console.log((<any>Object).values(data)[1])
+          
+          alert("sign up success!")
+          this.router.navigate(['./signin']);
+
+        } else {
+          alert("cannot sign up")
+
+        }
+      },
+      error: (error) => {
+        alert("cannot sign up")
+      }
+    })
+
+    }else{
+      alert("check your infos and try again!")
     }
     
-    this.http.post('http://localhost:3000/user/signup',signupjson
-      )
-      .subscribe({
-        next: (data) => {
-          if ((<any>Object).values(data)[0] != false) {
-            console.log((<any>Object).values(data)[0])
-            console.log((<any>Object).values(data)[1])
-            
-            alert("sign up success!")
-            this.router.navigate(['./signin']);
-
-          } else {
-            alert("cannot sign up")
-
-          }
-        },
-        error: (error) => {
-          alert("cannot sign up")
-        }
-      })
   }
 
 

@@ -3,7 +3,7 @@ const router = expressFunction.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const { rejects } = require('assert');
-
+const authorization = require('../config/authorize')
 var Schema = require("mongoose").Schema;
 const userSchema = Schema({
     picture: String,
@@ -90,7 +90,7 @@ router.route('/signup')
 router.route('/getUser')
     // V authorization V อยู่ตรงนี้ 
     // ตัวอย่าง .get(authorization, (req, res) => {
-    .get((req, res) => {
+    .get(authorization,(req, res) => {
         User.find((err, val) => {
             if (err) {
                 console.log(err)
@@ -103,10 +103,10 @@ router.route('/getUser')
 
 // Patch user
 router.route('/patch/:id')
-.patch((req, res) => {
+.patch(authorization,(req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((blog) => {
         if (!blog) {
-            return res.status(404).send();
+            return res.status(404).send({error:req.params.id});
         }
         res.send(blog);
     }).catch((error) => {
@@ -116,7 +116,7 @@ router.route('/patch/:id')
 
 // Delete user
 router.route('/delete/:id')
-.delete((req, res) => {
+.delete(authorization,(req, res) => {
     uid = req.params.id
     User.remove({"_id":uid}, function(err, result) { 
         if(err){

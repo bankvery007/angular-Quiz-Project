@@ -6,8 +6,6 @@ import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 import { QuestionsService } from 'src/app/service/questions.service';
-import { AppComponent } from 'src/app/app.component';
-
 
 @Component({
   selector: 'app-quiz',
@@ -25,7 +23,7 @@ export class QuizComponent implements OnInit {
   alert_comment: boolean = false
   sum: number = 0;
   count!: string;
-  user : any = {username : 'few'}
+  user : any;
 
   productForm = new FormGroup({
     owner: new FormControl(''),
@@ -40,13 +38,13 @@ export class QuizComponent implements OnInit {
     private router: Router,
     private profile: ProfilemodalService,
     private questions : QuestionsService,
-    private appComponent: AppComponent,
+    
   ) {
     this.onLoading();
   }
 
   ngOnInit(): void {
-    // this.user = this.profile.getUser()
+    this.user = this.profile.getUser()
   }
 
   onLoading() {
