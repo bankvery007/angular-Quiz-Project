@@ -17,10 +17,13 @@ export class MyquizComponent implements OnInit {
   ) { }
 
   quiz!: any
-  user!: any
+  quizfilter : any = []
+  q :any = []
+  user!: any 
   show_alert_del: boolean = true
   result!: string
   searchText: string = "";
+ 
 
   ngOnInit(): void {
     this.user = this.profile.getUser()
@@ -32,7 +35,12 @@ export class MyquizComponent implements OnInit {
       this.dataService.getAllQuiz().subscribe(
         data => {
           this.quiz = data.reverse();
-          console.log(this.quiz)
+          for (let i = 0; i < this.quiz.length; i++) { 
+            if(this.quiz[i].owner == this.user.username){
+              this.quizfilter.push(this.quiz[i])
+              this.q.push(i)
+            }
+          }
         },
         err => {
           console.log(err);
@@ -47,7 +55,6 @@ export class MyquizComponent implements OnInit {
     this.dataService.delQuiz(this.quiz[index]._id).subscribe(
       data => {
         this.result = data
-        console.log("xx", this.result)
         this.onLoading()
       }
     )
@@ -60,8 +67,8 @@ export class MyquizComponent implements OnInit {
       text: "You won't be able to revert this!",
       icon: 'warning',
       input: 'text',
-      inputLabel: 'Please type ' + this.quiz[index].quizName + ' to confirm.',
-      inputPlaceholder: this.quiz[index].quizName,
+      inputLabel: 'Please type ' + this.quiz[this.q[index]].quizName + ' to confirm.',
+      inputPlaceholder: this.quiz[this.q[index]].quizName,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -79,9 +86,9 @@ export class MyquizComponent implements OnInit {
       } else if (result.isConfirmed == true) {
         Swal.fire({
           title: 'Text mismatch!',
-          text:'Please type again.',
-          icon:'question',
-          confirmButtonText: 'OK',  
+          text: 'Please type again.',
+          icon: 'question',
+          confirmButtonText: 'OK',
         }).then(() => {
           this.delQuizAlert(index)
         })

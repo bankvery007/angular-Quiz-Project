@@ -19,19 +19,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of quiz | filter: (searchText || this.user.username) index as i">
+                        <tr *ngFor="let item of quizfilter | filter: searchText index as i">
                             <td scope="row">{{item.quizName}}</td>
                             <td>{{item.datetime}}</td>
-                            <td>{{item.count}}</td>
+                            <td>{{i}}</td>
                             <td>{{item.quiz.length}}</td>
                             <td><img [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'" style="height:150px;">
                             </td>
                             <td>
-                                <p style="margin-top: 20px;">
-                                    <button class="btn btn-danger btn-lg" (click)="delQuizAlert(i)">Delete</button>
-                                </p>
-                                <p>
-                                    <button class="btn btn-info btn-lg">Update</button>
+                                <p style="margin-top: 50px;">
+                                    <button class="btn btn-danger btn-lg" (click)="delQuizAlert(i)" *ngIf="item.owner == this.user.username">Delete</button>
                                 </p>
                             </td>
                         </tr>
