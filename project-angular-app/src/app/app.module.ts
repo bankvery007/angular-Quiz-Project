@@ -15,7 +15,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
-import { SatisfiedComponent } from './components/satisfied/satisfied.component';
 import { MyquizComponent } from './components/myquiz/myquiz.component';
 import { HistoryPlayingComponent } from './components/history-playing/history-playing.component';
 
@@ -34,7 +33,6 @@ import { HistoryPlayingComponent } from './components/history-playing/history-pl
     WelcomeComponent,
     HistoryComponent,
     ProfilemodalComponent,
-    SatisfiedComponent,
     MyquizComponent,
     HistoryPlayingComponent
 

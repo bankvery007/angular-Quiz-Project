@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="card" style="background-color: black;  margin-left: 100px;">
+<div class="card" style="background-color: black;">
     <div class="row">
         <div class="col-md-3 text-center" style="margin-top: 10px; margin-left: 50px;">
             <img id="img1"
@@ -43,34 +43,36 @@
         </div>
     </div>
     <table *ngIf="(quiz | filter: searchText).length > 0 ;else noResults">
-        <p class="col-lg-12 text-left" style="font-size: 50px;">
-            {{ShowTypeDisplay()}}
-        </p>
-        <div class="d-flex justify-content-center">
-            <div class="row" style="width:100%;height: 850px; overflow-y: scroll;">
-                <div class="col-lg-2 text-center" *ngFor="let item of quiz | filter: searchText let j = index">
-                    <div class="row" style="padding-top: 30px;">
-                        <div class="col text-center" style="width:250px ;height: 250px; ">
-                            <p class="avoid-clicks">{{item.quiz.length}} Qestion</p>
-                            <img id="img2" type="image" title={{item.quizName}}
-                                style="object-fit: cover;margin-top: 30px;width: 90%; height: 80%;"
-                                (click)="editQuiz(j)" [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
+        <div style="margin-left: 100px;">
+            <p class="col-lg-12 text-left" style="font-size: 50px;">
+                {{ShowTypeDisplay()}}
+            </p>
+            <div class="d-flex justify-content-center">
+                <div class="row" style="width:100%;height: 850px; overflow-y: scroll;">
+                    <div class="col-lg-2 text-center" *ngFor="let item of quiz | filter: searchText let j = index">
+                        <div class="row" style="padding-top: 30px;">
+                            <div class="col text-center" style="width:250px ;height: 250px; ">
+                                <p class="avoid-clicks">{{item.quiz.length}} Qestion</p>
+                                <img id="img2" type="image" title={{item.quizName}}
+                                    style="object-fit: cover;margin-top: 30px;width: 90%; height: 80%;"
+                                    (click)="editQuiz(j)" [src]="item.img || 'https://i.ibb.co/8DV5mBH/unnamed.jpg'">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <p class="col text-center" title={{item.quizName}} style="font-size: 2vmin;">
-                            {{item.quizName}}
-                        </p>
-                    </div>
-                    <div class="row">
-                        <p class="col text-center" style="font-size: 2vmin; color: gray;">
-                            create on {{(item.datetime)}}
-                        </p>
-                    </div>
-                    <div class="row">
-                        <p class="col text-center" style="font-size: 2vmin; color: green;">
-                            play count : {{item.count}}
-                        </p>
+                        <div class="row">
+                            <p class="col text-center" title={{item.quizName}} style="font-size: 2vmin;">
+                                {{item.quizName}}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p class="col text-center" style="font-size: 2vmin; color: gray;">
+                                create on {{(item.datetime)}}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p class="col text-center" style="font-size: 2vmin; color: green;">
+                                play count : {{item.count}}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,11 +82,11 @@
         <p *ngIf="quiz" style="padding: 50px;font-size: 25px;">No results found for "{{searchText}}".</p>
         <p *ngIf="!quiz" style="padding: 50px;font-size: 25px;">No quiz right now, let's create your own quiz!!</p>
     </ng-template>
-    <div class="col text-left" style="background-color: black; ">
+    <div class="col text-center" style="background-color: black; margin-left: 10px;">
         <form [formGroup]="productForm">
             <div class="row">
                 <p class="col-lg-12 text-center">
-                    <textarea rows="6" cols="80" formControlName='comment' maxlength="999"
+                    <textarea rows="6" cols="70" formControlName='comment' maxlength="999"
                         style="margin-left: 110px; font-size: 3vmin;"></textarea>
                     <button type="button" class="btn btn-success btn-lg" (click)="addComment()"
                         [disabled]="!productForm.valid"
