@@ -55,8 +55,10 @@ const insertUser = (dataUser) => {
     });
 }
 
+
+
 router.route('/signup')
-    .post((req, res) => {
+    .post(async (req, res) => {
         makeHash(req.body.password)
             .then(hashText => {
                 const payload = {
@@ -70,15 +72,29 @@ router.route('/signup')
                     email: req.body.email,
                     password: hashText,
                 }
-                console.log(payload);
-                insertUser(payload)
-                    .then(result => {
-                        console.log(result);
-                        res.status(200).json(result);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                var query = User.where({
+                    username: req.body.username,
+                });
+                query.findOne((err, existingUser) => {
+                    if (err) {
+                        return res.status(422).send(err);
+                    }
+                    if (existingUser) {
+                        return res.status(422).send({
+                            error: 'User already exists.'
+                        });
+                    } else {
+                        insertUser(payload)
+                            .then(result => {
+                                console.log(result);
+                                res.status(200).json(result);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    }
+                });
+
             })
             .catch(err => {
 

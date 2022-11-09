@@ -2,7 +2,7 @@ const expressFunction = require('express');
 const mongoose = require('mongoose');
 var expressApp = expressFunction(); //object to call
 
-const url = 'mongodb://localhost:27017/university';
+const url = 'mongodb://localhost:27017/quizproject';
 const config ={
     autoIndex: true,
     useNewUrlParser: true,
