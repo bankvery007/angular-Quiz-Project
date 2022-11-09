@@ -88,9 +88,7 @@ router.route('/signup')
 
 //get user
 router.route('/getUser')
-    // V authorization V อยู่ตรงนี้ 
-    // ตัวอย่าง .get(authorization, (req, res) => {
-    .get(authorization,(req, res) => {
+    .get(authorization, (req, res) => {
         User.find((err, val) => {
             if (err) {
                 console.log(err)
@@ -100,35 +98,34 @@ router.route('/getUser')
         })
     })
 
-
 // Patch user
 router.route('/patch/:id')
-.patch(authorization,(req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((blog) => {
-        if (!blog) {
-            return res.status(404).send({error:req.params.id});
-        }
-        res.send(blog);
-    }).catch((error) => {
-        res.status(500).send(error);
-    })
-});
+    .patch(authorization, (req, res) => {
+        User.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((blog) => {
+            if (!blog) {
+                return res.status(404).send({ error: req.params.id });
+            }
+            res.send(blog);
+        }).catch((error) => {
+            res.status(500).send(error);
+        })
+    });
 
 // Delete user
-router.route('/delete/:id')
-.delete(authorization,(req, res) => {
-    uid = req.params.id
-    User.remove({"_id":uid}, function(err, result) { 
-        if(err){
-            res.status(500).send(err);
-        }else{
-            if(result.deletedCount == 0){
-                res.send({comment: "Can't find user"})
-            }else{
-                res.send({comment: 'Delete'})
-            }
-        }
-    });
-});
+// router.route('/delete/:id')
+//     .delete(authorization, (req, res) => {
+//         uid = req.params.id
+//         User.remove({ "_id": uid }, function (err, result) {
+//             if (err) {
+//                 res.status(500).send(err);
+//             } else {
+//                 if (result.deletedCount == 0) {
+//                     res.send({ comment: "Can't find user" })
+//                 } else {
+//                     res.send({ comment: 'Delete' })
+//                 }
+//             }
+//         });
+//     });
 
 module.exports = router

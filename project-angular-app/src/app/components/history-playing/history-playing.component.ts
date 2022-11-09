@@ -10,6 +10,8 @@ export class HistoryPlayingComponent implements OnInit {
 
   playing !: any;
   user!:any;
+  owner!:any;
+
   constructor(private hs : HistoryPlayingService,
     private profile : ProfilemodalService) { }
 
