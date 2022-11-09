@@ -10,7 +10,6 @@ export class AppComponent {
   title = 'angular-test';
 
   token!: string
-  pass:boolean = false
 
   constructor(
   ) {}
