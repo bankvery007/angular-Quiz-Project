@@ -54,13 +54,6 @@ export class MyquizComponent implements OnInit {
 
   }
 
-
-
-
-  // if (email) {
-  //   Swal.fire(`Entered email: ${email}`)
-  // }
-
   delQuizAlert(index: number) {
     Swal.fire({
       title: 'Are you sure?',

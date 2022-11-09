@@ -105,9 +105,6 @@ export class NewquizComponent implements OnInit {
     }
   }
 
-  simpleAlert() {
-    Swal.fire('Hello Angular');
-  }
 
   onChangeImg(e: any) {
     if (e.target.files.length > 0) {
@@ -176,7 +173,10 @@ export class NewquizComponent implements OnInit {
       ).subscribe(
         data => {
           console.log(this.dataService.getAllQuiz())
-          alert('Quiz added successfully');
+          Swal.fire({
+            title: 'Quiz added successfully',
+            icon: 'success',
+          })
           this.productForm.reset();
           this.router.navigate(['/quiz']);
         },
