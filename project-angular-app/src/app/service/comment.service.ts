@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { commentModel } from '../comment.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { LoginService } from './login.service';

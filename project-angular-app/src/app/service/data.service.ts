@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { dataModel } from '../data.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { LoginService } from './login.service';
