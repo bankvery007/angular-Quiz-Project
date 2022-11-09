@@ -46,7 +46,7 @@ const addQuiz = (QuizData) => {
 }
 
 router.route('/Quiz')
-    .post((req, res) => {
+    .post(authorization, (req, res) => {
         const payload = {
             quizName: req.body.quizName,
             owner: req.body.owner,
@@ -83,7 +83,7 @@ router.route('/Quiz')
 
 // Patch Quiz
 router.route('/Quiz/:id')
-    .patch((req, res) => {
+    .patch(authorization, (req, res) => {
         Quiz.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((blog) => {
             if (!blog) {
                 return res.status(404).send();
@@ -96,7 +96,7 @@ router.route('/Quiz/:id')
 
 // Delete Quiz
 router.route('/Quiz/delete/:id')
-    .delete((req, res) => {
+    .delete(authorization, (req, res) => {
         uid = req.params.id
         Quiz.remove({"_id":uid}, function(err, result) { 
             if(err){

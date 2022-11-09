@@ -42,7 +42,7 @@ const addPlaying = (PlayingData) => {
 }
 
 router.route('/addplaying')
-    .post((req, res) => {
+    .post(authorization, (req, res) => {
         const payload = {
             owner: req.body.owner,
             point: req.body.point,
@@ -63,7 +63,7 @@ router.route('/addplaying')
 
 // Get Playing
 router.route('/getplaying')
-    .get((req, res) => {
+    .get(authorization, (req, res) => {
         Playing.find((err, val) => {
             if (err) {
                 console.log(err)
