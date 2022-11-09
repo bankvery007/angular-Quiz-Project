@@ -35,6 +35,8 @@ export class MyquizComponent implements OnInit {
       this.dataService.getAllQuiz().subscribe(
         data => {
           this.quiz = data.reverse();
+          this.quizfilter = []
+          this.q = []
           for (let i = 0; i < this.quiz.length; i++) { 
             if(this.quiz[i].owner == this.user.username){
               this.quizfilter.push(this.quiz[i])
@@ -52,7 +54,7 @@ export class MyquizComponent implements OnInit {
   }
 
   delQuiz(index: number) {
-    this.dataService.delQuiz(this.quiz[index]._id).subscribe(
+    this.dataService.delQuiz(this.quiz[this.q[index]]._id).subscribe(
       data => {
         this.result = data
         this.onLoading()
@@ -76,7 +78,7 @@ export class MyquizComponent implements OnInit {
       reverseButtons: true,
     }).then((result) => {
       console.log(result)
-      if (result.value === this.quiz[index].quizName) {
+      if (result.value === this.quiz[this.q[index]].quizName) {
         Swal.fire(
           'Deleted!',
           'Your question has been deleted.',
