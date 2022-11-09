@@ -74,7 +74,7 @@ export class ProfilemodalComponent implements OnInit {
       icon: 'warning',
       input: 'password',
       inputLabel: 'Please type your password to confirm.',
-      inputPlaceholder: 'Your password',
+      inputPlaceholder: 'password',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
