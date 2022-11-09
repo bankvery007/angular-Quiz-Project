@@ -8,8 +8,8 @@ var Schema = require("mongoose").Schema;
 const History_Playing = Schema({
     owner: String,
     point: Number,
+    datetime: String,
     quizName: String,
-    rating: Number,
 }, {
     collection: 'history_playing'
 });
@@ -28,8 +28,8 @@ const addPlaying = (PlayingData) => {
         var new_playing = new Playing({
             owner: PlayingData.owner,
             point: PlayingData.point,
+            datetime: PlayingData.datetime,
             quizName: PlayingData.quizName,
-            rating: PlayingData.rating
         });
         new_playing.save((err, data) => {
             if (err) {
@@ -46,8 +46,8 @@ router.route('/addplaying')
         const payload = {
             owner: req.body.owner,
             point: req.body.point,
+            datetime: req.body.datetime,
             quizName: req.body.quizName,
-            rating: req.body.rating,
         }
         console.log(payload);
         addPlaying(payload)
