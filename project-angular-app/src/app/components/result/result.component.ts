@@ -6,6 +6,7 @@ import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 import { QuestionsService } from 'src/app/service/questions.service';
 import { HistoryPlayingService } from 'src/app/service/history-playing.service';
 import { HistoryService } from 'src/app/service/history.service';
+
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -56,7 +57,7 @@ export class ResultComponent implements OnInit {
       }
     ).subscribe(
       data => {
-        alert('Playing added successfully');
+        console.log(data);
       },
       err => {
         console.log(err);
@@ -75,7 +76,7 @@ export class ResultComponent implements OnInit {
       }
     ).subscribe(
       data => {
-        alert('Rating added successfully');
+        console.log(data);
       },
       err => {
         console.log(err);
