@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "636bc9fc9fd4a0b1b3765a2d"
+  },
+  "owner": "handsomeboy",
+  "point": 6128,
+  "datetime": "9/11/2022",
+  "quizName": "คณิตคิดเร็ว",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636bca229fd4a0b1b3765a45"
+  },
+  "owner": "handsomeboy",
+  "point": 3166,
+  "datetime": "9/11/2022",
+  "quizName": "คณิตคิดเร็ว",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636bce3d4ca6d6ee754723d1"
+  },
+  "owner": "fewgg",
+  "point": 4100,
+  "datetime": "9/11/2022",
+  "quizName": "Hello World Python",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636bd976f53daf35948c6a6c"
+  },
+  "owner": "fewgg",
+  "point": 2204,
+  "datetime": "9/11/2022",
+  "quizName": "ปริศนาสายฟ้าแลบแท้",
+  "__v": 0
+}]
