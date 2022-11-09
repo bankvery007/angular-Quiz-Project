@@ -27,7 +27,7 @@ export class ProfilemodalComponent implements OnInit {
 
   user!: any
 
-  count: any = this.getCountPlayHistory();
+  // count: any = this.getCountPlayHistory();
 
   currentProfile: any = this.getUser();
 
@@ -59,9 +59,9 @@ export class ProfilemodalComponent implements OnInit {
     return this.profilemodal.getUser();
   }
 
-  getCountPlayHistory() {
-    return this.history.getCountPlayHistory();
-  }
+  // getCountPlayHistory() {
+  //   return this.history.getCountPlayHistory();
+  // }
 
   onClickEdit() {
     this.show = !this.show;
