@@ -56,7 +56,7 @@ export class SigninComponent implements OnInit {
                 username: this.user.username, 
                 email: this.user.email, 
                 title: this.user.title, 
-                sex: this.user.username,
+                sex: this.user.sex,
                 phonenumber: this.user.phonenumber,
                 picture: this.user.picture, 
                 birthyear: this.user.birthyear, 

@@ -19,10 +19,10 @@ export class SignupComponent implements OnInit {
     sex: new FormControl('',[Validators.required,Validators.maxLength(6)]),
     birthyear: new FormControl('',[Validators.required,Validators.pattern('[0-9]{4}'),Validators.max(2021),Validators.min(1900)]),
     phonenumber: new FormControl('',[Validators.required,Validators.pattern('[0][0-9]{9}')]),
-    username: new FormControl('',[Validators.required,Validators.maxLength(12),Validators.minLength(5)]),
+    username: new FormControl('',[Validators.required,Validators.maxLength(12),Validators.minLength(3)]),
     email: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(4)]),
-    confirmpass : new FormControl('',[Validators.required]),
+    
   });
 
   get email() {return this.profileForm.get('email');}
