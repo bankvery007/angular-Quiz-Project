@@ -90,16 +90,5 @@ router.route('/signin')
         }
     })
 
-router.route('/unsigntoken')
-    .post(async (req, res) => {
-        try {
-            const profile = jwt.verify(res.body.token,key)
-            res.status(200).json({ profile });
-        }
-
-        catch (error) {
-            res.status(404).send(error);
-        }
-    })
 
 module.exports = router
