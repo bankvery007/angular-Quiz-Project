@@ -42,9 +42,14 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.correctAnswer = 0;
     this.Allquiz = this.QuestionsService.getQuestion()
-    this.quiz = this.Allquiz.quiz[this.nextQuestion]
-    console.log(this.Allquiz)
+    this.quiz = this.shuffle(this.Allquiz.quiz)
+    console.log(this.quiz)
+    this.quiz = this.quiz[this.nextQuestion]
     this.start()
+  }
+
+  shuffle(array: any) {
+    return array.sort(() => Math.random() - 0.5);
   }
 
   start() {
@@ -75,22 +80,22 @@ export class QuestionComponent implements OnInit {
       this.bonus = 0
     }
     if ((this.nextQuestion + 1) === this.Allquiz.quiz.length) {
-      this.isQuizCompleted = true;
-      this.stopCounter();
-      Swal.fire({
-        title: this.correctAnswer == 0 ? "Try again!!" : "Congratulations!!",
-        html: 'You score is ' + this.correctAnswer + ' points',
-        width: 600,
-        padding: '3em',
-        color: '#716add',
-        background: '#fff',
-        backdrop: `
+      setTimeout(() => {
+        this.isQuizCompleted = true;
+        this.stopCounter();
+        Swal.fire({
+          title: this.correctAnswer == 0 ? "Try again!!" : "Congratulations!!",
+          html: 'You score is ' + this.correctAnswer + ' points',
+          width: 600,
+          padding: '3em',
+          color: '#716add',
+          background: '#fff',
+          backdrop: `
           rgba(0,0,123,0.4)
           url('assets/image/giphy.gif')
         `
-      }).then(() => {
-        //xxxx
-      })
+        })
+      }, 1000);
     } else {
       this.disabled = true
       setTimeout(() => {

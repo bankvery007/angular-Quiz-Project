@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { QuizComponent } from '../quiz/quiz.component';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 import { AppComponent } from 'src/app/app.component';
+import Swal from 'sweetalert2';
 
 
 @Injectable({
@@ -28,11 +29,11 @@ export class SigninComponent implements OnInit {
   @ViewChild('token') nameKey!: ElementRef;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private router: Router,
-    private profile:ProfilemodalService,
+    private profile: ProfilemodalService,
     private appComponent: AppComponent,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
@@ -53,19 +54,22 @@ export class SigninComponent implements OnInit {
               {
                 id: this.user.id,
                 name: this.user.name,
-                username: this.user.username, 
-                email: this.user.email, 
-                title: this.user.title, 
+                username: this.user.username,
+                email: this.user.email,
+                title: this.user.title,
                 sex: this.user.sex,
                 phonenumber: this.user.phonenumber,
-                picture: this.user.picture, 
-                birthyear: this.user.birthyear, 
+                picture: this.user.picture,
+                birthyear: this.user.birthyear,
               })
 
             window.localStorage.setItem("token", (<any>Object).values(data)[1]);
             this.appComponent.haveToken()
             this.router.navigate(['./quiz']);
-            alert("welcome!")
+            Swal.fire({
+              title: 'Welcome!',
+              text: this.user.title + "." + this.user.name,
+            })
 
           } else {
             alert("your username or password is incorrect")
@@ -77,5 +81,6 @@ export class SigninComponent implements OnInit {
         }
       })
 
-  }}
+  }
+}
 
