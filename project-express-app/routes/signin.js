@@ -95,13 +95,11 @@ router.route('/signin')
 router.route('/delete/:payload')
     .delete(async (req, res) => {
         data = req.params.payload.split(" ")
-        
+
         const payload = {
             username: data[0],
             password: data[1]
         };
-
-        console.log(payload);
 
         try {
             const result = await findUser(payload.username);
@@ -109,13 +107,24 @@ router.route('/delete/:payload')
             const status = loginStatus.status;
 
             if (status) {
-                res.status(200).json(true);
+                User.remove({ "_id": result.id }, function (err, result) {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        if (result.deletedCount == 0) {
+                            res.status(200).json(false);
+                        } else {
+                            res.status(200).json(true);
+                        }
+                    }
+                });
             } else {
                 res.status(200).json(false);
             }
 
         } catch (error) {
             res.status(404).send(error);
+            console.log(error)
         }
     })
 
