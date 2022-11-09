@@ -61,4 +61,11 @@ export class DataService {
       }));
   }
 
+  verify(verifydata: any) {
+    return this.http.post<any>('http://localhost:3000/login/verify', verifydata)
+      .pipe(map(datas => {
+        return datas;
+      }));
+  }
+
 }

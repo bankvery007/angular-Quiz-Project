@@ -77,12 +77,12 @@ router.route('/signin')
             const result = await findUser(payload.username);
             const loginStatus = await compareHash(payload.password, result.password);
             const status = loginStatus.status;
-            const signemail = {email: result.email};
+            const signemail = { email: result.email };
 
             if (status) {
                 const token = jwt.sign(signemail, key, { expiresIn: 60 * 15 });
                 res.status(200).json({ result, token, status });
-                console.log("email = "+signemail)
+                console.log("email = " + signemail)
             } else {
                 res.status(200).json({ status });
             }
@@ -91,6 +91,44 @@ router.route('/signin')
             res.status(404).send(error);
         }
     })
+
+router.route('/delete/:payload')
+    .delete(async (req, res) => {
+        data = req.params.payload.split(" ")
+
+        const payload = {
+            username: data[0],
+            password: data[1]
+        };
+
+        try {
+            const result = await findUser(payload.username);
+            const loginStatus = await compareHash(payload.password, result.password);
+            const status = loginStatus.status;
+
+            if (status) {
+                User.remove({ "_id": result.id }, function (err, result) {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        if (result.deletedCount == 0) {
+                            res.status(200).json(false);
+                        } else {
+                            res.status(200).json(true);
+                        }
+                    }
+                });
+            } else {
+                res.status(200).json(false);
+            }
+
+        } catch (error) {
+            res.status(404).send(error);
+            console.log(error)
+        }
+    })
+
+
 
 
 module.exports = router

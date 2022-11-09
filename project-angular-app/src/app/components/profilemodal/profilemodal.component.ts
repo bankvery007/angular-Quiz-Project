@@ -7,6 +7,7 @@ import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { LoginService } from 'src/app/service/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profilemodal',
@@ -16,92 +17,133 @@ import { LoginService } from 'src/app/service/login.service';
 export class ProfilemodalComponent implements OnInit {
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private profilemodal: ProfilemodalService,
     private appComponent: AppComponent,
-    private history:HistoryService,
-    private http:HttpClient,
-    private login:LoginService
-    ) { }
+    private history: HistoryService,
+    private http: HttpClient,
+    private login: LoginService
+  ) { }
 
-  user!:any
+  user!: any
 
-  count :any=this.getCountPlayHistory();
+  count: any = this.getCountPlayHistory();
 
-  currentProfile:any = this.getUser();
+  currentProfile: any = this.getUser();
 
-  show:boolean=false;
+  show: boolean = false;
 
   profileForm = new FormGroup({
-    firstName:  new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    lastName: new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    sex: new FormControl('',[Validators.required,Validators.maxLength(6)]),
-    birthyear: new FormControl('',[Validators.required,Validators.pattern('[0-9]{4}'),Validators.max(2021),Validators.min(1900)]),
-    phonenumber: new FormControl('',[Validators.required,Validators.pattern('[0][0-9]{9}')]),
-    email: new FormControl('',[Validators.required,Validators.email]),
+    firstName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    lastName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    sex: new FormControl('', [Validators.required, Validators.maxLength(6)]),
+    birthyear: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.max(2021), Validators.min(1900)]),
+    phonenumber: new FormControl('', [Validators.required, Validators.pattern('[0][0-9]{9}')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   ngOnInit(): void {
   }
 
-  onClickLogout(){
+  onClickLogout() {
     window.localStorage.setItem("token", "");
     this.appComponent.haveToken()
     this.router.navigate(['./signin']);
   }
 
-  setUser(user:any){
+  setUser(user: any) {
     return this.profilemodal.setUser(user);
   }
 
-  getUser(){
+  getUser() {
     return this.profilemodal.getUser();
   }
 
-  getCountPlayHistory(){
+  getCountPlayHistory() {
     return this.history.getCountPlayHistory();
   }
 
-  onClickEdit(){
+  onClickEdit() {
     this.show = !this.show;
   }
 
   onClickDelete() {
-    console.log(this.currentProfile.id)
-    return this.http.delete<any>('http://localhost:3000/user/delete/' + this.currentProfile.id ,{headers : this.login.getToken()})
-      .subscribe({
-        next: (data) => {
-          if ((<any>Object).values(data)[0] != false) {
-            alert("delete success!")
-            this.router.navigate(['./home']);
-          } else {
-            alert("failed")
-          }
-        },
-        error: (error) => {
-          alert("cannot delete")
-        }
-      })
-      
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      input: 'password',
+      inputLabel: 'Please type your password to confirm.',
+      inputPlaceholder: 'Your password',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm',
+      reverseButtons: true,
+    }).then((result) => {
+      console.log(result)
+      if (result.value) {
+        this.http.delete<any>('http://localhost:3000/login/delete/' + this.currentProfile.username + " " + result.value, { headers: this.login.getToken() })
+          .subscribe({
+            next: (data) => {
+              console.log("data", data)
+              if (data) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your profile has been deleted.',
+                  'success'
+                )
+                this.router.navigate(['/home']);
+              } else {
+                Swal.fire({
+                  title: 'Text mismatch!',
+                  text: 'Please type again.',
+                  icon: 'question',
+                  confirmButtonText: 'OK',
+                }).then(() => {
+                  this.onClickDelete()
+                })
+              }
+            },
+            error: (error) => {
+              Swal.fire({
+                title: 'Error!',
+                text: error,
+                icon: 'question',
+                confirmButtonText: 'OK',
+              })
+            }
+          })
+      } else if (result.isConfirmed == true) {
+        Swal.fire({
+          title: 'Text mismatch!',
+          text: 'Please type again.',
+          icon: 'question',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          this.onClickDelete()
+        })
+      }
+    })
   }
 
   onClickUpdate() {
-    const patchjson:JSON = <JSON><any>{
+    const patchjson: JSON = <JSON><any>{
       picture: this.currentProfile.picture || '',
-        title: this.currentProfile.title || '' ,
-        name: this.profileForm.value.firstName+' '+this.profileForm.value.lastName|| '',
-        sex: this.profileForm.value.sex || '',
-        username: this.currentProfile.username || '',
-        birthyear: parseInt(this.profileForm.value.birthyear || ''),
-        phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
-        email: this.profileForm.value.email || '',
-        password: this.currentProfile.password
+      title: this.currentProfile.title || '',
+      name: this.profileForm.value.firstName + ' ' + this.profileForm.value.lastName || '',
+      sex: this.profileForm.value.sex || '',
+      username: this.currentProfile.username || '',
+      birthyear: parseInt(this.profileForm.value.birthyear || ''),
+      phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
+      email: this.profileForm.value.email || '',
+      password: this.currentProfile.password
     }
 
     console.log(this.currentProfile);
-    
-    this.http.patch('http://localhost:3000/user/patch/'+ this.currentProfile.id,patchjson,{headers : this.login.getToken()}
-      )
+
+    this.http.patch('http://localhost:3000/user/patch/' + this.currentProfile.id, patchjson, { headers: this.login.getToken() }
+    )
       .subscribe({
         next: (data) => {
           if ((<any>Object).values(data)[0] != false) {
