@@ -5,49 +5,52 @@ const authorization = require('../config/authorize')
 
 var Schema = require("mongoose").Schema;
 
-const HistorySchema = Schema({
-    comment: String,
+const History_Rating = Schema({
+    owner: String,
+    quizName: String,
+    datetime: String,
+    rating: Number,
 }, {
-    collection: 'history'
+    collection: 'history_rating'
 });
 
-let History
+let Rating
 try {
-    History = mongoose.model('history')
+    Rating = mongoose.model('history_rating')
 } catch (error) {
-    History = mongoose.model('history', HistorySchema);
+    Rating = mongoose.model('history_rating', History_Rating);
 }
 
 
-// Add New History
-const addHistory = (HistoryData) => {
+// Add New Rating
+const addRating = (RatingData) => {
     return new Promise((resolve, reject) => {
-        var new_history = new Comment({
-            username: HistoryData.username,
-            quizname: HistoryData.quizname,
-            score: HistoryData.score,
-            date: HistoryData.date
+        var new_rating = new Rating({
+            owner: RatingData.owner,
+            quizName: RatingData.quizName,
+            datetime: RatingData.datetime,
+            rating: RatingData.rating
         });
-        new_history.save((err, data) => {
+        new_rating.save((err, data) => {
             if (err) {
-                reject(new Error('Cannot add new_history to DB!'));
+                reject(new Error('Cannot add rating to DB!'));
             } else {
-                resolve({ message: 'Add new_history successfully' });
+                resolve({ message: 'Add rating successfully' });
             }
         });
     });
 }
 
-router.route('/addHistory')
-    .post((req, res) => {
+router.route('/addrating')
+    .post(authorization, (req, res) => {
         const payload = {
-            username: HistoryData.username,
-            quizname: HistoryData.quizname,
-            score: HistoryData.score,
-            date: HistoryData.date
+            owner: req.body.owner,
+            quizName: req.body.quizName,
+            datetime: req.body.datetime,
+            rating: req.body.rating,
         }
         console.log(payload);
-        addHistory(payload)
+        addRating(payload)
             .then(result => {
                 console.log(result);
                 res.status(200).json(result);
@@ -57,10 +60,10 @@ router.route('/addHistory')
             })
     });
 
-// Get History
-router.route('/getHistory')
-    .get((req, res) => {
-        History.find((err, val) => {
+// Get Rating
+router.route('/getrating')
+    .get(authorization,(req, res) => {
+        Rating.find((err, val) => {
             if (err) {
                 console.log(err)
             } else {

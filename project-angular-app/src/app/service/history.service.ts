@@ -1,40 +1,63 @@
 import { Injectable } from '@angular/core';
-import { historyModel } from '../history.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HistoryService {
-  // history: historyModel
 
-  constructor(private http: HttpClient) {
-    // this.history = this.getHistory();
-  }
 
-  getHistory() {
-    this.http.get<any>('http://localhost:3000/history/getHistory')
-      .pipe(map(history => {
-        if (history) {
-          return history
-        } else {
-          alert('cannot get history')
-        }
+  constructor( private http: HttpClient,
+    private login: LoginService) {}
+
+    quiz: any
+    user: any
+    rating: any
+
+    addQuiz(QuizData: any) {
+      return this.http.post<any>('http://localhost:3000/quiz/Quiz', QuizData, {headers : this.login.getToken()})
+        .pipe(map(datas => {
+          return datas;
+        }));
+    }
+  
+    getAllQuiz() {
+      return this.http.get<any>('http://localhost:3000/quiz/Quiz', {headers : this.login.getToken()})
+        .pipe(map(newquiz => {
+          if (newquiz) {
+            this.quiz = newquiz;
+          }
+          return this.quiz;
+        }));
+    }
+  
+    getAllUser(){
+      return this.http.get<any>('http://localhost:3000/user/getUser', {headers : this.login.getToken()})
+        .pipe(map(getuser => {
+          if (getuser) {
+            this.user = getuser;
+          }
+          return this.user;
+        }));
+    }
+  
+    addRating(RatingData: any){
+      return this.http.post<any>('http://localhost:3000/history_rating/addrating', RatingData, {headers : this.login.getToken()})
+        .pipe(map(datas => {
+          return datas;
       }));
-
-  }
-
-  getCountPlayHistory() {
-    this.http.get<any>('http://localhost:3000/history/getCountPlayHistory')
-      .pipe(map(countplay => {
-        if (countplay) {
-          return countplay
-          
-        } else {
-          alert('cannot get count played history')
-        }
-      }));
-
-  }
+    }
+  
+    getRating(){
+      return this.http.get<any>('http://localhost:3000/history_rating/getrating', {headers : this.login.getToken()})
+        .pipe(map(getrating => {
+          if (getrating) {
+            this.rating = getrating;
+          }
+          return this.rating;
+        }));
+    }
+  
 }

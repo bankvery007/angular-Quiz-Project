@@ -12,7 +12,6 @@ import { QuestionComponent } from './components/question/question.component';
 import { ResultComponent } from './components/result/result.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { ChangeBgDirective } from './change-bg.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfilemodalComponent } from './components/profilemodal/profilemodal.component';
@@ -33,7 +32,6 @@ import { HistoryPlayingComponent } from './components/history-playing/history-pl
     ResultComponent,
     SigninComponent,
     WelcomeComponent,
-    ChangeBgDirective,
     HistoryComponent,
     ProfilemodalComponent,
     SatisfiedComponent,

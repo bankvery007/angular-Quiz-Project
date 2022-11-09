@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
 import { QuestionsService } from 'src/app/service/questions.service';
 import { HistoryPlayingService } from 'src/app/service/history-playing.service';
+import { HistoryService } from 'src/app/service/history.service';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -19,6 +20,7 @@ export class ResultComponent implements OnInit {
   constructor(private router: Router,
     private profile: ProfilemodalService,
     private QuestionsService: QuestionsService,
+    private hr : HistoryService,
     private hp: HistoryPlayingService) { }
 
   ngOnInit(): void {
@@ -36,32 +38,44 @@ export class ResultComponent implements OnInit {
     console.log(this.rating); ``
   }
 
-  ratingform = new FormGroup({
-    owner: new FormControl(''),
-    point: new FormControl(''),
-    quizName: new FormControl(''),
-    rating: new FormControl(''),
-  });
-
+  getDateNow() {
+    return [new Date().getDate(), new Date().getMonth() + 1, new Date().getFullYear()].join('/')
+  }
 
   onclicktopath() {
     this.router.navigate(['/quiz']);
   }
-
-  // comment: this.productForm.value.comment,
 
   addPlaying() {
     this.hp.addplaying(
       {
         owner: this.user.username,
         point: this.correctAnswer,
+        datetime: this.getDateNow(),
         quizName: this.Allquiz.quizName,
-        rating: this.rating,
       }
     ).subscribe(
       data => {
         alert('Playing added successfully');
-        this.ratingform.reset();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  
+  addRating() {
+    this.hr.addRating(
+      {
+        owner: this.user.username,
+        rating: this.rating,
+        datetime: this.getDateNow(),
+        quizName: this.Allquiz.quizName,
+      }
+    ).subscribe(
+      data => {
+        alert('Rating added successfully');
       },
       err => {
         console.log(err);
@@ -72,6 +86,7 @@ export class ResultComponent implements OnInit {
   CallAll(){
     this.addPlaying();
     this.onclicktopath();
+    this.addRating();
   }
 }
 
