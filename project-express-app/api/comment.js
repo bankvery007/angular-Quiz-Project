@@ -38,7 +38,7 @@ const addComment = (CommentData) => {
 }
 
 router.route('/addComment')
-    .post((req, res) => {
+    .post(authorization, (req, res) => {
         const payload = {
             owner: req.body.owner,
             comment: req.body.comment,
@@ -56,7 +56,7 @@ router.route('/addComment')
 
 // Get Comment
 router.route('/getComment')
-    .get((req, res) => {
+    .get(authorization, (req, res) => {
         Comment.find((err, val) => {
             if (err) {
                 console.log(err)
