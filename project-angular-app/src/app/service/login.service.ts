@@ -1,6 +1,5 @@
 import { Injectable,ViewChild,ElementRef} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { loginModel } from '../login.model'
 import { SigninComponent } from '../components/signin/signin.component';
 
 @Injectable({
