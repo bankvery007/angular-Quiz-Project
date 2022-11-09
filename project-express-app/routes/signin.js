@@ -77,10 +77,12 @@ router.route('/signin')
             const result = await findUser(payload.username);
             const loginStatus = await compareHash(payload.password, result.password);
             const status = loginStatus.status;
+            const signemail = {email: result.email};
 
             if (status) {
-                const token = jwt.sign(result, key, { expiresIn: 60 * 15 });
+                const token = jwt.sign(signemail, key, { expiresIn: 60 * 15 });
                 res.status(200).json({ result, token, status });
+                console.log("email = "+signemail)
             } else {
                 res.status(200).json({ status });
             }
