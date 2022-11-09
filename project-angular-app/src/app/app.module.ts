@@ -4,7 +4,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { NewquizComponent } from './components/newquiz/newquiz.component';
 import { FilterPipe } from './filter.pipe';
@@ -26,7 +25,6 @@ import { HistoryPlayingComponent } from './components/history-playing/history-pl
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
     QuizComponent,
     NewquizComponent,
     FilterPipe,
