@@ -98,5 +98,9 @@ export class SignupComponent implements OnInit {
     
   }
 
+  pathhome(){
+    this.router.navigate(['/home']);
+  }
+
 
 }

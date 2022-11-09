@@ -1,28 +1,32 @@
-<div class="fixed-background" >
-    <img src="https://i.im.ge/2022/10/15/2D6ArK.user.png" height="5%" width="5%" />
-    <img src="https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png" height="100%"
-        width="100%" />
-        <div class="d-flex justify-content-around py-3">
-    <div class="card col-md-6" style="text-align:center" [formGroup]="loginForm">
-        <br /><br />
-        <p style="text-align:center">
-            "username":"Monkey_za007",
-            "password":"monkey1234"
-          </p>
-        <div>
-            <label>Username : </label>
-            <input type="text" placeholder="Enter Username" formControlName="username" required>
-        </div>
-        <div>
-            <label>Password : </label>
-            <input type="password" placeholder="Enter Password" formControlName="password" required>
-        </div>
-
-        <div><button type="submit" (click)="onClickLogin()">Login</button></div>
-        <br />
-
+<div class="fixed-background" style="margin-bottom: 120px;">
+    <div class="col text-center" style="margin-top: 80px; ">
+        <img src="https://cdn.discordapp.com/attachments/1026870373700083732/1029786860471464026/Group_26.png"
+            height="50%" width="50%" />
     </div>
+    <div class="d-flex justify-content-around py-3">
+        <div class="card col-md-6" style="text-align:center" [formGroup]="loginForm">
+            <div class="row">
+                <button class="btn btn-success btn-md" [routerLink]="'/home'"><i class="fa fa-arrow-left btn-md" aria-hidden="true"></i>
+                    Home</button>
+            </div>
+            <p style="text-align:center">
+                "username":"Monkey_za007",
+                "password":"monkey1234"
+            </p>
+            <div>
+                <label>Username : </label>
+                <input type="text" placeholder="Enter Username" formControlName="username" required>
+            </div>
+            <div>
+                <label>Password : </label>
+                <input type="password" placeholder="Enter Password" formControlName="password" required>
+            </div>
+            <div>
+                <button class="btn btn-success btn-lg" (click)="onClickLogin()" style="margin: 10px;">Login</button>
+            </div>
+            <br />
         </div>
-        <br/><br/><br/>
+    </div>
+    <br /><br /><br />
 
 </div>
