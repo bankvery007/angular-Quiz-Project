@@ -20,7 +20,6 @@ export class AppComponent {
   //signin 68
   haveToken(){
     this.token = localStorage.getItem('token') || ''
-    console.log("token",localStorage.getItem('token') || '')
   }
   
 }
