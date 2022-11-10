@@ -1,5 +1,3 @@
-import { NgIfContext } from '@angular/common';
-import { NodeWithI18n } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -120,27 +118,6 @@ export class NewquizComponent implements OnInit {
           this.previewLoaded = true;
           this.productForm.patchValue({
             img: reader.result?.toString()
-          });
-        };
-
-      }
-    }
-  }
-
-  onChangeImgArray(e: any) {
-    if (e.target.files.length > 0) {
-      const file = e.target.files[0];
-      var pattern = /image-*/;
-      const reader = new FileReader();
-      if (!file.type.match(pattern)) {
-        alert('invalid format')
-        this.productForm.reset()
-      } else {
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.previewLoaded = true;
-          this.productForm.value.quiz.patchValue({
-            imgArray: reader.result?.toString()
           });
         };
 

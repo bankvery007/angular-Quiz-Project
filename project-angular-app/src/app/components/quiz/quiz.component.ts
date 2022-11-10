@@ -108,7 +108,6 @@ export class QuizComponent implements OnInit {
   }
 
   ShowTypeDisplay() {
-    // console.log("quiz user ID",this.quiz[0].quizName)
     return (this.searchText).length > 0 ? "Searching . . ." : "Quiz"
   }
 

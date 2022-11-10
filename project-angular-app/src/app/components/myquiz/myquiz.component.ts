@@ -20,7 +20,6 @@ export class MyquizComponent implements OnInit {
   quizfilter : any = []
   q :any = []
   user!: any 
-  show_alert_del: boolean = true
   result!: string
   searchText: string = "";
  

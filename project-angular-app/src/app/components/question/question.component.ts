@@ -21,15 +21,12 @@ export class QuestionComponent implements OnInit {
   interval$: any;
   Allquiz!: any
   quiz!: any
-  timerInterval!: any
   counter: number = 60;
   correctAnswer: number = 0;
   nextQuestion: number = 0;
   point: number = 0;
   bonus: number = 0
-  toggle !: boolean;
   isQuizCompleted: boolean = false;
-  isCorrect: boolean = false
   disabled: boolean = false
 
   color: string[] = ['white', 'white', 'white', 'white']
@@ -70,7 +67,6 @@ export class QuestionComponent implements OnInit {
   answer(value: number) {
     if (value == this.quiz.answer) {
       this.color[value - 1] = 'green'
-      // this.point = 1
       this.point = Math.round((1000 + this.bonus) / 60 * this.counter)
       this.correctAnswer += this.point;
       this.bonus += this.bonus + 50
