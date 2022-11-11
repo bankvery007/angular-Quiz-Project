@@ -63,7 +63,6 @@ export class ProfilemodalComponent implements OnInit {
 
   onClickEdit() {
     this.show = !this.show;
-    console.log(this.profilemodal)
   }
 
   onClickDelete() {
@@ -161,17 +160,29 @@ export class ProfilemodalComponent implements OnInit {
         }
       })
 
+      this.onClickEdit()
+
       setTimeout(() => {
+        console.log("this.currentProfile.id",this.currentProfile.id)
         this.http.get<any>('http://localhost:3000/user/getUserID/'+this.currentProfile.id).subscribe(
           data => {
-            console.log("data", data)
-            this.currentProfile = data
+            this.currentProfile = {
+                id: data._id,
+                name: data.name,
+                username: data.username,
+                email: data.email,
+                title: data.title,
+                sex: data.sex,
+                phonenumber: data.phonenumber,
+                picture: data.picture,
+                birthyear: data.birthyear,
+              }
           },
           err => {
               console.log(err);
           }
         );
-        console.log("getHTTP", this.currentProfile)
+
       }, 500);
 
   }
