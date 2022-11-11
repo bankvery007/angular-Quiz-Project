@@ -114,6 +114,15 @@ router.route('/getUser')
         })
     })
 
+//get user
+router.route('/getUserID/:id')
+    .get((req, res) => {
+        User.findById(req.params.id, function (err, user) {
+            res.send(user);
+        });
+    })
+
+
 // Patch user
 router.route('/patch/:id')
     .patch(authorization, (req, res) => {

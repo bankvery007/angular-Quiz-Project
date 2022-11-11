@@ -1,5 +1,4 @@
-import { Injectable,ViewChild,ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, ViewChild, ElementRef } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +7,20 @@ export class ProfilemodalService {
 
   @ViewChild('token') nameKey!: ElementRef;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  user!:any
+  user!: any
   token!: string
 
-  setUser(user:any){
+  setUser(user: any) {
     this.user = user
   }
 
-  getUser(){
+  getUser() {
     return this.user
   }
+
+
+
 
 }
