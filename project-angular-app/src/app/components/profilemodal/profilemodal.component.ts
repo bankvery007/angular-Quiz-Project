@@ -34,6 +34,7 @@ export class ProfilemodalComponent implements OnInit {
   show: boolean = false;
 
   profileForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
     firstName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     lastName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     sex: new FormControl('', [Validators.required, Validators.maxLength(6)]),
@@ -130,13 +131,13 @@ export class ProfilemodalComponent implements OnInit {
   onClickUpdate() {
     const patchjson: JSON = <JSON><any>{
       picture: this.currentProfile.picture || '',
-      title: this.currentProfile.title || '',
-      name: this.profileForm.value.firstName + ' ' + this.profileForm.value.lastName || '',
-      sex: this.profileForm.value.sex || '',
+      title: this.profileForm.value.title || '',
+      name: (this.profileForm.value.firstName + ' ' + this.profileForm.value.lastName) || this.currentProfile.firstName + ' ' + this.currentProfile.lastName,
+      sex: this.profileForm.value.sex || this.currentProfile.sex,
       username: this.currentProfile.username || '',
-      birthyear: parseInt(this.profileForm.value.birthyear || ''),
-      phonenumber: parseInt(this.profileForm.value.phonenumber || ''),
-      email: this.profileForm.value.email || '',
+      birthyear: parseInt(this.profileForm.value.birthyear || this.currentProfile.birthyear),
+      phonenumber: this.profileForm.value.phonenumber || this.currentProfile.phonenumber,
+      email: this.profileForm.value.email || this.currentProfile.email,
       password: this.currentProfile.password
     }
 
