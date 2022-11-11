@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { ProfilemodalService } from 'src/app/service/profilemodal.service';
-ProfilemodalService
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,11 +18,14 @@ export class NewquizComponent implements OnInit {
 
   imgSrc!: string;
   checkAnswer!: string;
+  statusButton : string =  "1"
   status!: boolean;
+  statusPay : boolean = false
   previewLoaded: boolean = false;
   show_alert_del: boolean = true;
   user!:any
 
+  
   productForm: FormGroup = this.fb.group({
     quizName: ['', Validators.required],
     owner: [''],
@@ -56,19 +58,47 @@ export class NewquizComponent implements OnInit {
   }
 
   addQuiz() {
-    this.status = false
-    this.quiz.push(
-      new FormGroup({
-        question: new FormControl('', [Validators.required]),
-        choice1: new FormControl('', [Validators.required]),
-        choice2: new FormControl('', [Validators.required]),
-        choice3: new FormControl('', [Validators.required]),
-        choice4: new FormControl('', [Validators.required]),
-        answer: new FormControl('', [Validators.required]),
-      }));
+    console.log(!this.statusPay)
+    if((this.productForm.value.quiz).length >= 5 && !this.statusPay){
+      this.statusButton = "2"
+    }else{
+      this.status = false
+      this.quiz.push(
+        new FormGroup({
+          question: new FormControl('', [Validators.required]),
+          choice1: new FormControl('', [Validators.required]),
+          choice2: new FormControl('', [Validators.required]),
+          choice3: new FormControl('', [Validators.required]),
+          choice4: new FormControl('', [Validators.required]),
+          answer: new FormControl('', [Validators.required]),
+        }));
+    }
   }
 
+  pay() {
+    Swal.fire({
+      title: 'Unlocked Premium',
+      text: "Unlocked to add unlimited questions!!!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '0.15 $',
+      reverseButtons: true,
+    }).then((result) => {
+      if(result.isConfirmed == true){
+        Swal.fire(
+          'Thank you',
+          'Your can add unlimited questions!!!',
+          'success'
+        )
+        this.statusButton = "3"
+        // this.dataService.setPremium(true)
+        this.statusPay = true
 
+      }
+    })
+  }
 
   delQuiz(index: number) {
     if (this.show_alert_del) {
@@ -84,6 +114,7 @@ export class NewquizComponent implements OnInit {
         confirmButtonText: 'Yes, delete it!',
         reverseButtons: true
       }).then((result) => {
+        console.log(result)
         if (result.isConfirmed) {
           Swal.fire(
             'Deleted!',
@@ -95,6 +126,9 @@ export class NewquizComponent implements OnInit {
         }
         if (result.value == 1) {
           this.show_alert_del = false
+        }
+        if((this.productForm.value.quiz).length < 5 && result.isConfirmed == true && !this.statusPay){
+          this.statusButton = "1"
         }
       })
     }else{

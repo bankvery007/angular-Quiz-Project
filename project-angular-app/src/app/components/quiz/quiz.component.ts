@@ -23,7 +23,7 @@ export class QuizComponent implements OnInit {
   alert_comment: boolean = false
   sum: number = 0;
   count!: string;
-  user!: any
+  user: any = {username : 'fewgg'}
 
   productForm = new FormGroup({
     owner: new FormControl(''),

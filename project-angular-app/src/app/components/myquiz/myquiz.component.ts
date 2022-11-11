@@ -59,7 +59,6 @@ export class MyquizComponent implements OnInit {
         this.onLoading()
       }
     )
-
   }
 
   delQuizAlert(index: number) {
@@ -95,7 +94,6 @@ export class MyquizComponent implements OnInit {
         })
       }
     })
-
   }
 
 
