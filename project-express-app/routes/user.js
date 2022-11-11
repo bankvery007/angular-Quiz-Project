@@ -127,21 +127,5 @@ router.route('/patch/:id')
         })
     });
 
-// Delete user
-// router.route('/delete/:id')
-//     .delete(authorization, (req, res) => {
-//         uid = req.params.id
-//         User.remove({ "_id": uid }, function (err, result) {
-//             if (err) {
-//                 res.status(500).send(err);
-//             } else {
-//                 if (result.deletedCount == 0) {
-//                     res.send({ comment: "Can't find user" })
-//                 } else {
-//                     res.send({ comment: 'Delete' })
-//                 }
-//             }
-//         });
-//     });
 
 module.exports = router

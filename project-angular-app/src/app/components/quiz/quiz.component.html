@@ -98,9 +98,6 @@
             <div class="col-lg-3 text-left" *ngFor="let item of comment | filter: mycomment let k = index"
                 style="padding-left: 40px ">
                 <div class="row" type="button">
-                    <!-- <h2 id="mycomment" style="margin-top: 35px; width: 15vmax; border-bottom-left-radius: 0;"
-                        title="User"><i class="fa fa-user-o" aria-hidden="true" 
-                            style="color: rgb(55, 202, 50);"></i> xxx</h2> -->
                     <h2 id="mycomment" style="margin-top: 35px; width: 15vmax; border-bottom-left-radius: 0;"
                         title="User"><i class="fa fa-user-o" aria-hidden="true" *ngIf="item.owner == this.user.username"
                             style="color: rgb(55, 202, 50);"></i> {{this.item.owner}}</h2>

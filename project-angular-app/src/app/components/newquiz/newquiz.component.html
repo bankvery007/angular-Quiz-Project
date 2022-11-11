@@ -68,14 +68,6 @@
                 </div>
             </div>
         </div>
-        <!-- <a *ngFor="let person of this.user" >
-            <p class="col-lg-12 text-left" style="font-size: 50px;" *ngSwitchCase="person.username">
-                {{person.username}}
-            </p>
-        </a>
-        <p class="col-lg-12 text-left" style="font-size: 50px;" *ngSwitchCase="''">
-            Quiz
-        </p> -->
         <form [formGroup]="productForm">
             <div formArrayName="quiz">
                 <div class="form-group" *ngFor="let line of quiz.controls; let i_quiz=index">
