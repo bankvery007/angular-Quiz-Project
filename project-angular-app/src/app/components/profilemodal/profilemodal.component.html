@@ -25,6 +25,17 @@
 
                 <img [src]="currentProfile.picture" class="img-thumbnail" alt="Your Image">
                 <form [formGroup]="profileForm">
+                    <p>* blank input = same data</p>
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <select class="form-control" formControlName='title'>
+                            <option value=""></option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Ms">Ms</option>
+                        </select>
+                    </div>   
                 <div class="form-group">
                     <label>FirstName</label>
                     <input type="text" class="form-control" formControlName='firstName'>
@@ -47,7 +58,7 @@
                 <br/><br/>
 
                 <div class="form-group">
-                    <label>BirthYaer</label>
+                    <label>Birthyear</label>
                     <input type="text" class="form-control" formControlName='birthyear'>
                 </div>
 
