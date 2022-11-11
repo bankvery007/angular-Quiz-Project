@@ -25,8 +25,6 @@ export class ProfilemodalComponent implements OnInit {
     private login: LoginService
   ) { }
 
-  user!: any
-
   // count: any = this.getCountPlayHistory();
 
   currentProfile: any = this.getUser();
@@ -35,8 +33,7 @@ export class ProfilemodalComponent implements OnInit {
 
   profileForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    firstName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-    lastName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
     sex: new FormControl('', [Validators.required, Validators.maxLength(6)]),
     birthyear: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.max(2021), Validators.min(1900)]),
     phonenumber: new FormControl('', [Validators.required, Validators.pattern('[0][0-9]{9}')]),
@@ -66,6 +63,7 @@ export class ProfilemodalComponent implements OnInit {
 
   onClickEdit() {
     this.show = !this.show;
+    console.log(this.profilemodal)
   }
 
   onClickDelete() {
@@ -93,8 +91,13 @@ export class ProfilemodalComponent implements OnInit {
                   'Deleted!',
                   'Your profile has been deleted.',
                   'success'
-                )
-                this.router.navigate(['/home']);
+                ).then(() => {
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 100);
+                })
+                this.router.navigate(['/home']);      
+    
               } else {
                 Swal.fire({
                   title: 'Text mismatch!',
@@ -130,9 +133,9 @@ export class ProfilemodalComponent implements OnInit {
 
   onClickUpdate() {
     const patchjson: JSON = <JSON><any>{
-      picture: this.currentProfile.picture || '',
-      title: this.profileForm.value.title || '',
-      name: (this.profileForm.value.firstName + ' ' + this.profileForm.value.lastName) || this.currentProfile.firstName + ' ' + this.currentProfile.lastName,
+      picture: this.currentProfile.picture || this.currentProfile.picture,
+      title: this.profileForm.value.title || this.currentProfile.title,
+      name: this.profileForm.value.name  || this.currentProfile.name ,
       sex: this.profileForm.value.sex || this.currentProfile.sex,
       username: this.currentProfile.username || '',
       birthyear: parseInt(this.profileForm.value.birthyear || this.currentProfile.birthyear),
@@ -157,5 +160,21 @@ export class ProfilemodalComponent implements OnInit {
           alert("cannot sign up")
         }
       })
+
+      setTimeout(() => {
+        this.http.get<any>('http://localhost:3000/user/getUserID/'+this.currentProfile.id).subscribe(
+          data => {
+            console.log("data", data)
+            this.currentProfile = data
+          },
+          err => {
+              console.log(err);
+          }
+        );
+        console.log("getHTTP", this.currentProfile)
+      }, 500);
+
   }
+
+
 }
