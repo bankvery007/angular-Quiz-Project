@@ -80,7 +80,7 @@ router.route('/signin')
             const signemail = { email: result.email };
 
             if (status) {
-                const token = jwt.sign(signemail, key, { expiresIn: 60 * 15 });
+                const token = jwt.sign(signemail, key, { expiresIn: "15d" });
                 res.status(200).json({ result, token, status });
                 console.log("email = " + signemail)
             } else {
@@ -92,6 +92,8 @@ router.route('/signin')
         }
     })
 
+
+    
 router.route('/delete/:payload')
     .delete(async (req, res) => {
         data = req.params.payload.split(" ")

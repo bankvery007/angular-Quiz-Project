@@ -164,7 +164,7 @@ export class ProfilemodalComponent implements OnInit {
 
       setTimeout(() => {
         console.log("this.currentProfile.id",this.currentProfile.id)
-        this.http.get<any>('http://localhost:3000/user/getUserID/'+this.currentProfile.id).subscribe(
+        this.http.get<any>('http://localhost:3000/user/getUserID/'+this.currentProfile.id, { headers: this.login.getToken() }).subscribe(
           data => {
             this.currentProfile = {
                 id: data._id,
