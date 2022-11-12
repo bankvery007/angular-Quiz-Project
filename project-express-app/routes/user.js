@@ -116,7 +116,7 @@ router.route('/getUser')
 
 //get user
 router.route('/getUserID/:id')
-    .get((req, res) => {
+    .get(authorization, (req, res) => {
         User.findById(req.params.id, function (err, user) {
             res.send(user);
         });
